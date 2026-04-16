@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TB1J8RPL61"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TB1J8RPL61');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogi | Artha Insight — Riku Forsell</title>
+  <meta name="description" content="Ajattelun selkeyttäjän blogi. Kirjoituksia käänteistä, merkityksestä ja selkeydestä.">
+  <meta name="author" content="Riku Forsell">
+  <link rel="canonical" href="https://arthainsight.com/blog.html">
+  <link rel="alternate" hreflang="fi" href="https://arthainsight.com/blog.html">
+  <link rel="alternate" hreflang="en" href="https://arthainsight.com/en-blog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arthainsight.com/blog.html">
+  <meta property="og:title" content="Blogi | Artha Insight">
+  <meta property="og:description" content="Ajattelun selkeyttäjän blogi. Kirjoituksia käänteistä, merkityksestä ja selkeydestä.">
+  <meta property="og:image" content="https://arthainsight.com/riku.jpg">
+  <meta property="og:locale" content="fi_FI">
+  <meta property="og:site_name" content="Artha Insight">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1a2332;
+      line-height: 1.7;
+      background: #fafafa;
+    }
+
+    /* --- NAVIGAATIO (täsmälleen sama kuin index.html) --- */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(26, 47, 92, 0.5);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      z-index: 1000;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border-bottom: none;
+    }
+
+    .navbar.scrolled {
+      background: rgba(26, 47, 92, 0.82);
+      backdrop-filter: blur(12px);
+      padding: 12px 5%;
+      border-bottom: 1px solid rgba(232, 197, 71, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-logo a {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #fff;
+      text-decoration: none;
+      opacity: 0.92;
+      transition: opacity 0.2s;
+    }
+
+    .nav-logo a:hover {
+      opacity: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 450;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links .cta-nav {
+      background: #E8C547;
+      color: #1a2f5c;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-links .cta-nav:hover {
+      background: #dbbf3a;
+      color: #0f1f3a;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .nav-links .lang-link {
+      background: transparent;
+      padding: 0;
+      border: none;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .mobile-menu-btn span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #E8C547;
+      margin: 5px 0;
+      transition: 0.2s;
+      border-radius: 2px;
+    }
+
+    /* --- HERO (täsmälleen sama kuin index.html) --- */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #1a2f5c 0%, #2a4a7a 50%, #0f1a33 100%);
+      color: #fff;
+      padding: 140px 24px 100px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(232, 197, 71, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-logo {
+      max-width: 140px;
+      margin: 0 auto 30px;
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 600;
+      max-width: 800px;
+      margin: 0 auto 20px;
+      line-height: 1.2;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero .tagline {
+      font-size: clamp(18px, 2.5vw, 22px);
+      color: #E8C547;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: #E8C547;
+      color: #1a2f5c;
+      padding: 16px 36px;
+      font-size: 17px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-button:hover {
+      background: #D4A82A;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* --- BLOG LISTA (minimalistinen, ei kortteja) --- */
+    .blog-list {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 70px 24px 90px;
+    }
+
+    .blog-item {
+      margin-bottom: 56px;
+      border-bottom: none;
+    }
+
+    .blog-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .blog-item .post-date {
+      font-size: 13px;
+      color: #8a9bb0;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .blog-item h2 {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .blog-item h2 a {
+      color: #1a2f5c;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .blog-item h2 a:hover {
+      color: #3d6bb3;
+    }
+
+    .blog-item .post-excerpt {
+      font-size: 17px;
+      color: #2c3e50;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .blog-item .read-more {
+      font-size: 15px;
+      color: #3d6bb3;
+      text-decoration: none;
+      font-weight: 450;
+      transition: color 0.2s;
+    }
+
+    .blog-item .read-more:hover {
+      color: #E8C547;
+    }
+
+    /* --- FOOTER (täsmälleen sama kuin index.html) --- */
+    .footer {
+      background: #0f1a33;
+      color: #b0c4de;
+      padding: 48px 24px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .footer .brand {
+      color: #E8C547;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .footer a {
+      color: #E8C547;
+      text-decoration: none;
+    }
+
+    .footer .footer-links {
+      margin-top: 20px;
+      font-size: 15px;
+      line-height: 2.2;
+    }
+
+    .footer .footer-links a {
+      display: inline-block;
+      margin: 0 4px;
+    }
+
+    .footer .footer-links .sep {
+      color: #7a8a9e;
+      margin: 0 2px;
+    }
+
+    /* --- RESPONSIIVISUUS (täsmälleen sama kuin index.html) --- */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background: rgba(26, 47, 92, 0.98);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        gap: 32px;
+        padding-top: 100px;
+        transition: left 0.3s ease;
+        align-items: center;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-links a {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .nav-links .cta-nav {
+        background: #E8C547;
+        color: #1a2f5c;
+        padding: 10px 28px;
+        font-size: 16px;
+      }
+
+      .hero {
+        padding: 120px 20px 80px;
+      }
+
+      .blog-list {
+        padding: 50px 20px 70px;
+      }
+
+      .blog-item h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGAATIO -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="nav-logo">
+      <a href="index.html">ARTHA INSIGHT</a>
+    </div>
+    <div class="nav-links">
+      <a href="blog.html">Blogi</a>
+      <a href="en.html" class="lang-link">English</a>
+      <a href="https://calendly.com/riku-forsell" target="_blank" rel="noopener" class="cta-nav">Varaa</a>
+    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Valikko">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- HERO (sama kuin index.html mutta eri otsikolla) -->
+  <section class="hero">
+    <img src="logo.png" alt="Artha Insight" class="hero-logo">
+    <h1>Blogi</h1>
+    <p class="tagline">Kirjoituksia käänteistä, merkityksestä ja selkeydestä.</p>
+  </section>
+
+  <!-- BLOG LISTA (tyhjennetty) -->
+  <div class="blog-list">
+    <!-- Kaikki blog-artikkelit poistettu -->
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="brand">ARTHA INSIGHT</div>
+    <p><em>Selkeyttä silloin, kun sitä eniten tarvitset.</em></p>
+    <p class="footer-links">
+      <a href="https://www.linkedin.com/in/rikuforsell/" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="sep">·</span>
+      <a href="mailto:riku.forsell@gmail.com">Sähköposti</a>
+      <span class="sep">·</span>
+      <a href="tietosuoja.html">Tietosuojaseloste</a>
+    </p>
+    <p style="margin-top: 20px; font-size: 13px; color: #7a8a9e;">© Artha Insight 2026</p>
+  </footer>
+
+  <!-- SCROLL-ÄLYKÄS TOIMINTA + MOBIILIVALIKKO -->
+  <script>
+    const navbar = document.getElementById('mainNavbar');
+    const scrollThreshold = 40;
+
+    function handleScroll() {
+      if (window.scrollY > scrollThreshold) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileBtn) {
+      mobileBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        const spans = this.querySelectorAll('span');
+        if (navLinks.classList.contains('active')) {
+          spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+          spans[1].style.opacity = '0';
+          spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
+        }
+      });
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        if (mobileBtn) {
+          const spans = mobileBtn.querySelectorAll('span');
+          spans[0].style.transform = 'none';
+          spans[1].style.opacity = '1';
+          spans[2].style.transform = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
