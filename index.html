@@ -61,10 +61,10 @@ gtag('config', 'G-TB1J8RPL61');
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a2332; line-height: 1.7; background: #fafafa; }
 .navbar { position: fixed; top: 0; left: 0; width: 100%; background: rgba(26, 47, 92, 0.5); backdrop-filter: blur(8px); display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; z-index: 1000; transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
 .navbar.scrolled { background: rgba(26, 47, 92, 0.82); backdrop-filter: blur(12px); padding: 10px 5%; border-bottom: 1px solid rgba(232, 197, 71, 0.15); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); }
-.nav-logo a { display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.96); padding: 8px 12px; border-radius: 12px; text-decoration: none; opacity: 1; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); }
-.nav-logo a:hover { opacity: 1; background: #fff; transform: translateY(-1px); }
-.nav-logo img { height: 50px; width: auto; display: block; }
-.navbar.scrolled .nav-logo img { height: 42px; }
+.nav-logo a { display: flex; align-items: center; justify-content: center; text-decoration: none; opacity: 1; transition: opacity 0.2s; }
+.nav-logo a:hover { opacity: 0.9; }
+.nav-logo img { height: 56px; width: auto; display: block; }
+.navbar.scrolled .nav-logo img { height: 46px; }
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a { color: rgba(255, 255, 255, 0.88); text-decoration: none; font-size: 15px; font-weight: 450; transition: color 0.2s; }
 .nav-links a:hover { color: #fff; }
@@ -107,7 +107,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .footer a { color: #E8C547; text-decoration: none; }
 .footer .footer-links { margin-top: 20px; font-size: 15px; line-height: 2.2; }
 .footer .footer-links .sep { color: #7a8a9e; margin: 0 2px; }
-@media (max-width: 768px) { .mobile-menu-btn { display: block; } .nav-links { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background: rgba(26, 47, 92, 0.98); backdrop-filter: blur(16px); flex-direction: column; gap: 32px; padding-top: 100px; transition: left 0.3s ease; align-items: center; } .nav-links.active { left: 0; } .nav-links a { font-size: 18px; color: rgba(255, 255, 255, 0.92); } .nav-links .cta-nav { background: #E8C547; color: #1a2f5c; padding: 10px 28px; font-size: 16px; } .nav-logo a { padding: 6px 9px; border-radius: 10px; } .nav-logo img { height: 36px; } .navbar.scrolled .nav-logo img { height: 32px; } .hero { padding: 130px 20px 80px; } .hero h1 { font-size: 32px; } .section { padding: 50px 20px; } .section p { font-size: 17px; } .differentiation .inner, .section.alt .inner { padding: 50px 20px; } .price-box { padding: 28px 22px; } }
+@media (max-width: 768px) { .mobile-menu-btn { display: block; } .nav-links { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background: rgba(26, 47, 92, 0.98); backdrop-filter: blur(16px); flex-direction: column; gap: 32px; padding-top: 100px; transition: left 0.3s ease; align-items: center; } .nav-links.active { left: 0; } .nav-links a { font-size: 18px; color: rgba(255, 255, 255, 0.92); } .nav-links .cta-nav { background: #E8C547; color: #1a2f5c; padding: 10px 28px; font-size: 16px; } .nav-logo img { height: 44px; } .navbar.scrolled .nav-logo img { height: 38px; } .hero { padding: 130px 20px 80px; } .hero h1 { font-size: 32px; } .section { padding: 50px 20px; } .section p { font-size: 17px; } .differentiation .inner, .section.alt .inner { padding: 50px 20px; } .price-box { padding: 28px 22px; } }
 </style>
 </head>
 <body>
