@@ -1,0 +1,4 @@
+Artha Insight deploy marker
+Updated: 2026-06-03
+Logo nav version: 112px desktop / 88px mobile
+No white logo background
