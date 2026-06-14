@@ -1,4 +1,4 @@
 Artha Insight deploy marker
-Updated: 2026-06-03
-Logo nav version: 112px desktop / 88px mobile
-No white logo background
+Updated: 2026-06-14
+Offering: Diagnoosipuhelu 90 min / 500 € + alv (entry, credited toward diagnosis)
+Removed: free initial review CTA, quick diagnosis (kevyt 2 pv), blog
