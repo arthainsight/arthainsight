@@ -1,89 +1,125 @@
 const categories = {
-  audience: {
-    label: "Kenelle palvelu on",
-    title: "Oikea asiakas ei tunnista riittävän nopeasti, että palvelu on hänelle.",
+  market: {
+    label: "Kohderyhmä ja tarve",
+    title: "Ratkaiset ehkä oikeaa ongelmaa liian laajalle tai liian myöhään reagoivalle joukolle.",
     summary:
-      "Viestisi voi kuvailla osaamistasi hyvin, mutta ostajan on vaikea päätellä, puhutaanko juuri hänen tilanteestaan.",
+      "Palvelu voi olla hyvä, mutta kauppa jää vaikeaksi, jos ensisijainen ostaja tai hänen akuutti ostotilanteensa ei ole riittävän tarkka.",
     reason:
-      "Vastauksesi viittaavat siihen, ettei kohderyhmä näy viestissäsi tarpeeksi tarkasti. Kun viestin täytyy sopia monelle, yksittäinen asiakas ei välttämättä koe sen osuvan itseensä.",
+      "Vastauksesi viittaavat siihen, ettei kohderyhmä tai ongelman ajankohtaisuus vielä ohjaa myyntiäsi riittävästi. Kiinnostava ongelma ei aina ole ongelma, josta asiakas on valmis maksamaan juuri nyt.",
     action:
-      "Nimeä yksi ensisijainen asiakas hänen tilanteensa kautta. Aloita viesti siitä, minkä hän tunnistaa omasta arjestaan — älä omasta ammattinimikkeestäsi.",
+      "Valitse yksi ensisijainen asiakas ja yksi tilanne, jossa ongelma on jo näkyvä, tärkeä ja päätöstä vaativa. Haastattele kolmea tällaista ihmistä ennen kuin muutat muuta myyntiä.",
   },
-  problem: {
-    label: "Mihin ongelmaan",
-    title: "Asiakas ei ymmärrä, missä tilanteessa hän tarvitsee palveluasi.",
+  offer: {
+    label: "Tarjous",
+    title: "Osaamisesi ei ole vielä muuttunut helposti ymmärrettäväksi ja ostettavaksi tarjoukseksi.",
     summary:
-      "Palvelusi voi kuulostaa kiinnostavalta, mutta yhteys asiakkaan konkreettiseen ongelmaan tai ajankohtaiseen tilanteeseen jää epäselväksi.",
+      "Asiakas voi kiinnostua osaamisestasi, mutta kokonaisuus, lopputulos tai vastine rahalle jää liian avoimeksi.",
     reason:
-      "Vastauksesi kertovat, että viestissäsi on enemmän yleisiä teemoja kuin asiakkaan tunnistettavaa ongelmaa. Ilman selvää käyttötilannetta palvelun tarve jää helposti myöhemmäksi.",
+      "Vastauksesi kertovat, että palvelun rajaus, tulos, sisältö tai ostamisen askel vaatii liikaa selvittämistä. Silloin kiinnostus ei muutu helposti päätökseksi.",
     action:
-      "Kuvaa yksi hetki, jossa asiakas huomaa tarvitsevansa apua: mitä tapahtuu, mikä ei toimi ja mitä se hänelle maksaa, jos mikään ei muutu.",
+      "Rakenna yksi päätarjous: kenelle, mikä ongelma, mikä lopputulos, mitä tehdään, missä ajassa, millä hinnalla tai millä seuraavalla askeleella.",
   },
-  value: {
-    label: "Mitä hyötyä",
-    title: "Asiakas näkee mitä teet, mutta ei vielä miksi se kannattaa ostaa.",
+  message: {
+    label: "Viesti",
+    title: "Oikea asiakas ei ymmärrä tarpeeksi nopeasti, miksi palvelusi on hänelle tärkeä.",
     summary:
-      "Menetelmäsi, osaamisesi tai palvelun teemat voivat olla esillä, mutta asiakkaan saama muutos jää liian abstraktiksi.",
+      "Tarjous voi olla kunnossa, mutta sen arvo hukkuu yleisyyteen, ammattikieleen tai liian moneen viestiin.",
     reason:
-      "Vastauksesi viittaavat siihen, että asiakkaan täytyy päätellä hyöty itse. Kiinnostava menetelmä ei vielä kerro, mitä asiakkaan elämässä tai liiketoiminnassa muuttuu.",
+      "Vastauksesi viittaavat siihen, että ostajan täytyy itse yhdistää kenelle palvelu on, mitä se ratkaisee ja mitä hyötyä siitä saa. Jokainen ylimääräinen tulkinta heikentää toimintaa.",
     action:
-      "Korvaa yksi abstrakti hyöty havaittavalla muutoksella. Kerro, mitä asiakas pystyy tekemään, päättämään tai saavuttamaan palvelun jälkeen eri tavalla kuin ennen.",
+      "Kirjoita palvelustasi yksi lause: autan [asiakasta] ratkaisemaan [ongelman], jotta [havaittava hyöty], palvelulla [mitä ostetaan]. Testaa lause ulkopuolisella.",
   },
-  buying: {
-    label: "Mitä asiakas ostaa",
-    title: "Asiakas voi kiinnostua, mutta ei hahmota mitä hän on ostamassa.",
+  trust: {
+    label: "Luottamus ja todisteet",
+    title: "Asiakas voi ymmärtää tarjouksesi, mutta hänellä ei ole vielä riittävästi syitä uskoa siihen.",
     summary:
-      "Palvelun aihe voi olla selkeä, mutta sisältö, toteutustapa tai seuraava askel vaatii asiakkaalta liikaa selvittämistä.",
+      "Lupaus voi olla kiinnostava, mutta ilman näyttöä, relevantteja esimerkkejä tai selkeää eroa ostamisen riski jää liian suureksi.",
     reason:
-      "Vastauksesi kertovat, ettei kiinnostus muutu helposti toiminnaksi. Asiakas ei näe yhdellä silmäyksellä, mitä palveluun kuuluu tai miten hän pääsee etenemään.",
+      "Vastauksesi kertovat, ettei asiakas näe riittävästi todisteita siitä, että ymmärrät juuri hänen tilanteensa ja pystyt tuottamaan lupaamasi muutoksen.",
     action:
-      "Nimeä yksi päätarjous ja kerro sen muoto, tärkeimmät vaiheet, kesto sekä yksi selkeä seuraava askel. Poista samasta näkymästä kilpailevat toimintakehotukset.",
+      "Lisää yksi mahdollisimman samankaltainen asiakasesimerkki: lähtötilanne, mitä teitte ja mikä muuttui. Jos tuloksia ei vielä ole, hanki rajattu pilottiasiakas.",
+  },
+  acquisition: {
+    label: "Asiakashankinta",
+    title: "Tarjouksesi ei kohtaa riittävän monta oikeaa ostajaa.",
+    summary:
+      "Muut osat voivat toimia, mutta ilman tasaista määrää relevantteja kontakteja ja keskusteluja myynti jää satunnaiseksi.",
+    reason:
+      "Vastauksesi viittaavat siihen, ettei sinulla ole vielä riittävää tai toistettavaa tapaa saada oikeita ihmisiä tarjouksesi äärelle. Silloin et saa myöskään tarpeeksi dataa muun myyntipolun arviointiin.",
+    action:
+      "Valitse yksi pääkanava ja viikoittainen tavoite relevanteille avauksille tai yhteydenotoille. Seuraa neljän viikon ajan kontakteja, keskusteluja ja sovittuja tapaamisia.",
+  },
+  sales: {
+    label: "Myyntiprosessi",
+    title: "Kiinnostusta syntyy, mutta se ei etene järjestelmällisesti päätökseksi.",
+    summary:
+      "Liidejä tai keskusteluja voi olla, mutta tarpeen selvittäminen, tarjous, seuraava askel tai seuranta katkeaa ennen kauppaa.",
+    reason:
+      "Vastauksesi kertovat, ettei myyntikeskusteluista tarjouksiin ja päätöksiin johtava polku ole vielä riittävän selkeä tai seurattu.",
+    action:
+      "Kirjaa jokaiselle liidille nykyinen vaihe, päätöksentekijä ja seuraava sovittu askel. Käytä samaa keskustelurunkoa ja seuraa, missä vaiheessa eteneminen useimmin pysähtyy.",
   },
 };
 
 const clearResult = {
-  label: "Viesti vaikuttaa selkeältä",
-  title: "Palvelusi on omien vastaustesi perusteella helppo ymmärtää.",
+  label: "Ei selvää pääpullonkaulaa",
+  title: "Vastauksesi eivät osoita yhtä selvää myynnin pääpullonkaulaa.",
   summary:
-    "Kohderyhmä, ongelma, hyöty ja ostettava kokonaisuus näyttävät olevan viestissäsi pääosin ymmärrettäviä.",
+    "Kohderyhmä, tarjous, viesti, luottamus, asiakashankinta ja myyntiprosessi vaikuttavat omien vastaustesi perusteella kohtuullisen toimivilta.",
   reason:
-    "Tämä on silti itsearvio. Oma viesti tuntuu usein tekijälle selvemmältä kuin ulkopuoliselle, koska tunnet palvelusi ja taustaoletukset jo valmiiksi.",
+    "Itsearvio ei kuitenkaan voi todistaa, missä myynti pysähtyy. Seuraava vastaus löytyy toteutuneista luvuista: kuinka moni oikea kontakti etenee keskusteluun, tarjoukseen ja kauppaan.",
   action:
-    "Näytä etusivusi tai profiilisi henkilölle, joka ei tunne palveluasi. Pyydä häntä kertomaan omin sanoin kenelle palvelu on, mitä se ratkaisee, mitä hyötyä siitä saa ja mitä pitäisi tehdä seuraavaksi.",
+    "Kerää viimeisen 90 päivän luvut vaiheittain. Tutki ensin kohtaa, jossa suhteellisesti suurin osa potentiaalisista asiakkaista putoaa pois.",
 };
 
 const questions = [
   {
-    category: "audience",
-    text: "Verkkosivuni tai profiilini ensimmäisistä riveistä käy ilmi, kenelle palvelu on tarkoitettu.",
+    category: "market",
+    text: "Pystyn nimeämään yhden ensisijaisen asiakasryhmän ja tilanteen, jossa he hakevat aktiivisesti ratkaisua.",
   },
   {
-    category: "problem",
-    text: "Asiakas tunnistaa viestistäni konkreettisen tilanteen tai ongelman, jossa palveluni auttaa.",
+    category: "offer",
+    text: "Minulla on yksi selkeä päätarjous, jonka tulos, sisältö, kesto ja ostamisen seuraava askel on määritelty.",
   },
   {
-    category: "value",
-    text: "Kerron asiakkaan saamasta havaittavasta muutoksesta enkä vain menetelmistäni tai osaamisalueistani.",
+    category: "message",
+    text: "Ulkopuolinen ymmärtää sivultani tai profiilistani alle 30 sekunnissa, mitä myyn, kenelle ja mihin ongelmaan.",
   },
   {
-    category: "buying",
-    text: "Asiakkaalle on selvää, mitä palvelu käytännössä sisältää ja missä muodossa se toteutetaan.",
+    category: "trust",
+    text: "Voin näyttää relevantteja asiakastuloksia, referenssejä tai muita todisteita lupaukseni tueksi.",
   },
   {
-    category: "audience",
-    text: "Viestini on rajattu niin, ettei sen tarvitse tuntua sopivalta kaikille mahdollisille asiakkaille.",
+    category: "acquisition",
+    text: "Minulla on viikoittainen tapa tavoittaa uusia, kohderyhmään sopivia ihmisiä.",
   },
   {
-    category: "problem",
-    text: "Kuvaan ongelman asiakkaan omalla arkisella kielellä ilman, että hänen täytyy tuntea ammattisanastoa.",
+    category: "sales",
+    text: "Myyntikeskustelussa selvitän tarpeen, ongelman vaikutukset, päätöksenteon ja seuraavan askeleen.",
   },
   {
-    category: "value",
-    text: "Ulkopuolinen osaisi viestini perusteella selittää omin sanoin, miksi palvelustani voisi olla hänelle hyötyä.",
+    category: "market",
+    text: "Potentiaaliset asiakkaani pitävät ratkaisemaani ongelmaa tärkeänä ja ajankohtaisena, eivät vain kiinnostavana.",
   },
   {
-    category: "buying",
-    text: "Sivulta tai profiilista löytyy yksi selkeä seuraava askel yhteydenottoon tai ostamiseen.",
+    category: "offer",
+    text: "Asiakkaat ymmärtävät, mitä he saavat vastineeksi rahalleen ilman pitkää räätälöintikeskustelua.",
+  },
+  {
+    category: "message",
+    text: "Sisältöni ja myyntiviestini tuovat esiin asiakkaan saaman konkreettisen hyödyn, eivät vain osaamistani tai menetelmääni.",
+  },
+  {
+    category: "trust",
+    text: "Ostaja näkee, miksi juuri minuun ja tapaani ratkaista ongelma kannattaa luottaa.",
+  },
+  {
+    category: "acquisition",
+    text: "Saan riittävästi relevantteja yhteydenottoja tai myyntikeskusteluja, jotta voin arvioida tarjoukseni toimivuutta.",
+  },
+  {
+    category: "sales",
+    text: "Teen tarjoukset ja seurannan järjestelmällisesti ja tiedän, missä vaiheessa kaupat tavallisesti pysähtyvät.",
   },
 ];
 
@@ -91,7 +127,7 @@ const answerOptions = [
   { label: "Pitää täysin paikkansa", score: 0 },
   { label: "Pitää enimmäkseen paikkansa", score: 1 },
   { label: "Pitää vain vähän paikkansa", score: 2 },
-  { label: "Ei pidä lainkaan paikkansa", score: 3 },
+  { label: "Ei pidä paikkansa tai en tiedä", score: 3 },
 ];
 
 const introPanel = document.querySelector("#intro-panel");
@@ -168,13 +204,13 @@ function calculateScores() {
 
 function renderResult() {
   const scores = calculateScores();
-  const tiePriority = ["audience", "problem", "value", "buying"];
+  const tiePriority = ["market", "offer", "message", "trust", "acquisition", "sales"];
   const sorted = Object.keys(scores).sort((a, b) => {
     const scoreDifference = scores[b] - scores[a];
     return scoreDifference || tiePriority.indexOf(a) - tiePriority.indexOf(b);
   });
   const highestScore = scores[sorted[0]];
-  const primaryKey = highestScore <= 1 ? null : sorted[0];
+  const primaryKey = highestScore <= 2 ? null : sorted[0];
   const primary = primaryKey ? categories[primaryKey] : clearResult;
   const secondaryKey = sorted[1];
   const closeSecondary =
@@ -184,7 +220,7 @@ function renderResult() {
   document.querySelector("#result-title").textContent = primary.title;
   document.querySelector("#result-summary").textContent = primary.summary;
   document.querySelector("#result-reason").textContent = closeSecondary
-    ? `${primary.reason} Myös kohta ”${categories[secondaryKey].label.toLowerCase()}” on vastauksissasi lähes yhtä epäselvä.`
+    ? `${primary.reason} Myös ${categories[secondaryKey].label.toLowerCase()} näyttää vastauksissasi lähes yhtä vahvalta pullonkaulalta.`
     : primary.reason;
   document.querySelector("#result-action").textContent = primary.action;
 
@@ -203,26 +239,6 @@ function renderResult() {
       </div>`;
     scoreBars.append(row);
   });
-
-  const scoreLines = tiePriority
-    .map((key) => `${categories[key].label}: ${scores[key]}/6`)
-    .join("\n");
-  const subject = encodeURIComponent(`Selkeytestin tulokseni: ${primary.label}`);
-  const body = encodeURIComponent(
-    `Hei Riku,
-
-Tein Artha Insightin palveluviestin selkeytestin.
-
-Tulokseni: ${primary.label}
-${scoreLines}
-
-Sivuni tai profiilini: [liitä linkki tähän]
-
-Voisitko katsoa, ymmärtääkö ulkopuolinen nopeasti, mitä myyn, kenelle ja miksi se kannattaa ostaa?
-
-Terveisin,`
-  );
-  document.querySelector("#contact-link").href = `mailto:info@arthainsight.com?subject=${subject}&body=${body}`;
 
   showOnly(resultPanel);
   resultPanel.scrollIntoView({ behavior: "smooth", block: "start" });
