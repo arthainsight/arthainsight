@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta
+      name="description"
+      content="Testaa kahdeksalla kysymyksellä, kuinka helposti asiakas ymmärtää mitä myyt, kenelle ja miksi palvelusi kannattaa ostaa."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ymmärtääkö asiakas, mitä oikeasti myyt?" />
+    <meta
+      property="og:description"
+      content="Vastaa kahdeksaan kysymykseen ja testaa palveluviestisi ymmärrettävyys."
+    />
+    <meta property="og:url" content="https://arthainsight.com/diagnoosi/" />
+    <link rel="canonical" href="https://arthainsight.com/diagnoosi/" />
+    <meta name="theme-color" content="#f4f1ea" />
+    <title>Ymmärtääkö asiakas, mitä myyt? — Artha Insight</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#alku" aria-label="Artha Insight, sivun alku">
+        <span class="brand-mark" aria-hidden="true">AI</span>
+        <span>Artha Insight</span>
+      </a>
+      <span class="privacy-note">Maksuton testi</span>
+    </header>
+
+    <main id="alku">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Palveluviestin selkeytesti</p>
+          <h1 id="page-title">Ymmärtääkö asiakas, mitä oikeasti myyt?</h1>
+          <p class="lead">
+            Vastaa kahdeksaan kysymykseen ja selvitä, kuinka helposti potentiaalinen asiakas
+            pystyy ymmärtämään palvelusi, sen arvon ja seuraavan askeleen.
+          </p>
+          <ul class="facts" aria-label="Diagnoosin tiedot">
+            <li>8 kysymystä</li>
+            <li>Noin 2 minuuttia</li>
+            <li>Vastauksia ei tallenneta</li>
+          </ul>
+        </div>
+
+        <div class="diagnosis-shell" id="diagnoosi">
+          <div class="intro-panel" id="intro-panel">
+            <span class="panel-number">01</span>
+            <h2>Näkeekö asiakas arvon yhtä nopeasti kuin sinä?</h2>
+            <p>
+              Valitse jokaisesta kohdasta rehellisin vaihtoehto. Testi ei arvioi osaamistasi,
+              vaan sitä, kuinka selkeästi palvelusi näkyy ulospäin ostajan näkökulmasta.
+            </p>
+            <button class="primary-button" id="start-button" type="button">
+              Aloita diagnoosi
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="quiz-panel" id="quiz-panel" hidden>
+            <div class="progress-row">
+              <span id="progress-label">Kysymys 1 / 8</span>
+              <span id="progress-percent">13 %</span>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <span id="progress-bar"></span>
+            </div>
+
+            <fieldset class="question-fieldset">
+              <legend id="question-text"></legend>
+              <p class="question-help">Kuinka hyvin väite pitää paikkansa tällä hetkellä?</p>
+              <div class="answer-list" id="answer-list"></div>
+            </fieldset>
+
+            <div class="quiz-actions">
+              <button class="text-button" id="back-button" type="button">← Edellinen</button>
+              <span class="keyboard-hint">Voit vastata myös näppäimillä 1–4</span>
+            </div>
+          </div>
+
+          <div class="result-panel" id="result-panel" hidden aria-live="polite">
+            <div class="result-heading">
+              <p class="eyebrow">Todennäköisin epäselvä kohta</p>
+              <span class="result-badge" id="result-badge"></span>
+              <h2 id="result-title"></h2>
+              <p class="result-summary" id="result-summary"></p>
+            </div>
+
+            <div class="result-grid">
+              <div class="result-explanation">
+                <h3>Miksi tähän päädyttiin</h3>
+                <p id="result-reason"></p>
+                <div class="next-move">
+                  <span>Ensimmäinen korjausliike</span>
+                  <p id="result-action"></p>
+                </div>
+              </div>
+
+              <div class="score-card">
+                <h3>Epäselvyyden riski</h3>
+                <div id="score-bars"></div>
+                <p class="score-note">Suurempi luku tarkoittaa, että asiakkaalta vaaditaan enemmän tulkintaa.</p>
+              </div>
+            </div>
+
+            <div class="result-cta">
+              <div>
+                <h3>Haluatko tietää, mikä viestissäsi hämmentää asiakasta?</h3>
+                <p>
+                  Lähetä minulle verkkosivusi, LinkedIn-profiilisi tai muu someprofiili, jonka
+                  kautta myyt palveluasi. Katson, ymmärtääkö ulkopuolinen nopeasti, mitä myyt,
+                  kenelle ja miksi se kannattaa ostaa.
+                </p>
+              </div>
+              <a class="primary-button" id="contact-link" href="mailto:info@arthainsight.com">
+                Lähetä sivusi arvioitavaksi
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            <div class="result-footer">
+              <button class="text-button" id="restart-button" type="button">Tee diagnoosi uudelleen</button>
+              <p>Testi perustuu omiin vastauksiisi. Varmimmin ymmärrettävyys selviää näyttämällä viestiä ulkopuoliselle.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="method" aria-labelledby="method-title">
+        <div>
+          <p class="eyebrow">Mitä asiakas yrittää ymmärtää</p>
+          <h2 id="method-title">Asiakas tarvitsee neljä selkeää vastausta ennen kuin hän voi ostaa.</h2>
+        </div>
+        <div class="method-list">
+          <article>
+            <span>01</span>
+            <h3>Kenelle?</h3>
+            <p>Tunnistaako oikea asiakas nopeasti, että palvelu on tarkoitettu hänelle?</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Mihin ongelmaan?</h3>
+            <p>Ymmärtääkö asiakas, missä tilanteessa hän tarvitsee palveluasi?</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Mitä hyötyä?</h3>
+            <p>Näkeekö hän konkreettisen muutoksen, ei vain menetelmää tai ammattinimikkeitä?</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Mitä ostan?</h3>
+            <p>Onko palvelun sisältö ja seuraava askel riittävän helppo hahmottaa?</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Artha Insight</span>
+      <a href="mailto:info@arthainsight.com">info@arthainsight.com</a>
+    </footer>
+  </body>
+</html>
