@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="robots" content="index,follow" />
     <meta
       name="description"
-      content="Testaa kahdeksalla kysymyksellä, kuinka helposti asiakas ymmärtää mitä myyt, kenelle ja miksi palvelusi kannattaa ostaa."
+      content="Tunnista 12 kysymyksellä, jarruttaako myyntiäsi eniten kohderyhmä, tarjous, viesti, luottamus, asiakashankinta vai myyntiprosessi."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ymmärtääkö asiakas, mitä oikeasti myyt?" />
+    <meta property="og:title" content="Mikä myyntiäsi oikeasti jarruttaa?" />
     <meta
       property="og:description"
-      content="Vastaa kahdeksaan kysymykseen ja testaa palveluviestisi ymmärrettävyys."
+      content="Vastaa 12 kysymykseen ja tunnista asiantuntijapalvelusi todennäköisin myynnin pullonkaula."
     />
     <meta property="og:url" content="https://arthainsight.com/diagnoosi/" />
     <link rel="canonical" href="https://arthainsight.com/diagnoosi/" />
     <meta name="theme-color" content="#f4f1ea" />
-    <title>Ymmärtääkö asiakas, mitä myyt? — Artha Insight</title>
+    <title>Mikä myyntiäsi oikeasti jarruttaa? — Artha Insight</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
   </head>
@@ -33,15 +33,15 @@
     <main id="alku">
       <section class="hero" aria-labelledby="page-title">
         <div class="hero-copy">
-          <p class="eyebrow">Palveluviestin selkeytesti</p>
-          <h1 id="page-title">Ymmärtääkö asiakas, mitä oikeasti myyt?</h1>
+          <p class="eyebrow">Myynnin pullonkauladiagnoosi</p>
+          <h1 id="page-title">Mikä myyntiäsi oikeasti jarruttaa?</h1>
           <p class="lead">
-            Vastaa kahdeksaan kysymykseen ja selvitä, kuinka helposti potentiaalinen asiakas
-            pystyy ymmärtämään palvelusi, sen arvon ja seuraavan askeleen.
+            Vastaa 12 kysymykseen. Saat arvion siitä, pysähtyykö myyntisi todennäköisimmin
+            kohderyhmään, tarjoukseen, viestiin, luottamukseen, asiakashankintaan vai myyntiprosessiin.
           </p>
           <ul class="facts" aria-label="Diagnoosin tiedot">
-            <li>8 kysymystä</li>
-            <li>Noin 2 minuuttia</li>
+            <li>12 kysymystä</li>
+            <li>Noin 3 minuuttia</li>
             <li>Vastauksia ei tallenneta</li>
           </ul>
         </div>
@@ -49,10 +49,10 @@
         <div class="diagnosis-shell" id="diagnoosi">
           <div class="intro-panel" id="intro-panel">
             <span class="panel-number">01</span>
-            <h2>Näkeekö asiakas arvon yhtä nopeasti kuin sinä?</h2>
+            <h2>Ongelma ei aina ole näkyvyydessä — eikä viestissä.</h2>
             <p>
-              Valitse jokaisesta kohdasta rehellisin vaihtoehto. Testi ei arvioi osaamistasi,
-              vaan sitä, kuinka selkeästi palvelusi näkyy ulospäin ostajan näkökulmasta.
+              Vastaa viimeisen 90 päivän toteutuneen tilanteen perusteella, ei sen mukaan miten
+              asioiden pitäisi toimia. Testi vertaa myyntipolun kuutta mahdollista pullonkaulaa.
             </p>
             <button class="primary-button" id="start-button" type="button">
               Aloita diagnoosi
@@ -62,8 +62,8 @@
 
           <div class="quiz-panel" id="quiz-panel" hidden>
             <div class="progress-row">
-              <span id="progress-label">Kysymys 1 / 8</span>
-              <span id="progress-percent">13 %</span>
+              <span id="progress-label">Kysymys 1 / 12</span>
+              <span id="progress-percent">8 %</span>
             </div>
             <div class="progress-track" aria-hidden="true">
               <span id="progress-bar"></span>
@@ -83,7 +83,7 @@
 
           <div class="result-panel" id="result-panel" hidden aria-live="polite">
             <div class="result-heading">
-              <p class="eyebrow">Todennäköisin epäselvä kohta</p>
+              <p class="eyebrow">Todennäköisin myynnin pullonkaula</p>
               <span class="result-badge" id="result-badge"></span>
               <h2 id="result-title"></h2>
               <p class="result-summary" id="result-summary"></p>
@@ -100,30 +100,35 @@
               </div>
 
               <div class="score-card">
-                <h3>Epäselvyyden riski</h3>
+                <h3>Pullonkaulojen vahvuus</h3>
                 <div id="score-bars"></div>
-                <p class="score-note">Suurempi luku tarkoittaa, että asiakkaalta vaaditaan enemmän tulkintaa.</p>
+                <p class="score-note">Suurempi luku tarkoittaa vahvempaa mahdollista jarrua juuri nyt.</p>
               </div>
             </div>
 
             <div class="result-cta">
               <div>
-                <h3>Haluatko tietää, mikä viestissäsi hämmentää asiakasta?</h3>
+                <h3>Haluatko varmistaa, mikä myyntiäsi oikeasti jarruttaa?</h3>
                 <p>
-                  Lähetä minulle verkkosivusi, LinkedIn-profiilisi tai muu someprofiili, jonka
-                  kautta myyt palveluasi. Katson, ymmärtääkö ulkopuolinen nopeasti, mitä myyt,
-                  kenelle ja miksi se kannattaa ostaa.
+                  Varaa maksuton 20 minuutin keskustelu. Käydään tuloksesi läpi ja katsotaan,
+                  mistä sinun kannattaa aloittaa — ilman että yrität korjata kaikkea kerralla.
                 </p>
               </div>
-              <a class="primary-button" id="contact-link" href="mailto:info@arthainsight.com">
-                Lähetä sivusi arvioitavaksi
+              <a
+                class="primary-button"
+                id="booking-link"
+                href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1ES2XY7E7rRLR4oVCyUqlCYtnADC0_FbDxooLsN9vuY9rqa6SzdJbu1PgO64TIuwOzzqrq1Hjm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Varaa maksuton 20 min keskustelu
                 <span aria-hidden="true">→</span>
               </a>
             </div>
 
             <div class="result-footer">
               <button class="text-button" id="restart-button" type="button">Tee diagnoosi uudelleen</button>
-              <p>Testi perustuu omiin vastauksiisi. Varmimmin ymmärrettävyys selviää näyttämällä viestiä ulkopuoliselle.</p>
+              <p>Testi on itsearvio ja antaa hypoteesin. Todellinen pullonkaula varmistetaan myyntidatasta ja asiakaskeskusteluista.</p>
             </div>
           </div>
         </div>
@@ -131,29 +136,39 @@
 
       <section class="method" aria-labelledby="method-title">
         <div>
-          <p class="eyebrow">Mitä asiakas yrittää ymmärtää</p>
-          <h2 id="method-title">Asiakas tarvitsee neljä selkeää vastausta ennen kuin hän voi ostaa.</h2>
+          <p class="eyebrow">Mistä myynti voi pysähtyä</p>
+          <h2 id="method-title">Yksi kohta rajoittaa yleensä koko muun myyntipolun toimintaa.</h2>
         </div>
         <div class="method-list">
           <article>
             <span>01</span>
-            <h3>Kenelle?</h3>
-            <p>Tunnistaako oikea asiakas nopeasti, että palvelu on tarkoitettu hänelle?</p>
+            <h3>Kohderyhmä ja tarve</h3>
+            <p>Ratkaisetko tärkeää ongelmaa ihmiselle, joka on valmis toimimaan juuri nyt?</p>
           </article>
           <article>
             <span>02</span>
-            <h3>Mihin ongelmaan?</h3>
-            <p>Ymmärtääkö asiakas, missä tilanteessa hän tarvitsee palveluasi?</p>
+            <h3>Tarjous</h3>
+            <p>Onko osaamisesi muutettu selkeäksi kokonaisuudeksi, jonka asiakas voi ostaa?</p>
           </article>
           <article>
             <span>03</span>
-            <h3>Mitä hyötyä?</h3>
-            <p>Näkeekö hän konkreettisen muutoksen, ei vain menetelmää tai ammattinimikkeitä?</p>
+            <h3>Viesti</h3>
+            <p>Ymmärtääkö oikea asiakas nopeasti, mitä myyt ja miksi sillä on hänelle väliä?</p>
           </article>
           <article>
             <span>04</span>
-            <h3>Mitä ostan?</h3>
-            <p>Onko palvelun sisältö ja seuraava askel riittävän helppo hahmottaa?</p>
+            <h3>Luottamus</h3>
+            <p>Näkeekö ostaja riittävästi todisteita ja syitä uskoa lupaukseesi?</p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3>Asiakashankinta</h3>
+            <p>Kohtaako tarjouksesi riittävän monta kohderyhmään sopivaa ihmistä?</p>
+          </article>
+          <article>
+            <span>06</span>
+            <h3>Myyntiprosessi</h3>
+            <p>Eteneekö syntynyt kiinnostus järjestelmällisesti seuraavaan askeleeseen ja päätökseen?</p>
           </article>
         </div>
       </section>
