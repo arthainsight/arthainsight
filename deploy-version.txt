@@ -1,4 +1,7 @@
 Artha Insight deploy marker
-Updated: 2026-06-14
-Offering: Diagnoosipuhelu 90 min / 500 € + alv (entry, credited toward diagnosis)
-Removed: free initial review CTA, quick diagnosis (kevyt 2 pv), blog
+Updated: 2026-09-20
+Offering: Myynnin pullonkauladiagnoosi (maksullinen), hinta kerrotaan keskustelussa
+Entry: maksuton 30 min keskustelu tuloksesta ja sopivuudesta
+Lead magnet: /diagnoosi — testi "Myynnin kuusi jarrua", jarrukohtainen raportti sähköpostiin + 3 jatkoviestiä
+Data: testivastaukset tallennetaan nimettöminä markkinatietona (eri välilehti kuin sähköpostit)
+Backend: Google Apps Script + Sheets (apps-script/, ENDPOINT asetetaan diagnoosi/app.js)

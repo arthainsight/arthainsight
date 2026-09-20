@@ -1,3 +1,20 @@
+/*
+ * Myynnin kuusi jarrua — maksuton esiversio Artha Insightin myynnin
+ * pullonkauladiagnoosista.
+ *
+ * Sama kuuden jarrun lista on käytössä testissä ja maksullisessa diagnoosissa.
+ * Testi antaa hypoteesin, diagnoosi todentaa sen.
+ */
+
+const FRAMEWORK_NAME = "Myynnin kuusi jarrua";
+
+/*
+ * Google Apps Script -web-sovelluksen osoite. Asennusohje: apps-script/README.md.
+ * Niin kauan kuin osoite on tyhjä, lomakkeen tilalla näkyy sähköpostilinkki
+ * eikä mitään lähetetä mihinkään.
+ */
+const ENDPOINT = "";
+
 const categories = {
   market: {
     label: "Kohderyhmä ja tarve",
@@ -8,6 +25,12 @@ const categories = {
       "Vastauksesi viittaavat siihen, ettei kohderyhmä tai ongelman ajankohtaisuus vielä ohjaa myyntiäsi riittävästi. Kiinnostava ongelma ei aina ole ongelma, josta asiakas on valmis maksamaan juuri nyt.",
     action:
       "Valitse yksi ensisijainen asiakas ja yksi tilanne, jossa ongelma on jo näkyvä, tärkeä ja päätöstä vaativa. Haastattele kolmea tällaista ihmistä ennen kuin muutat muuta myyntiä.",
+    reportPoints: [
+      "Kolme kysymystä, joilla erotat akuutin ongelman vain kiinnostavasta",
+      "Rajausmalli: yksi ensisijainen asiakas ja yksi ostotilanne",
+      "Haastattelurunko kolmelle asiakkaalle",
+      "Merkit siitä, että kohderyhmä on liian laaja myytäväksi",
+    ],
   },
   offer: {
     label: "Tarjous",
@@ -18,6 +41,12 @@ const categories = {
       "Vastauksesi kertovat, että palvelun rajaus, tulos, sisältö tai ostamisen askel vaatii liikaa selvittämistä. Silloin kiinnostus ei muutu helposti päätökseksi.",
     action:
       "Rakenna yksi päätarjous: kenelle, mikä ongelma, mikä lopputulos, mitä tehdään, missä ajassa, millä hinnalla tai millä seuraavalla askeleella.",
+    reportPoints: [
+      "Päätarjouksen rakenne: kenelle, mikä tulos, mitä tehdään, missä ajassa",
+      "Kolme tapaa tehdä ostamisesta yksinkertaista laskematta hintaa",
+      "Tarkistuslista: mitä asiakkaan on tiedettävä ennen kuin hän voi sanoa kyllä",
+      "Miten rajaat räätälöinnin pois ensimmäisestä myyntikeskustelusta",
+    ],
   },
   message: {
     label: "Viesti",
@@ -28,6 +57,12 @@ const categories = {
       "Vastauksesi viittaavat siihen, että ostajan täytyy itse yhdistää kenelle palvelu on, mitä se ratkaisee ja mitä hyötyä siitä saa. Jokainen ylimääräinen tulkinta heikentää toimintaa.",
     action:
       "Kirjoita palvelustasi yksi lause: autan [asiakasta] ratkaisemaan [ongelman], jotta [havaittava hyöty], palvelulla [mitä ostetaan]. Testaa lause ulkopuolisella.",
+    reportPoints: [
+      "Yhden lauseen malli ja kolme esimerkkiä asiantuntijapalveluista",
+      "30 sekunnin testi ulkopuolisella: mitä kysyt ja mitä vastauksista päättelet",
+      "Yleisimmät ammattikielen sudenkuopat asiantuntijan sivulla",
+      "Miten muutat menetelmäpuheen asiakkaan havaittavaksi hyödyksi",
+    ],
   },
   trust: {
     label: "Luottamus ja todisteet",
@@ -38,6 +73,12 @@ const categories = {
       "Vastauksesi kertovat, ettei asiakas näe riittävästi todisteita siitä, että ymmärrät juuri hänen tilanteensa ja pystyt tuottamaan lupaamasi muutoksen.",
     action:
       "Lisää yksi mahdollisimman samankaltainen asiakasesimerkki: lähtötilanne, mitä teitte ja mikä muuttui. Jos tuloksia ei vielä ole, hanki rajattu pilottiasiakas.",
+    reportPoints: [
+      "Asiakasesimerkin rakenne: lähtötilanne, teot, muutos",
+      "Mitä teet, kun tuloksia ei vielä ole — rajatun pilotin malli",
+      "Kolme todistetyyppiä, jotka toimivat ilman referenssilistaa",
+      "Miten teet eron kilpailijaan näkyväksi ostajalle",
+    ],
   },
   acquisition: {
     label: "Asiakashankinta",
@@ -48,6 +89,12 @@ const categories = {
       "Vastauksesi viittaavat siihen, ettei sinulla ole vielä riittävää tai toistettavaa tapaa saada oikeita ihmisiä tarjouksesi äärelle. Silloin et saa myöskään tarpeeksi dataa muun myyntipolun arviointiin.",
     action:
       "Valitse yksi pääkanava ja viikoittainen tavoite relevanteille avauksille tai yhteydenotoille. Seuraa neljän viikon ajan kontakteja, keskusteluja ja sovittuja tapaamisia.",
+    reportPoints: [
+      "Yhden pääkanavan valinta: kolme kriteeriä",
+      "Viikkotavoite ja neljän viikon seurantataulukko",
+      "Avausviestin runko, joka ei ole myyntipuhe",
+      "Milloin ongelma on kanava ja milloin pelkkä määrä",
+    ],
   },
   sales: {
     label: "Myyntiprosessi",
@@ -58,18 +105,30 @@ const categories = {
       "Vastauksesi kertovat, ettei myyntikeskusteluista tarjouksiin ja päätöksiin johtava polku ole vielä riittävän selkeä tai seurattu.",
     action:
       "Kirjaa jokaiselle liidille nykyinen vaihe, päätöksentekijä ja seuraava sovittu askel. Käytä samaa keskustelurunkoa ja seuraa, missä vaiheessa eteneminen useimmin pysähtyy.",
+    reportPoints: [
+      "Myyntikeskustelun runko: tarve, vaikutus, päätöksenteko, seuraava askel",
+      "Seurantamalli, joka ei tunnu painostukselta",
+      "Putken vaiheet ja mitä kirjaat jokaisesta liidistä",
+      "Kolme yleisintä kohtaa, joissa kauppa pysähtyy — ja mitä kussakin tehdään",
+    ],
   },
 };
 
 const clearResult = {
-  label: "Ei selvää pääpullonkaulaa",
-  title: "Vastauksesi eivät osoita yhtä selvää myynnin pääpullonkaulaa.",
+  label: "Ei selvää pääjarrua",
+  title: "Vastauksesi eivät osoita yhtä selvää myynnin pääjarrua.",
   summary:
     "Kohderyhmä, tarjous, viesti, luottamus, asiakashankinta ja myyntiprosessi vaikuttavat omien vastaustesi perusteella kohtuullisen toimivilta.",
   reason:
     "Itsearvio ei kuitenkaan voi todistaa, missä myynti pysähtyy. Seuraava vastaus löytyy toteutuneista luvuista: kuinka moni oikea kontakti etenee keskusteluun, tarjoukseen ja kauppaan.",
   action:
     "Kerää viimeisen 90 päivän luvut vaiheittain. Tutki ensin kohtaa, jossa suhteellisesti suurin osa potentiaalisista asiakkaista putoaa pois.",
+  reportPoints: [
+    "Miten keräät 90 päivän luvut vaiheittain",
+    "Mitä lukuja kannattaa pitää normaalina asiantuntijapalvelussa",
+    "Mistä aloitat, kun kaikki kuusi jarrua näyttävät kohtuullisilta",
+    "Milloin itsearvio ei enää riitä ja mitä tilalle",
+  ],
 };
 
 const questions = [
@@ -130,6 +189,8 @@ const answerOptions = [
   { label: "Ei pidä paikkansa tai en tiedä", score: 3 },
 ];
 
+const categoryOrder = ["market", "offer", "message", "trust", "acquisition", "sales"];
+
 const introPanel = document.querySelector("#intro-panel");
 const quizPanel = document.querySelector("#quiz-panel");
 const resultPanel = document.querySelector("#result-panel");
@@ -142,8 +203,22 @@ const progressBar = document.querySelector("#progress-bar");
 const questionText = document.querySelector("#question-text");
 const answerList = document.querySelector("#answer-list");
 
+const leadGate = document.querySelector("#lead-gate");
+const leadForm = document.querySelector("#lead-form");
+const leadEmail = document.querySelector("#lead-email");
+const leadConsent = document.querySelector("#lead-consent");
+const leadSubmit = document.querySelector("#lead-submit");
+const leadStatus = document.querySelector("#lead-status");
+const leadPoints = document.querySelector("#lead-points");
+const leadTitle = document.querySelector("#lead-title");
+const leadFallback = document.querySelector("#lead-fallback");
+const leadDone = document.querySelector("#lead-done");
+const nextMove = document.querySelector("#next-move");
+const nextMoveLocked = document.querySelector("#next-move-locked");
+
 let currentQuestion = 0;
 let answers = [];
+let currentResult = null;
 
 function showOnly(panel) {
   [introPanel, quizPanel, resultPanel].forEach((item) => {
@@ -154,6 +229,7 @@ function showOnly(panel) {
 function beginQuiz() {
   currentQuestion = 0;
   answers = [];
+  currentResult = null;
   showOnly(quizPanel);
   renderQuestion();
 }
@@ -195,7 +271,7 @@ function selectAnswer(score) {
 }
 
 function calculateScores() {
-  const scores = Object.fromEntries(Object.keys(categories).map((key) => [key, 0]));
+  const scores = Object.fromEntries(categoryOrder.map((key) => [key, 0]));
   questions.forEach((question, index) => {
     scores[question.category] += answers[index] ?? 0;
   });
@@ -204,10 +280,9 @@ function calculateScores() {
 
 function renderResult() {
   const scores = calculateScores();
-  const tiePriority = ["market", "offer", "message", "trust", "acquisition", "sales"];
-  const sorted = Object.keys(scores).sort((a, b) => {
+  const sorted = [...categoryOrder].sort((a, b) => {
     const scoreDifference = scores[b] - scores[a];
-    return scoreDifference || tiePriority.indexOf(a) - tiePriority.indexOf(b);
+    return scoreDifference || categoryOrder.indexOf(a) - categoryOrder.indexOf(b);
   });
   const highestScore = scores[sorted[0]];
   const primaryKey = highestScore <= 2 ? null : sorted[0];
@@ -216,17 +291,19 @@ function renderResult() {
   const closeSecondary =
     primaryKey && scores[secondaryKey] >= scores[primaryKey] - 1 && scores[secondaryKey] > 0;
 
+  currentResult = { scores, primaryKey, secondaryKey: closeSecondary ? secondaryKey : null };
+
   document.querySelector("#result-badge").textContent = primary.label;
   document.querySelector("#result-title").textContent = primary.title;
   document.querySelector("#result-summary").textContent = primary.summary;
   document.querySelector("#result-reason").textContent = closeSecondary
-    ? `${primary.reason} Myös ${categories[secondaryKey].label.toLowerCase()} näyttää vastauksissasi lähes yhtä vahvalta pullonkaulalta.`
+    ? `${primary.reason} Myös ${categories[secondaryKey].label.toLowerCase()} näyttää vastauksissasi lähes yhtä vahvalta jarrulta.`
     : primary.reason;
   document.querySelector("#result-action").textContent = primary.action;
 
   const scoreBars = document.querySelector("#score-bars");
   scoreBars.replaceChildren();
-  tiePriority.forEach((key) => {
+  categoryOrder.forEach((key) => {
     const row = document.createElement("div");
     row.className = `score-row${key === primaryKey ? " is-primary" : ""}`;
     row.innerHTML = `
@@ -240,13 +317,141 @@ function renderResult() {
     scoreBars.append(row);
   });
 
+  prepareLeadGate(primary);
+  storeAnonymousResponse();
+
   showOnly(resultPanel);
   resultPanel.scrollIntoView({ behavior: "smooth", block: "start" });
   document.querySelector("#result-title").focus?.({ preventScroll: true });
 }
 
+/* --- Laajempi raportti sähköpostiin --- */
+
+function prepareLeadGate(primary) {
+  leadTitle.textContent = `Haluatko koko raportin jarrusta "${primary.label}"?`;
+  leadPoints.replaceChildren();
+  primary.reportPoints.forEach((point) => {
+    const item = document.createElement("li");
+    item.textContent = point;
+    leadPoints.append(item);
+  });
+
+  leadGate.classList.remove("is-sent");
+  leadDone.hidden = true;
+  leadStatus.textContent = "";
+  leadStatus.className = "lead-status";
+  nextMove.hidden = true;
+  nextMoveLocked.hidden = false;
+  leadSubmit.disabled = false;
+
+  if (ENDPOINT) {
+    leadForm.hidden = false;
+    leadFallback.hidden = true;
+  } else {
+    leadForm.hidden = true;
+    leadFallback.hidden = false;
+    leadFallback.querySelector("a").href = `mailto:info@arthainsight.com?subject=${encodeURIComponent(
+      `Raportti: ${primary.label}`,
+    )}&body=${encodeURIComponent(
+      `Tein testin "${FRAMEWORK_NAME}" ja sain tulokseksi: ${primary.label}. Lähetätkö minulle laajemman raportin?`,
+    )}`;
+  }
+}
+
+function unlockNextMove() {
+  nextMoveLocked.hidden = true;
+  nextMove.hidden = false;
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
+}
+
+/*
+ * Apps Script -web-sovellus ei tue esitarkistuspyyntöjä (preflight), joten
+ * runko lähetetään text/plain-tyyppisenä. Silloin selain tekee yksinkertaisen
+ * pyynnön ilman OPTIONS-kierrosta.
+ */
+async function postToEndpoint(payload) {
+  if (!ENDPOINT) return false;
+  const response = await fetch(ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) throw new Error(`Palvelin vastasi: ${response.status}`);
+  return true;
+}
+
+/*
+ * Vastaukset tallennetaan ilman sähköpostiosoitetta tai muuta tunnistetta.
+ * Niitä käytetään vain koostettuna markkinatietona siitä, mihin kohtaan
+ * myyntipolkua asiantuntijayrittäjät useimmin jäävät kiinni.
+ */
+function storeAnonymousResponse() {
+  if (!ENDPOINT || !currentResult) return;
+  const payload = {
+    tyyppi: "vastaus",
+    aikaleima: new Date().toISOString(),
+    kehys: FRAMEWORK_NAME,
+    ensisijainen: currentResult.primaryKey ?? "ei_selvaa",
+    toissijainen: currentResult.secondaryKey ?? "",
+    pisteet: currentResult.scores,
+    vastaukset: answers.slice(),
+  };
+  postToEndpoint(payload).catch(() => {
+    /* Nimetön tilasto ei saa häiritä käyttäjää, jos lähetys ei onnistu. */
+  });
+}
+
+async function submitLead(event) {
+  event.preventDefault();
+  if (!currentResult) return;
+
+  const email = leadEmail.value.trim();
+  if (!isValidEmail(email)) {
+    leadStatus.className = "lead-status is-error";
+    leadStatus.textContent = "Tarkista sähköpostiosoite.";
+    leadEmail.focus();
+    return;
+  }
+  if (!leadConsent.checked) {
+    leadStatus.className = "lead-status is-error";
+    leadStatus.textContent = "Tarvitsen luvan lähettää raportin ja jatkoviestit.";
+    leadConsent.focus();
+    return;
+  }
+
+  leadSubmit.disabled = true;
+  leadStatus.className = "lead-status";
+  leadStatus.textContent = "Lähetetään…";
+
+  try {
+    await postToEndpoint({
+      tyyppi: "liidi",
+      aikaleima: new Date().toISOString(),
+      kehys: FRAMEWORK_NAME,
+      sahkoposti: email,
+      ensisijainen: currentResult.primaryKey ?? "ei_selvaa",
+      toissijainen: currentResult.secondaryKey ?? "",
+      pisteet: currentResult.scores,
+      suostumus: true,
+    });
+    leadGate.classList.add("is-sent");
+    leadForm.hidden = true;
+    leadDone.hidden = false;
+    unlockNextMove();
+  } catch (error) {
+    leadSubmit.disabled = false;
+    leadStatus.className = "lead-status is-error";
+    leadStatus.textContent =
+      "Lähetys ei onnistunut. Kokeile uudelleen tai laita viesti osoitteeseen info@arthainsight.com.";
+  }
+}
+
 startButton.addEventListener("click", beginQuiz);
 restartButton.addEventListener("click", beginQuiz);
+leadForm.addEventListener("submit", submitLead);
 backButton.addEventListener("click", () => {
   if (currentQuestion === 0) return;
   currentQuestion -= 1;
