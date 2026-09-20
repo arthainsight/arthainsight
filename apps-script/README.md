@@ -66,6 +66,20 @@ Jos selaimen konsoli valittaa CORS-virheestä, käyttöönoton asetus
 "Kenellä on käyttöoikeus" ei ole *Kuka tahansa*. Muutos vaatii **uuden**
 käyttöönoton, ei pelkkää asetuksen muuttamista.
 
+## Testit
+
+Skriptin logiikan voi ajaa koneella ilman Google-tiliä:
+
+```
+node apps-script/test/gas-test.js
+```
+
+Testi jäljittelee Sheetsin ja MailAppin toiminnan muistissa ja tarkistaa
+muun muassa, että nimettömälle riville ei päädy sähköpostiosoitetta, että
+sama osoite ei saa kahta riviä, että jatkoviestit lähtevät oikeassa
+järjestyksessä eivätkä toistu, ja että perutulle ei lähde mitään. Aja se
+aina, kun olet muokannut `Viestit.gs`- tai `Code.gs`-tiedostoa.
+
 ## Rajat ja ylläpito
 
 - Tavallisen Gmail-tilin lähetysraja on noin 100 viestiä vuorokaudessa,
@@ -74,6 +88,9 @@ käyttöönoton, ei pelkkää asetuksen muuttamista.
 - Peruutus hoidetaan käsin: kun joku vastaa "lopeta", kirjoita
   `Liidit`-välilehden sarakkeeseen **Peruttu** mikä tahansa merkintä. Rivi
   jää taulukkoon, mutta viestejä ei enää lähde.
+- Peruutusmerkintä säilyy, vaikka sama osoite täyttäisi lomakkeen uudelleen.
+  Hän saa pyytämänsä raportin, mutta ei palaa jatkoviestien listalle
+  itsestään. Jos haluat palauttaa hänet, tyhjennä Peruttu-solu käsin.
 - Sähköpostien tekstit ovat tiedostossa `Viestit.gs`. Niitä voi muokata
   koskematta `Code.gs`-logiikkaan. Jos muutat raporttien sisältöä, päivitä
   myös `diagnoosi/app.js`-tiedoston `reportPoints`-luettelot, jotta sivun

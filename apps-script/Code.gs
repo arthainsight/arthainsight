@@ -113,10 +113,17 @@ function tallennaVastaus_(data) {
   ]);
 }
 
-/** Sama osoite ei saa kahta riviä: vanha rivi päivitetään uusimmalla tuloksella. */
+/**
+ * Sama osoite ei saa kahta riviä: vanha rivi päivitetään uusimmalla tuloksella.
+ *
+ * Peruutusmerkintä säilyy myös uudelleentilauksessa. Kerran annettua "lopeta"-
+ * ilmoitusta ei kumota lomakkeella, koska osoitteen voi täyttää kuka tahansa.
+ * Tilaajan saa takaisin listalle tyhjentämällä Peruttu-sarakkeen käsin.
+ */
 function tallennaLiidi_(data, email) {
   const taulukko = haeTaulukko_(LIIDIT_SHEET, LIIDIT_OTSIKOT);
   const rivi = etsiLiidinRivi_(taulukko, email);
+  const peruttu = rivi > 0 ? taulukko.getRange(rivi, 10).getValues()[0][0] : "";
   const arvot = [
     data.aikaleima || new Date().toISOString(),
     email,
@@ -127,7 +134,7 @@ function tallennaLiidi_(data, email) {
     "",
     "",
     "",
-    "",
+    peruttu,
   ];
   if (rivi > 0) {
     taulukko.getRange(rivi, 1, 1, arvot.length).setValues([arvot]);
