@@ -12,9 +12,12 @@ const FRAMEWORK_NAME = "Myynnin kuusi jarrua";
  * Google Apps Script -web-sovelluksen osoite. Asennusohje: apps-script/README.md.
  * Niin kauan kuin osoite on tyhjä, lomakkeen tilalla näkyy sähköpostilinkki
  * eikä mitään lähetetä mihinkään.
+ *
+ * Tyhjennetty odottamaan, että JSONP-korjaus on julkaistu Apps Scriptissä.
+ * Palauta tämä osoite, kun uusi versio on käytössä:
+ * https://script.google.com/macros/s/AKfycbznuw-lhBUZsAc6OsRvOatuPG46Qoi1ispxUYNFwjsgTXaws4g2jvu3Ll4A3TBnZmQA/exec
  */
-const ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbznuw-lhBUZsAc6OsRvOatuPG46Qoi1ispxUYNFwjsgTXaws4g2jvu3Ll4A3TBnZmQA/exec";
+const ENDPOINT = "";
 
 const categories = {
   market: {
