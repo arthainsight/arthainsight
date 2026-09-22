@@ -1,0 +1,7 @@
+# Vain Code.gs, Viestit.gs ja appsscript.json kuuluvat Apps Scriptiin.
+# Testit ajetaan Nodessa eivätkä toimi Apps Scriptissä: ne käyttävät
+# require()-kutsuja ja jäljittelevät Googlen palveluita.
+test/**
+**/*.md
+.clasp.json
+.claspignore

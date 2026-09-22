@@ -6,18 +6,18 @@
     <meta name="robots" content="index,follow" />
     <meta
       name="description"
-      content="Tunnista 12 kysymyksellä, jarruttaako myyntiäsi eniten kohderyhmä, tarjous, viesti, luottamus, asiakashankinta vai myyntiprosessi."
+      content="Myynnin kuusi jarrua on maksuton esiversio Artha Insightin myynnin pullonkauladiagnoosista. Tunnista 12 kysymyksellä, mikä kuudesta jarrusta hidastaa myyntiäsi eniten."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Mikä myyntiäsi oikeasti jarruttaa?" />
+    <meta property="og:title" content="Myynnin kuusi jarrua — mikä myyntiäsi oikeasti jarruttaa?" />
     <meta
       property="og:description"
-      content="Vastaa 12 kysymykseen ja tunnista asiantuntijapalvelusi todennäköisin myynnin pullonkaula."
+      content="Vastaa 12 kysymykseen ja tunnista, mikä Myynnin kuudesta jarrusta hidastaa asiantuntijapalveluasi eniten. Laajemman raportin saat sähköpostiin."
     />
     <meta property="og:url" content="https://arthainsight.com/diagnoosi/" />
     <link rel="canonical" href="https://arthainsight.com/diagnoosi/" />
     <meta name="theme-color" content="#f4f1ea" />
-    <title>Mikä myyntiäsi oikeasti jarruttaa? — Artha Insight</title>
+    <title>Myynnin kuusi jarrua — mikä myyntiäsi oikeasti jarruttaa? | Artha Insight</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
   </head>
@@ -27,22 +27,25 @@
         <span class="brand-mark" aria-hidden="true">AI</span>
         <span>Artha Insight</span>
       </a>
-      <span class="privacy-note">Maksuton testi</span>
+      <span class="privacy-note">Maksuton esiversio</span>
     </header>
 
     <main id="alku">
       <section class="hero" aria-labelledby="page-title">
         <div class="hero-copy">
-          <p class="eyebrow">Myynnin pullonkauladiagnoosi</p>
+          <p class="eyebrow">Myynnin kuusi jarrua — diagnoosin maksuton esiversio</p>
           <h1 id="page-title">Mikä myyntiäsi oikeasti jarruttaa?</h1>
           <p class="lead">
-            Vastaa 12 kysymykseen. Saat arvion siitä, pysähtyykö myyntisi todennäköisimmin
-            kohderyhmään, tarjoukseen, viestiin, luottamukseen, asiakashankintaan vai myyntiprosessiin.
+            Vastaa 12 kysymykseen. Saat arvion siitä, mikä <strong>Myynnin kuudesta jarrusta</strong>
+            hidastaa myyntiäsi juuri nyt: kohderyhmä, tarjous, viesti, luottamus, asiakashankinta
+            vai myyntiprosessi. Sama kuuden jarrun lista on käytössä myös maksullisessa
+            pullonkauladiagnoosissa — tämä testi on sen ilmainen esiversio.
           </p>
           <ul class="facts" aria-label="Diagnoosin tiedot">
             <li>12 kysymystä</li>
             <li>Noin 3 minuuttia</li>
-            <li>Vastauksia ei tallenneta</li>
+            <li>Laajempi raportti sähköpostiin</li>
+            <li>Vastaukset tallennetaan nimettöminä</li>
           </ul>
         </div>
 
@@ -52,7 +55,8 @@
             <h2>Ongelma ei aina ole näkyvyydessä — eikä viestissä.</h2>
             <p>
               Vastaa viimeisen 90 päivän toteutuneen tilanteen perusteella, ei sen mukaan miten
-              asioiden pitäisi toimia. Testi vertaa myyntipolun kuutta mahdollista pullonkaulaa.
+              asioiden pitäisi toimia. Testi vertaa samaa kuutta jarrua, jotka käydään läpi myös
+              maksullisessa diagnoosissa.
             </p>
             <button class="primary-button" id="start-button" type="button">
               Aloita diagnoosi
@@ -83,9 +87,9 @@
 
           <div class="result-panel" id="result-panel" hidden aria-live="polite">
             <div class="result-heading">
-              <p class="eyebrow">Todennäköisin myynnin pullonkaula</p>
+              <p class="eyebrow">Myynnin kuusi jarrua — todennäköisin jarrusi</p>
               <span class="result-badge" id="result-badge"></span>
-              <h2 id="result-title"></h2>
+              <h2 id="result-title" tabindex="-1"></h2>
               <p class="result-summary" id="result-summary"></p>
             </div>
 
@@ -93,25 +97,90 @@
               <div class="result-explanation">
                 <h3>Miksi tähän päädyttiin</h3>
                 <p id="result-reason"></p>
-                <div class="next-move">
+                <div class="next-move" id="next-move" hidden>
                   <span>Ensimmäinen korjausliike</span>
                   <p id="result-action"></p>
                 </div>
+                <p class="next-move-locked" id="next-move-locked">
+                  Ensimmäinen korjausliike ja koko jarrukohtainen raportti tulevat sähköpostiin —
+                  pyydä ne alta.
+                </p>
               </div>
 
               <div class="score-card">
-                <h3>Pullonkaulojen vahvuus</h3>
+                <h3>Kuuden jarrun vahvuus</h3>
                 <div id="score-bars"></div>
                 <p class="score-note">Suurempi luku tarkoittaa vahvempaa mahdollista jarrua juuri nyt.</p>
               </div>
             </div>
 
+            <section class="lead-gate" id="lead-gate" aria-labelledby="lead-title">
+              <div class="lead-copy">
+                <p class="eyebrow">Laajempi raportti</p>
+                <h3 id="lead-title">Haluatko koko raportin jarrustasi?</h3>
+                <p class="lead-intro">
+                  Yllä on lyhyt tulos. Sähköpostiin lähtee laajempi, juuri tähän jarruun keskittyvä
+                  raportti — sama rakenne, jolla pullonkaula käydään läpi maksullisessa diagnoosissa.
+                </p>
+                <ul class="lead-points" id="lead-points"></ul>
+              </div>
+
+              <form class="lead-form" id="lead-form" novalidate>
+                <label class="lead-label" for="lead-email">Sähköposti</label>
+                <input
+                  class="lead-input"
+                  id="lead-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="etunimi@yritys.fi"
+                  required
+                />
+                <label class="lead-consent">
+                  <input type="checkbox" id="lead-consent" required />
+                  <span>
+                    Lähetä minulle raportti ja 3–4 jatkoviestiä myynnin kuudesta jarrusta. Voin perua
+                    tilauksen milloin tahansa. <a href="/tietosuoja.html" target="_blank" rel="noopener">Tietosuojaseloste</a>
+                  </span>
+                </label>
+                <button class="primary-button" id="lead-submit" type="submit">
+                  Lähetä raportti sähköpostiin
+                  <span aria-hidden="true">→</span>
+                </button>
+                <p class="lead-status" id="lead-status" role="status"></p>
+                <p class="lead-privacy">
+                  Testivastaukset tallennetaan erikseen nimettöminä markkinatietona. Niitä ei
+                  yhdistetä sähköpostiosoitteeseesi.
+                </p>
+              </form>
+
+              <p class="lead-fallback" id="lead-fallback" hidden>
+                Automaattinen lähetys ei ole vielä käytössä.
+                <a href="mailto:info@arthainsight.com">Pyydä raportti sähköpostitse</a>, niin lähetän sen käsin.
+              </p>
+
+              <div class="lead-done" id="lead-done" hidden>
+                <h4>Kiitos — raportti on matkalla.</h4>
+                <p>
+                  Tarkista myös roskapostikansio. Seuraavien päivien aikana saat 3–4 lyhyttä viestiä,
+                  jotka syventävät juuri tätä jarrua. Ensimmäisen korjausliikkeen näet jo yllä.
+                </p>
+              </div>
+            </section>
+
             <div class="result-cta">
               <div>
-                <h3>Haluatko varmistaa, mikä myyntiäsi oikeasti jarruttaa?</h3>
+                <h3>Seuraava askel: myynnin pullonkauladiagnoosi</h3>
+                <p class="cta-lead">
+                  Diagnoosi on maksullinen toimeksianto, jossa käydään samat kuusi jarrua läpi
+                  toteutuneiden lukujen ja oikeiden myyntikeskustelujesi kautta — ei itsearviona.
+                  Lopputuloksena tiedät, mikä jarru on todellinen, mihin se perustuu ja mitä teet
+                  ensimmäisenä. Hinta ja laajuus kerrotaan avoimesti keskustelussa ennen kuin päätät
+                  mitään.
+                </p>
                 <p>
-                  Varaa maksuton 30 minuutin keskustelu. Käydään tuloksesi läpi ja katsotaan,
-                  mistä sinun kannattaa aloittaa — ilman että yrität korjata kaikkea kerralla.
+                  Varaa maksuton 30 minuutin keskustelu. Se on keskustelu tuloksestasi ja siitä,
+                  sopiiko diagnoosi sinulle — ei myyntipuhelu, jonka sisältö paljastuu vasta linjoilla.
                 </p>
               </div>
               <a
@@ -127,8 +196,8 @@
             </div>
 
             <div class="result-footer">
-              <button class="text-button" id="restart-button" type="button">Tee diagnoosi uudelleen</button>
-              <p>Testi antaa alustavan hypoteesin. Todellinen pullonkaula selviää, kun tarkastelemme yhdessä, mitä myynnissäsi oikeasti tapahtuu: mitä teet, miten asiakkaat reagoivat ja missä kohtaa eteneminen pysähtyy.</p>
+              <button class="text-button" id="restart-button" type="button">Tee testi uudelleen</button>
+              <p>Testi antaa alustavan hypoteesin. Todellinen jarru selviää, kun tarkastelemme yhdessä, mitä myynnissäsi oikeasti tapahtuu: mitä teet, miten asiakkaat reagoivat ja missä kohtaa eteneminen pysähtyy.</p>
             </div>
           </div>
         </div>
@@ -136,8 +205,13 @@
 
       <section class="method" aria-labelledby="method-title">
         <div>
-          <p class="eyebrow">Mistä myynti voi pysähtyä</p>
-          <h2 id="method-title">Yksi kohta rajoittaa yleensä koko muun myyntipolun toimintaa.</h2>
+          <p class="eyebrow">Myynnin kuusi jarrua</p>
+          <h2 id="method-title">Yksi kuudesta jarrusta rajoittaa yleensä koko muun myyntipolun toimintaa.</h2>
+          <p class="method-lead">
+            Tämä on sama lista, jolla myynti käydään läpi maksullisessa pullonkauladiagnoosissa.
+            Testi kertoo, mikä jarruista on vastaustesi perusteella todennäköisin. Diagnoosi todentaa
+            sen toteutuneista luvuista ja oikeista myyntikeskusteluista.
+          </p>
         </div>
         <div class="method-list">
           <article>
