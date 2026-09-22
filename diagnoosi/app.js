@@ -13,7 +13,8 @@ const FRAMEWORK_NAME = "Myynnin kuusi jarrua";
  * Niin kauan kuin osoite on tyhjä, lomakkeen tilalla näkyy sähköpostilinkki
  * eikä mitään lähetetä mihinkään.
  */
-const ENDPOINT = "";
+const ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbznuw-lhBUZsAc6OsRvOatuPG46Qoi1ispxUYNFwjsgTXaws4g2jvu3Ll4A3TBnZmQA/exec";
 
 const categories = {
   market: {
