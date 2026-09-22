@@ -460,6 +460,8 @@ async function submitLead(event) {
     leadDone.hidden = false;
     unlockNextMove();
   } catch (error) {
+    // Tarkka syy konsoliin, jotta vian voi selvittää ilman palvelimen lokeja.
+    console.error("Raportin tilaus epäonnistui:", error);
     leadSubmit.disabled = false;
     leadStatus.className = "lead-status is-error";
     leadStatus.textContent =

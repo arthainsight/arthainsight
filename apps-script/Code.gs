@@ -91,8 +91,27 @@ function vastaa(objekti) {
   );
 }
 
-function haeTaulukko_(nimi, otsikot) {
+/**
+ * Avaa taulukon. Jos skripti on luotu erikseen eikä Sheetsin sisältä,
+ * getActiveSpreadsheet() palauttaa null ja jokainen kirjoitus kaatuisi.
+ * Silloin tunniste luetaan skriptin ominaisuudesta SHEET_ID.
+ */
+function haeKirja_() {
+  const tunniste = PropertiesService.getScriptProperties().getProperty("SHEET_ID");
+  if (tunniste) return SpreadsheetApp.openById(tunniste);
+
   const kirja = SpreadsheetApp.getActiveSpreadsheet();
+  if (!kirja) {
+    throw new Error(
+      "Taulukkoa ei löydy. Skripti ei ole sidottu Sheetsiin — lisää skriptin " +
+        "ominaisuus SHEET_ID, jonka arvo on taulukon tunniste osoiterivistä."
+    );
+  }
+  return kirja;
+}
+
+function haeTaulukko_(nimi, otsikot) {
+  const kirja = haeKirja_();
   let taulukko = kirja.getSheetByName(nimi);
   if (!taulukko) {
     taulukko = kirja.insertSheet(nimi);
