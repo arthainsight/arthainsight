@@ -38,8 +38,23 @@ function install(ctx) {
     MimeType: { JSON: 'json' },
     createTextOutput: t => ({ _t: t, setMimeType() { return this; }, getContent() { return this._t; } }),
   };
-  ctx.ScriptApp = { getProjectTriggers: () => [], newTrigger: () => ({ timeBased: () => ({ atHour: () => ({ everyDays: () => ({ create: () => {} }) }) }) }) };
+  const props = {};
+  ctx.PropertiesService = {
+    getScriptProperties: () => ({
+      getProperty: k => (k in props ? props[k] : null),
+      setProperty: (k, v) => { props[k] = v; },
+    }),
+  };
+  const kutsut = [];
+  let vastausKoodi = 200;
+  ctx.UrlFetchApp = {
+    fetch: (url, opts) => {
+      kutsut.push({ url, opts, runko: JSON.parse(opts.payload) });
+      if (vastausKoodi === 'heitto') throw new Error('verkkovirhe');
+      return { getResponseCode: () => vastausKoodi, getContentText: () => '{}' };
+    },
+  };
   ctx.console = console;
-  return { sheets, sent };
+  return { sheets, sent, props, kutsut, setKoodi: k => { vastausKoodi = k; } };
 }
 module.exports = { install };

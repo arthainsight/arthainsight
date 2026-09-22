@@ -1,9 +1,12 @@
 /**
- * Sähköpostien sisällöt. Tätä tiedostoa voi muokata vapaasti ilman, että
+ * Jarrukohtaiset raportit. Tätä tiedostoa voi muokata vapaasti ilman, että
  * Code.gs:n logiikkaan tarvitsee koskea.
  *
- * Viesti 1 = jarrukohtainen raportti (lähtee heti).
- * Viestit 2–4 = jatkoviestit, jotka johtavat diagnoosiin.
+ * Vain raportti lähtee täältä, ja se lähtee heti tilauksen jälkeen.
+ * Kolmen viestin jatkosarja on MailerLitessä — tekstit ovat tiedostossa
+ * sisalto/mailerlite-sarja.md.
+ *
+ * Aja testit muokkauksen jälkeen: node apps-script/test/gas-test.js
  */
 
 const JARRUN_NIMET = {
@@ -16,8 +19,6 @@ const JARRUN_NIMET = {
   ei_selvaa: "Ei selvää pääjarrua",
 };
 
-const VARAUSLINKKI = "https://calendar.app.google/YF82nyAij819wJJT6";
-
 function jarrunNimi_(avain) {
   return JARRUN_NIMET[avain] || "Myynnin jarru";
 }
@@ -28,15 +29,6 @@ function raportti_(jarru) {
   return {
     aihe: `Raporttisi: ${jarrunNimi_(avain)}`,
     teksti: sisalto,
-  };
-}
-
-function jatkoviesti_(numero, jarru) {
-  const nimi = jarrunNimi_(JARRUN_NIMET[jarru] ? jarru : "ei_selvaa");
-  const viesti = JATKOVIESTIT[numero];
-  return {
-    aihe: viesti.aihe.replace("{jarru}", nimi),
-    teksti: viesti.teksti.replace(/\{jarru\}/g, nimi),
   };
 }
 
@@ -409,80 +401,4 @@ Lähetän muutaman päivän päästä viestin siitä, miksi yhden jarrun korjaam
 
 Riku Forsell
 Artha Insight`,
-};
-
-const JATKOVIESTIT = {
-  2: {
-    aihe: "Miksi yhden jarrun korjaaminen riittää",
-    teksti: `Hei,
-
-lähetin muutama päivä sitten raportin jarrusta "{jarru}". Tässä lyhyt viesti siitä, miksi kannattaa korjata vain se.
-
-Myynti on ketju. Kohderyhmä, tarjous, viesti, luottamus, asiakashankinta ja myyntiprosessi ovat peräkkäisiä lenkkejä, ja heikoin niistä määrää lopputuloksen. Jos kohderyhmä on väärä, maailman paras myyntiprosessi ei auta. Jos keskusteluja on kaksi kuukaudessa, viestin hiominen ei tuota mitään mitattavaa.
-
-Tästä seuraa kaksi asiaa.
-
-Ensimmäinen: kaiken korjaaminen kerralla on tehotonta. Jos muutat samalla viikolla kohderyhmän, tarjouksen ja viestin, et tiedä kuukauden päästä, mikä muutos vaikutti mihinkin. Menetät ainoan oppimismahdollisuuden, jonka muutos tarjoaa.
-
-Toinen: väärän lenkin korjaaminen ei näy missään. Se on tavallisin syy siihen, miksi yrittäjä kokee tehneensä paljon ilman tulosta. Työtä on tehty — se on vain kohdistunut lenkkiin, joka ei ollut heikoin.
-
-Siksi testi antaa vain yhden jarrun eikä listaa kuudesta kehityskohteesta. Yksi kerrallaan, mitattavasti.
-
-Yksi kysymys sinulle: mitä teit viimeisen kolmen kuukauden aikana myynnin eteen, mikä ei näkynyt tuloksessa? Voit vastata tähän viestiin suoraan — luen jokaisen vastauksen itse.
-
-Riku Forsell
-Artha Insight`,
-  },
-  3: {
-    aihe: "Kolme lukua, jotka kertovat enemmän kuin testi",
-    teksti: `Hei,
-
-testi, jonka teit, on itsearvio. Se on hyödyllinen hypoteesin muodostamiseen ja huono todisteeksi. Syy on yksinkertainen: arvioit myyntiäsi siitä, miltä se näyttää sisältä. Ostaja näkee vain sen, mitä ulospäin tapahtuu.
-
-Kerää tämän viikon aikana kolme lukua viimeiseltä 90 päivältä:
-
-1. Kuinka monta relevanttia myyntikeskustelua kävit?
-2. Kuinka monelle heistä esitit tarjouksen?
-3. Kuinka moni tarjous johti kauppaan?
-
-Kolme lukua kertovat jo, missä siirtymässä ihmiset putoavat pois. Jos keskusteluja on vähän, ongelma on ketjun alkupäässä — kohderyhmässä tai asiakashankinnassa. Jos keskusteluja on mutta tarjouksia vähän, ongelma on tarjouksessa tai tarpeen selvittämisessä. Jos tarjouksia on mutta kauppoja vähän, ongelma on luottamuksessa tai myyntiprosessissa.
-
-Huomaa, että tämä voi olla eri jarru kuin testin antama. Silloin luvut ovat oikeassa, ei testi.
-
-Jos luvut ovat pieniä, älä huolestu niistä. Pieni aineisto on tavallinen asiantuntijayrityksessä, ja se tarkoittaa vain, että päättely vaatii tarkempaa katsomista — ei sitä, ettei päätelmiä voisi tehdä.
-
-Viimeisessä viestissä kerron, mitä diagnoosi tekee näille luvuille ja milloin se kannattaa.
-
-Riku Forsell
-Artha Insight`,
-  },
-  4: {
-    aihe: "Mitä diagnoosi tekee — ja milloin se kannattaa",
-    teksti: `Hei,
-
-tämä on viimeinen viesti sarjasta. Kerron suoraan, mitä myyn, jotta voit päättää itse.
-
-Testi, jonka teit, antoi hypoteesin: "{jarru}". Pullonkauladiagnoosi todentaa hypoteesin tai kumoaa sen. Käymme läpi samat kuusi jarrua, mutta emme itsearviona vaan toteutuneiden lukujen, todellisten myyntikeskustelujesi ja sen perusteella, mitä ostaja oikeasti näkee ja kuulee sinusta.
-
-Saat lopputuloksena:
-
-- mikä jarru on todellinen ja mihin havaintoon se perustuu
-- mitä näyttöä sitä vastaan puhuu — myös se kerrotaan
-- mitä teet ensimmäisenä, toisena ja kolmantena
-- mistä tiedät kuukauden päästä, toimiko korjaus
-
-Diagnoosi on maksullinen toimeksianto. Hinnan ja laajuuden kerron avoimesti keskustelussa ennen kuin päätät mitään — sen ei kuulu olla asia, joka paljastuu vasta puhelimessa.
-
-Sitä ennen on maksuton 30 minuutin keskustelu. Siinä käydään läpi sinun testituloksesi ja katsotaan, onko diagnoosi sinulle oikea asia juuri nyt. Jos ei ole, sanon sen. Se on molempien etu.
-
-Varaa aika: ${VARAUSLINKKI}
-
-Jos et halua varata aikaa, se on täysin ok. Voit myös vastata tähän viestiin ja kertoa tilanteestasi — vastaan itse.
-
-Kiitos, että luit.
-
-Riku Forsell
-Artha Insight
-info@arthainsight.com`,
-  },
 };

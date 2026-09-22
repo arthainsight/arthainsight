@@ -9,9 +9,13 @@ function check(name, cond, extra) {
   else { fail++; console.log('  FAIL ' + name + (extra ? '  → ' + JSON.stringify(extra) : '')); }
 }
 
-function boot() {
+function boot(mlAsetettu = true) {
   const ctx = {};
   const env = install(ctx);
+  if (mlAsetettu) {
+    env.props.MAILERLITE_TOKEN = 'testitunnus';
+    env.props.MAILERLITE_GROUP = '123456789';
+  }
   vm.createContext(ctx);
   vm.runInContext(fs.readFileSync(R + 'Viestit.gs', 'utf8'), ctx);
   vm.runInContext(fs.readFileSync(R + 'Code.gs', 'utf8'), ctx);
@@ -52,6 +56,14 @@ console.log('\n2. Liidi + raportti');
   check('peruutusohje mukana', /lopeta/.test(env.sent[0]?.body || ''));
   check('tietosuojalinkki mukana', /tietosuoja\.html/.test(env.sent[0]?.body || ''));
   check('Vastaukset-välilehteä ei luotu', !env.sheets['Vastaukset']);
+  const k = env.kutsut[0];
+  check('MailerLiteen lähti yksi kutsu', env.kutsut.length === 1, env.kutsut.length);
+  check('oikea osoite', k?.url === 'https://connect.mailerlite.com/api/subscribers', k?.url);
+  check('bearer-tunnus otsikossa', k?.opts.headers.Authorization === 'Bearer testitunnus', k?.opts.headers);
+  check('sähköposti rungossa', k?.runko.email === 'asiakas@yritys.fi', k?.runko);
+  check('jarru luettavana nimenä', k?.runko.fields.jarru === 'Luottamus ja todisteet', k?.runko.fields);
+  check('ryhmä mukana merkkijonona', JSON.stringify(k?.runko.groups) === '["123456789"]', k?.runko.groups);
+  check('tila merkitty riville', env.sheets['Liidit'].rows[1][6] === 'ok', env.sheets['Liidit'].rows[1][6]);
 }
 
 console.log('\n3. Virheellinen sähköposti');
@@ -72,51 +84,33 @@ console.log('\n4. Sama osoite kahdesti');
   check('vain yksi datarivi', s.rows.length === 2, s.rows.length);
   check('jarru päivittyi uusimpaan', s.rows[1][2] === 'sales', s.rows[1][2]);
   check('kaksi raporttia lähti', env.sent.length === 2, env.sent.length);
+  check('kaksi kutsua MailerLiteen', env.kutsut.length === 2, env.kutsut.length);
 }
 
-console.log('\n5. Jatkoviestien ajoitus');
+console.log('\n5. MailerLite-virheet eivät kaada pyyntöä');
 {
-  const days = n => new Date(Date.now() - n * 86400000).toISOString();
-  for (const [päiviä, odotettu] of [[0, null], [2, 'Miksi yhden jarrun korjaaminen riittää'],
-                                    [5, 'Miksi yhden jarrun korjaaminen riittää']]) {
-    const { ctx, env } = boot();
-    post(ctx, { tyyppi: 'liidi', sahkoposti: 'a@b.fi', ensisijainen: 'offer', suostumus: true });
-    env.sheets['Liidit'].rows[1][5] = days(päiviä);
-    env.sent.length = 0;
-    ctx.lahetaJatkoviestit();
-    const got = env.sent[0]?.subject ?? null;
-    check(`päivä ${päiviä} → ${odotettu ?? 'ei viestiä'}`, got === odotettu, got);
-  }
-  // Koko sarja peräkkäisinä ajoina
   const { ctx, env } = boot();
-  post(ctx, { tyyppi: 'liidi', sahkoposti: 'a@b.fi', ensisijainen: 'offer', suostumus: true });
-  env.sent.length = 0;
-  const aiheet = [];
-  for (const d of [2, 5, 9, 10]) {
-    env.sheets['Liidit'].rows[1][5] = days(d);
-    ctx.lahetaJatkoviestit();
-    aiheet.push(env.sent.map(m => m.subject).pop() ?? null);
-  }
-  check('sarja etenee 2→3→4 eikä toistu', env.sent.length === 3, aiheet);
-  check('viimeinen on diagnoosikutsu', /Mitä diagnoosi tekee/.test(env.sent[2]?.subject || ''), env.sent[2]?.subject);
-  check('varauslinkki viimeisessä', /calendar\.app\.google/.test(env.sent[2]?.body || ''));
-  check('jarrun nimi personoitu', /Tarjous/.test(env.sent[2]?.body || ''));
+  env.setKoodi(422);
+  const r = post(ctx, { tyyppi: 'liidi', sahkoposti: 'a@b.fi', ensisijainen: 'offer', suostumus: true });
+  check('pyyntö onnistuu silti', r.ok === true, r);
+  check('raportti lähti silti', env.sent.length === 1, env.sent.length);
+  check('virhe kirjattu riville', env.sheets['Liidit'].rows[1][6] === 'virhe 422', env.sheets['Liidit'].rows[1][6]);
+
+  const { ctx: c2, env: e2 } = boot();
+  e2.setKoodi('heitto');
+  const r2 = post(c2, { tyyppi: 'liidi', sahkoposti: 'a@b.fi', ensisijainen: 'offer', suostumus: true });
+  check('verkkovirhe ei kaada', r2.ok === true, r2);
+  check('verkkovirhe kirjattu', /virhe:/.test(e2.sheets['Liidit'].rows[1][6] || ''), e2.sheets['Liidit'].rows[1][6]);
 }
 
-console.log('\n6. Peruttu');
+console.log('\n6. Ilman MailerLite-asetuksia');
 {
-  const { ctx, env } = boot();
-  post(ctx, { tyyppi: 'liidi', sahkoposti: 'a@b.fi', ensisijainen: 'offer', suostumus: true });
-  env.sheets['Liidit'].rows[1][5] = new Date(Date.now() - 5 * 86400000).toISOString();
-  env.sheets['Liidit'].rows[1][9] = 'lopeta 21.9.';
-  env.sent.length = 0;
-  ctx.lahetaJatkoviestit();
-  check('ei viestejä perutulle', env.sent.length === 0, env.sent.map(m => m.subject));
-
-  // Perunut täyttää lomakkeen uudelleen
-  post(ctx, { tyyppi: 'liidi', sahkoposti: 'a@b.fi', ensisijainen: 'sales', suostumus: true });
-  check('peruutusmerkintä säilyy uudelleentilauksessa',
-    env.sheets['Liidit'].rows[1][9] === 'lopeta 21.9.', env.sheets['Liidit'].rows[1][9]);
+  const { ctx, env } = boot(false);
+  const r = post(ctx, { tyyppi: 'liidi', sahkoposti: 'a@b.fi', ensisijainen: 'offer', suostumus: true });
+  check('pyyntö onnistuu', r.ok === true, r);
+  check('raportti lähtee', env.sent.length === 1, env.sent.length);
+  check('ei kutsua MailerLiteen', env.kutsut.length === 0, env.kutsut.length);
+  check('merkintä "ei asetettu"', env.sheets['Liidit'].rows[1][6] === 'ei asetettu', env.sheets['Liidit'].rows[1][6]);
 }
 
 console.log('\n7. Tuntematon jarru');

@@ -2,7 +2,24 @@
 
 Tämä kansio sisältää Google Apps Script -koodin, joka ottaa vastaan
 osoitteesta `arthainsight.com/diagnoosi/` lähetetyt tiedot, tallentaa ne
-Google Sheets -taulukkoon ja lähettää sähköpostisarjan.
+Google Sheets -taulukkoon, lähettää jarrukohtaisen raportin ja siirtää
+tilaajan MailerLiteen.
+
+## Työnjako
+
+| Osa | Kuka hoitaa |
+|---|---|
+| Nimetön testidata | Apps Script → Sheets |
+| Suostumusloki | Apps Script → Sheets |
+| Jarrukohtainen raportti (7 versiota) | Apps Script → Gmail |
+| Tilaajalista | MailerLite |
+| Kolmen viestin jatkosarja | MailerLite (`sisalto/mailerlite-sarja.md`) |
+| Peruutus ja tilastot | MailerLite |
+
+Raportti lähtee Apps Scriptistä, koska sitä on seitsemän erilaista eikä
+MailerLiten ilmaistason kolme automaatiota riitä niihin. Jos siirryt
+maksulliselle tasolle, raportinkin voi siirtää MailerLiteen ja Gmail jää
+kokonaan pois.
 
 Koodi ei ole osa julkaistavaa sivustoa. Se liitetään käsin Google-tilille
 kerran, minkä jälkeen se toimii itsekseen.
@@ -13,6 +30,9 @@ kerran, minkä jälkeen se toimii itsekseen.
 |---|---|---|
 | `Vastaukset` | Testin pisteet ja vastaukset, aikaleima | Ei |
 | `Liidit` | Sähköposti, ensisijainen jarru, suostumus, lähetyslokit | Kyllä |
+
+`Liidit` on suostumusloki, ei postituslista: se todentaa kuka antoi luvan ja
+milloin. Varsinainen lista on MailerLitessä.
 
 Vastaukset ja liidit kirjataan erillisinä riveinä eri välilehdille, eikä
 niiden välillä ole yhdistävää tunnistetta. Testivastauksista ei siis voi
@@ -49,9 +69,26 @@ jäljittää yksittäistä vastaajaa.
    sähköpostilinkki eikä mitään lähetetä mihinkään. Sivun voi siis julkaista
    turvallisesti ennen tämän vaiheen tekemistä.
 
-6. **Käynnistä jatkoviestit.** Valitse skriptieditorissa funktio
-   `asennaAjastin` ja aja se kerran. Se luo päivittäisen ajastimen, joka
-   lähettää viestit 2–4 aikataulun mukaan (2, 5 ja 9 päivää raportista).
+6. **Yhdistä MailerLite.** Luo MailerLitessä tekstikenttä `jarru` ja ryhmä
+   tilaajille, ja ota talteen ryhmän tunniste. Luo sitten API-tunnus
+   (Integrations → API). Tallenna molemmat Apps Scriptissä kohtaan
+   *Projektin asetukset → Skriptin ominaisuudet*:
+
+   | Nimi | Arvo |
+   |---|---|
+   | `MAILERLITE_TOKEN` | API-tunnus |
+   | `MAILERLITE_GROUP` | ryhmän tunniste |
+
+   **Älä kirjoita tunnusta koodiin äläkä vie sitä versionhallintaan.**
+   Skriptin ominaisuudet eivät näy repossa eivätkä lähde mukaan, kun koodi
+   kopioidaan. Jos tunnus vuotaa, mitätöi se MailerLitessä ja luo uusi.
+
+   Niin kauan kuin ominaisuuksia ei ole asetettu, raportti lähtee normaalisti
+   ja `Liidit`-välilehden MailerLite-sarakkeeseen tulee merkintä
+   "ei asetettu". Mitään ei siis rikkoudu, jos teet tämän vaiheen myöhemmin.
+
+7. **Rakenna jatkosarja.** Ohjeet ja valmiit tekstit ovat tiedostossa
+   `sisalto/mailerlite-sarja.md`.
 
 ## Tarkistus
 
@@ -82,15 +119,17 @@ aina, kun olet muokannut `Viestit.gs`- tai `Code.gs`-tiedostoa.
 
 ## Rajat ja ylläpito
 
-- Tavallisen Gmail-tilin lähetysraja on noin 100 viestiä vuorokaudessa,
-  Workspace-tilin 1 500. Raportti + kolme jatkoviestiä = neljä viestiä per
-  liidi.
-- Peruutus hoidetaan käsin: kun joku vastaa "lopeta", kirjoita
-  `Liidit`-välilehden sarakkeeseen **Peruttu** mikä tahansa merkintä. Rivi
-  jää taulukkoon, mutta viestejä ei enää lähde.
-- Peruutusmerkintä säilyy, vaikka sama osoite täyttäisi lomakkeen uudelleen.
-  Hän saa pyytämänsä raportin, mutta ei palaa jatkoviestien listalle
-  itsestään. Jos haluat palauttaa hänet, tyhjennä Peruttu-solu käsin.
+- Gmailista lähtee enää yksi viesti per liidi (raportti), joten tavallisen
+  tilin noin 100 viestin vuorokausiraja riittää pitkälle.
+- MailerLiten ilmaistaso: 250 tilaajaa ja 2 500 viestiä kuukaudessa. Kolme
+  jatkoviestiä per tilaaja tarkoittaa, että raja tulee vastaan noin 800
+  tilaajan vuosivauhdilla — käytännössä siis tilaajaraja tulee ensin.
+- Peruutuksen hoitaa MailerLite automaattisesti. Se myös estää kerran
+  perunutta palaamasta listalle rajapinnan kautta, joten Apps Scriptin kutsu
+  ei voi tilata häntä takaisin.
+- Jos `Liidit`-välilehden MailerLite-sarakkeessa lukee muuta kuin "ok",
+  tilaaja on saanut raportin mutta ei ole listalla. Lisää hänet käsin tai
+  selvitä virhe ennen kuin jatkat.
 - Sähköpostien tekstit ovat tiedostossa `Viestit.gs`. Niitä voi muokata
   koskematta `Code.gs`-logiikkaan. Jos muutat raporttien sisältöä, päivitä
   myös `diagnoosi/app.js`-tiedoston `reportPoints`-luettelot, jotta sivun

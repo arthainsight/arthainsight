@@ -39,10 +39,13 @@ ole myyntipuhelu, jonka sisältö paljastuu vasta linjoilla.
 |---|---|
 | Testin logiikka ja tekstit | `diagnoosi/app.js` |
 | Tulossivun jatkumo ja hinnan mainita | `diagnoosi/index.html` |
-| Raportit ja sähköpostisarja | `apps-script/Viestit.gs` |
+| Jarrukohtaiset raportit | `apps-script/Viestit.gs` |
+| Kolmen viestin jatkosarja | `sisalto/mailerlite-sarja.md` (rakennetaan MailerLiteen) |
 | Yhteydenottoviestit | `sisalto/prospektiviestit.md` |
 
-Jos kehyksen sanamuoto muuttuu, se on muutettava kaikissa neljässä. Jarrujen
+Jos kehyksen sanamuoto muuttuu, se on muutettava kaikissa viidessä — ja
+jatkosarjan osalta myös MailerLitessä, joka on niiden viestien varsinainen
+sijainti. Jarrujen
 nimiä ei kannata muuttaa kevyesti — ne ovat sama sanasto testistä laskuun asti.
 
 ## Nimettömän datan käyttö

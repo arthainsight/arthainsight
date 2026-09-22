@@ -1,9 +1,13 @@
 /**
- * Myynnin kuusi jarrua — vastaanotto, tallennus ja sähköpostisarja.
+ * Myynnin kuusi jarrua — vastaanotto, tallennus ja raportin lähetys.
+ *
+ * Työnjako:
+ *   Tämä skripti  — nimetön testidata, suostumusloki ja jarrukohtainen raportti
+ *   MailerLite    — tilaajalista, kolmen viestin jatkosarja, peruutus, tilastot
  *
  * Kaksi välilehteä:
  *   Vastaukset — nimettömät testivastaukset markkinatietona (ei sähköpostia)
- *   Liidit     — sähköpostiosoitteet, jotka pyysivät laajemman raportin
+ *   Liidit     — suostumusloki: kuka pyysi raportin, milloin ja mihin jarruun
  *
  * Asennus: katso README.md samassa kansiossa.
  */
@@ -11,6 +15,15 @@
 const VASTAUKSET_SHEET = "Vastaukset";
 const LIIDIT_SHEET = "Liidit";
 const LAHETTAJAN_NIMI = "Riku Forsell / Artha Insight";
+
+/*
+ * MailerLiten tunnus ja ryhmä luetaan skriptin ominaisuuksista, eivät koodista.
+ * Aseta ne kerran: Apps Script → Projektin asetukset → Skriptin ominaisuudet
+ *   MAILERLITE_TOKEN → API-tunnus
+ *   MAILERLITE_GROUP → ryhmän tunniste (numerosarja)
+ * Älä kirjoita tunnusta tähän tiedostoon äläkä vie sitä versionhallintaan.
+ */
+const MAILERLITE_API = "https://connect.mailerlite.com/api/subscribers";
 
 const VASTAUKSET_OTSIKOT = [
   "Aikaleima",
@@ -32,10 +45,7 @@ const LIIDIT_OTSIKOT = [
   "Toissijainen jarru",
   "Suostumus",
   "Raportti lähetetty",
-  "Viesti 2",
-  "Viesti 3",
-  "Viesti 4",
-  "Peruttu",
+  "MailerLite",
 ];
 
 const JARRU_JARJESTYS = ["market", "offer", "message", "trust", "acquisition", "sales"];
@@ -59,6 +69,7 @@ function doPost(e) {
       }
       tallennaLiidi_(data, email);
       lahetaRaportti_(email, data.ensisijainen);
+      lisaaMailerLiteen_(email, data.ensisijainen);
       return vastaa({ ok: true });
     }
 
@@ -116,14 +127,13 @@ function tallennaVastaus_(data) {
 /**
  * Sama osoite ei saa kahta riviä: vanha rivi päivitetään uusimmalla tuloksella.
  *
- * Peruutusmerkintä säilyy myös uudelleentilauksessa. Kerran annettua "lopeta"-
- * ilmoitusta ei kumota lomakkeella, koska osoitteen voi täyttää kuka tahansa.
- * Tilaajan saa takaisin listalle tyhjentämällä Peruttu-sarakkeen käsin.
+ * Tämä on suostumusloki, ei postituslista. Varsinaisen listan ja peruutukset
+ * hoitaa MailerLite, joka myös estää kerran perunutta palaamasta listalle
+ * rajapinnan kautta.
  */
 function tallennaLiidi_(data, email) {
   const taulukko = haeTaulukko_(LIIDIT_SHEET, LIIDIT_OTSIKOT);
   const rivi = etsiLiidinRivi_(taulukko, email);
-  const peruttu = rivi > 0 ? taulukko.getRange(rivi, 10).getValues()[0][0] : "";
   const arvot = [
     data.aikaleima || new Date().toISOString(),
     email,
@@ -132,9 +142,6 @@ function tallennaLiidi_(data, email) {
     data.suostumus ? "kyllä" : "ei",
     "",
     "",
-    "",
-    "",
-    peruttu,
   ];
   if (rivi > 0) {
     taulukko.getRange(rivi, 1, 1, arvot.length).setValues([arvot]);
@@ -175,50 +182,6 @@ function lahetaRaportti_(email, jarru) {
   merkitseLahetetyksi_(email, 6);
 }
 
-/**
- * Päivittäinen ajastin: lähettää jatkoviestit 2–4 sen mukaan, montako päivää
- * liidin ensimmäisestä viestistä on kulunut. Luo ajastin funktiolla
- * asennaAjastin().
- */
-function lahetaJatkoviestit() {
-  const taulukko = haeTaulukko_(LIIDIT_SHEET, LIIDIT_OTSIKOT);
-  const viimeinen = taulukko.getLastRow();
-  if (viimeinen < 2) return;
-
-  const rivit = taulukko.getRange(2, 1, viimeinen - 1, LIIDIT_OTSIKOT.length).getValues();
-  const aikataulu = [
-    { paivia: 2, sarake: 7, numero: 2 },
-    { paivia: 5, sarake: 8, numero: 3 },
-    { paivia: 9, sarake: 9, numero: 4 },
-  ];
-
-  rivit.forEach(function (rivi, index) {
-    const email = String(rivi[1]).trim();
-    const jarru = rivi[2];
-    const raporttiLahetetty = rivi[5];
-    const peruttu = String(rivi[9]).trim();
-    if (!email || !raporttiLahetetty || peruttu) return;
-
-    const aloitus = new Date(raporttiLahetetty);
-    const paivia = Math.floor((Date.now() - aloitus.getTime()) / 86400000);
-
-    for (const vaihe of aikataulu) {
-      const joLahetetty = rivi[vaihe.sarake - 1];
-      if (joLahetetty || paivia < vaihe.paivia) continue;
-      const viesti = jatkoviesti_(vaihe.numero, jarru);
-      MailApp.sendEmail({
-        to: email,
-        subject: viesti.aihe,
-        body: viesti.teksti + peruutusOhje_(),
-        name: LAHETTAJAN_NIMI,
-        replyTo: "info@arthainsight.com",
-      });
-      taulukko.getRange(index + 2, vaihe.sarake).setValue(new Date().toISOString());
-      break; // Enintään yksi viesti per liidi per päivä.
-    }
-  });
-}
-
 function peruutusOhje_() {
   return (
     "\n\n—\nSait tämän viestin, koska pyysit raportin osoitteessa arthainsight.com/diagnoosi.\n" +
@@ -228,12 +191,49 @@ function peruutusOhje_() {
   );
 }
 
-/** Aja kerran käsin: luo päivittäisen ajastimen jatkoviesteille. */
-function asennaAjastin() {
-  ScriptApp.getProjectTriggers().forEach(function (ajastin) {
-    if (ajastin.getHandlerFunction() === "lahetaJatkoviestit") {
-      ScriptApp.deleteTrigger(ajastin);
-    }
-  });
-  ScriptApp.newTrigger("lahetaJatkoviestit").timeBased().atHour(8).everyDays(1).create();
+/**
+ * Lisää tilaajan MailerLiteen ja merkitsee jarrun kenttään, jota jatkosarjan
+ * automaatio käyttää viestien personointiin.
+ *
+ * Jos kutsu epäonnistuu, se ei kaada pyyntöä: tilaaja on jo saanut pyytämänsä
+ * raportin, ja virhe kirjataan Liidit-välilehdelle käsin korjattavaksi.
+ */
+function lisaaMailerLiteen_(email, jarru) {
+  const asetukset = PropertiesService.getScriptProperties();
+  const tunnus = asetukset.getProperty("MAILERLITE_TOKEN");
+  const ryhma = asetukset.getProperty("MAILERLITE_GROUP");
+
+  if (!tunnus || !ryhma) {
+    merkitseMailerLite_(email, "ei asetettu");
+    return;
+  }
+
+  const runko = {
+    email: email,
+    fields: { jarru: jarrunNimi_(jarru) },
+    groups: [String(ryhma)],
+  };
+
+  try {
+    const vastaus = UrlFetchApp.fetch(MAILERLITE_API, {
+      method: "post",
+      contentType: "application/json",
+      headers: { Authorization: "Bearer " + tunnus, Accept: "application/json" },
+      payload: JSON.stringify(runko),
+      muteHttpExceptions: true,
+    });
+    const koodi = vastaus.getResponseCode();
+    merkitseMailerLite_(email, koodi >= 200 && koodi < 300 ? "ok" : "virhe " + koodi);
+  } catch (error) {
+    console.error(error);
+    merkitseMailerLite_(email, "virhe: " + String(error));
+  }
+}
+
+function merkitseMailerLite_(email, tila) {
+  const taulukko = haeTaulukko_(LIIDIT_SHEET, LIIDIT_OTSIKOT);
+  const rivi = etsiLiidinRivi_(taulukko, email);
+  if (rivi > 0) {
+    taulukko.getRange(rivi, 7).setValue(tila);
+  }
 }
