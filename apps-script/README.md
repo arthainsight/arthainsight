@@ -90,10 +90,46 @@ jäljittää yksittäistä vastaajaa.
 7. **Rakenna jatkosarja.** Ohjeet ja valmiit tekstit ovat tiedostossa
    `sisalto/mailerlite-sarja.md`.
 
+## Vaihtoehto: clasp (ei käsin liittämistä)
+
+Googlen komentorivityökalu vie tämän kansion tiedostot suoraan Apps Scriptiin,
+jolloin leikepöytä ei ole missään vaiheessa mukana eikä pitkä tiedosto voi
+katketa kesken. Asetukset ovat valmiina (`.clasp.json`, `.claspignore`).
+
+Aja omalla koneellasi, repon juuresta:
+
+```
+npm i -g @google/clasp
+clasp login                    # avaa selaimen, kirjaudu omalla tililläsi
+cd apps-script
+clasp push                     # vie Code.gs ja Viestit.gs projektiin
+```
+
+`clasp login` tallentaa tunnisteet kotihakemistoosi (`~/.clasprc.json`).
+Ne ovat henkilökohtaisia: älä vie niitä versionhallintaan äläkä jaa niitä.
+
+**`clasp push` ei julkaise mitään.** Se päivittää editorissa olevan koodin.
+Julkaisu on erillinen vaihe, joko käyttöliittymästä tai komennolla:
+
+```
+clasp deployments              # listaa käyttöönotot ja niiden tunnisteet
+clasp deploy -i <tunniste> -d "kuvaus"
+```
+
+Käytä olemassa olevan käyttöönoton tunnistetta, jolloin `/exec`-osoite pysyy
+samana. Ilman `-i`-valitsinta syntyy uusi käyttöönotto ja uusi osoite, jolloin
+`diagnoosi/app.js`:n `ENDPOINT` pitäisi vaihtaa.
+
+`.claspignore` pitää `test/`-kansion poissa: testit ajetaan Nodessa eivätkä
+toimisi Apps Scriptissä.
+
 ## Tarkistus
 
-- Avaa `/exec`-osoite selaimessa. Vastaukseksi pitäisi tulla
-  `{"ok":true,"palvelu":"Myynnin kuusi jarrua"}`.
+- Avaa `/exec`-osoite **yksityisessä ikkunassa** (kirjautumatta). Vastaukseksi
+  pitäisi tulla `{"ok":true,"palvelu":"Myynnin kuusi jarrua"}`.
+  - `Ohjelmatoimintoa ei löydy: doGet` → koodi ei ole julkaistussa versiossa.
+    Julkaise uusi versio; pelkkä tallennus editorissa ei riitä.
+  - Kirjautumissivu → käyttöönoton oikeus ei ole *Kuka tahansa*.
 - Tee testi sivulla loppuun asti ja katso, ilmestyikö rivi `Vastaukset`-
   välilehdelle.
 - Pyydä raportti omalla osoitteellasi ja tarkista, että viesti saapuu ja
