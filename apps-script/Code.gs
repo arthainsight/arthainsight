@@ -51,44 +51,67 @@ const LIIDIT_OTSIKOT = [
 const JARRU_JARJESTYS = ["market", "offer", "message", "trust", "acquisition", "sales"];
 
 function doPost(e) {
+  const runko = e && e.postData && e.postData.contents;
+  if (!runko) return vastaa({ ok: false, virhe: "Tyhjä pyyntö" });
+  return kasittele_(runko, null);
+}
+
+/**
+ * GET palvelee kahta tarkoitusta: ilman parametreja se on terveystarkistus,
+ * ja data-parametrin kanssa se ottaa vastaan lomakkeen lähetyksen JSONP:nä.
+ */
+function doGet(e) {
+  const callback = e && e.parameter ? e.parameter.callback : null;
+  const data = e && e.parameter ? e.parameter.data : null;
+  if (!data) {
+    return vastaa({ ok: true, palvelu: "Myynnin kuusi jarrua" }, callback);
+  }
+  return kasittele_(data, callback);
+}
+
+function kasittele_(runko, callback) {
   try {
-    if (!e || !e.postData || !e.postData.contents) {
-      return vastaa({ ok: false, virhe: "Tyhjä pyyntö" });
-    }
-    const data = JSON.parse(e.postData.contents);
+    const data = JSON.parse(runko);
 
     if (data.tyyppi === "vastaus") {
       tallennaVastaus_(data);
-      return vastaa({ ok: true });
+      return vastaa({ ok: true }, callback);
     }
 
     if (data.tyyppi === "liidi") {
       const email = String(data.sahkoposti || "").trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        return vastaa({ ok: false, virhe: "Virheellinen sähköpostiosoite" });
+        return vastaa({ ok: false, virhe: "Virheellinen sähköpostiosoite" }, callback);
       }
       tallennaLiidi_(data, email);
       lahetaRaportti_(email, data.ensisijainen);
       lisaaMailerLiteen_(email, data.ensisijainen);
-      return vastaa({ ok: true });
+      return vastaa({ ok: true }, callback);
     }
 
-    return vastaa({ ok: false, virhe: "Tuntematon tyyppi" });
+    return vastaa({ ok: false, virhe: "Tuntematon tyyppi" }, callback);
   } catch (error) {
     console.error(error);
-    return vastaa({ ok: false, virhe: String(error) });
+    return vastaa({ ok: false, virhe: String(error) }, callback);
   }
 }
 
-/** GET-pyyntö on vain terveystarkistus, jotta asennuksen voi todeta selaimesta. */
-function doGet() {
-  return vastaa({ ok: true, palvelu: "Myynnin kuusi jarrua" });
-}
-
-function vastaa(objekti) {
-  return ContentService.createTextOutput(JSON.stringify(objekti)).setMimeType(
-    ContentService.MimeType.JSON
-  );
+/**
+ * Palauttaa JSON-vastauksen, tai JSONP-kääreen jos callback on annettu.
+ *
+ * JSONP on tässä välttämätön: Apps Script ei palauta CORS-otsakkeita, joten
+ * selain ei anna lukea tavallisen fetch-pyynnön vastausta toiselta sivustolta.
+ * Script-elementillä ladattu vastaus ei ole CORS-rajoitusten alainen, joten
+ * lähetyksen onnistuminen voidaan yhä varmistaa sisällöstä eikä vain toivoa.
+ */
+function vastaa(objekti, callback) {
+  const runko = JSON.stringify(objekti);
+  if (callback && /^[A-Za-z0-9_]{1,64}$/.test(callback)) {
+    return ContentService.createTextOutput(callback + "(" + runko + ");").setMimeType(
+      ContentService.MimeType.JAVASCRIPT
+    );
+  }
+  return ContentService.createTextOutput(runko).setMimeType(ContentService.MimeType.JSON);
 }
 
 /**

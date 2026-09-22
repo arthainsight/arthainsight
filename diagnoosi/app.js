@@ -369,36 +369,52 @@ function isValidEmail(value) {
 }
 
 /*
- * Apps Script -web-sovellus ei tue esitarkistuspyyntöjä (preflight), joten
- * runko lähetetään text/plain-tyyppisenä. Silloin selain tekee yksinkertaisen
- * pyynnön ilman OPTIONS-kierrosta.
+ * Lähetys tehdään script-elementillä (JSONP), ei fetch-kutsuna.
  *
- * Vastauksesta tarkistetaan sisältö, ei pelkkää tilakoodia. Jos web-sovellus
- * on julkaistu väärillä oikeuksilla, Google vastaa kirjautumissivulla tilalla
- * 200 — pelkkä tilakoodin katsominen näyttäisi silloin onnistumista, vaikka
- * mitään ei tallennu. Se on pahin mahdollinen vikatila, koska liidi katoaisi
- * huomaamatta.
+ * Apps Script ei palauta Access-Control-Allow-Origin -otsaketta, joten selain
+ * estää fetch-vastauksen lukemisen toiselta sivustolta. Pyyntö kyllä menisi
+ * perille, mutta emme näkisi onnistuiko se — ja silloin liidi voisi kadota
+ * huomaamatta. Script-elementillä ladattu vastaus ei ole CORS-rajoitusten
+ * alainen, joten onnistuminen voidaan varmistaa sisällöstä.
  */
-async function postToEndpoint(payload) {
-  if (!ENDPOINT) return false;
-  const response = await fetch(ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: JSON.stringify(payload),
-  });
-  if (!response.ok) throw new Error(`Palvelin vastasi: ${response.status}`);
+function postToEndpoint(payload) {
+  if (!ENDPOINT) return Promise.resolve(false);
 
-  const teksti = await response.text();
-  let tulos;
-  try {
-    tulos = JSON.parse(teksti);
-  } catch (error) {
-    throw new Error("Palvelin ei vastannut odotetusti. Tarkista käyttöönoton oikeudet.");
-  }
-  if (!tulos || tulos.ok !== true) {
-    throw new Error(tulos && tulos.virhe ? tulos.virhe : "Palvelin hylkäsi pyynnön.");
-  }
-  return true;
+  return new Promise((resolve, reject) => {
+    const nimi = `arthaCb_${Date.now()}_${Math.floor(Math.random() * 1e6)}`;
+    const script = document.createElement("script");
+
+    const siivoa = () => {
+      clearTimeout(aikakatkaisu);
+      delete window[nimi];
+      script.remove();
+    };
+
+    const aikakatkaisu = setTimeout(() => {
+      siivoa();
+      reject(new Error("Palvelin ei vastannut ajoissa."));
+    }, 20000);
+
+    window[nimi] = (tulos) => {
+      siivoa();
+      if (tulos && tulos.ok === true) {
+        resolve(true);
+        return;
+      }
+      reject(new Error(tulos && tulos.virhe ? tulos.virhe : "Palvelin hylkäsi pyynnön."));
+    };
+
+    script.onerror = () => {
+      siivoa();
+      reject(new Error("Yhteys palvelimeen epäonnistui."));
+    };
+
+    const osoite = new URL(ENDPOINT);
+    osoite.searchParams.set("callback", nimi);
+    osoite.searchParams.set("data", JSON.stringify(payload));
+    script.src = osoite.toString();
+    document.head.append(script);
+  });
 }
 
 /*
