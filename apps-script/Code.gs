@@ -237,3 +237,78 @@ function merkitseMailerLite_(email, tila) {
     taulukko.getRange(rivi, 7).setValue(tila);
   }
 }
+
+/**
+ * Aja tämä kerran editorista asennuksen jälkeen.
+ *
+ * Kaksi tehtävää: se pyytää käyttöoikeudet, joita doPost tarvitsee, ja kertoo
+ * kerralla mikä osa asennuksesta toimii. doGet ei koske Sheetsiin, Gmailiin
+ * eikä verkkoon, joten sen ajaminen ei pyydä mitään lupia — siksi ensimmäinen
+ * oikea lähetys voi kaatua vaikka /exec näyttäisi toimivan.
+ *
+ * Tulokset näkyvät suorituslokissa (Näytä → Loki).
+ */
+function testaaAsennus() {
+  const tulokset = [];
+
+  // 1. Sheets: kirjoitetaan rivi ja poistetaan se heti.
+  try {
+    const taulukko = haeTaulukko_(VASTAUKSET_SHEET, VASTAUKSET_OTSIKOT);
+    taulukko.appendRow(["TESTI", "", "", "", "", "", "", "", "", ""]);
+    SpreadsheetApp.flush();
+    taulukko.deleteRow(taulukko.getLastRow());
+    tulokset.push("Sheets: OK");
+  } catch (error) {
+    tulokset.push("Sheets: VIRHE — " + error);
+  }
+
+  // 2. Asetukset.
+  const asetukset = PropertiesService.getScriptProperties();
+  const tunnus = asetukset.getProperty("MAILERLITE_TOKEN");
+  const ryhma = asetukset.getProperty("MAILERLITE_GROUP");
+  tulokset.push("MAILERLITE_TOKEN: " + (tunnus ? "asetettu" : "PUUTTUU"));
+  tulokset.push("MAILERLITE_GROUP: " + (ryhma ? ryhma : "PUUTTUU"));
+
+  // 3. MailerLite: vain luku, ei lisätä ketään listalle.
+  if (tunnus) {
+    try {
+      const vastaus = UrlFetchApp.fetch("https://connect.mailerlite.com/api/groups", {
+        method: "get",
+        headers: { Authorization: "Bearer " + tunnus, Accept: "application/json" },
+        muteHttpExceptions: true,
+      });
+      const koodi = vastaus.getResponseCode();
+      tulokset.push("MailerLite-yhteys: " + (koodi === 200 ? "OK" : "VIRHE " + koodi));
+      if (koodi === 200 && ryhma) {
+        const ryhmat = JSON.parse(vastaus.getContentText()).data || [];
+        const osuma = ryhmat.filter(function (g) {
+          return String(g.id) === String(ryhma);
+        });
+        tulokset.push(
+          osuma.length
+            ? 'Ryhmä löytyi: "' + osuma[0].name + '"'
+            : "Ryhmää " + ryhma + " EI löydy tililtä — tarkista tunniste"
+        );
+      }
+    } catch (error) {
+      tulokset.push("MailerLite-yhteys: VIRHE — " + error);
+    }
+  }
+
+  // 4. Gmail: lähetetään koeviesti omistajalle.
+  try {
+    MailApp.sendEmail({
+      to: Session.getEffectiveUser().getEmail(),
+      subject: "Myynnin kuusi jarrua — asennustesti",
+      body: tulokset.join("\n"),
+      name: LAHETTAJAN_NIMI,
+    });
+    tulokset.push("Gmail: OK (koeviesti lähetetty)");
+  } catch (error) {
+    tulokset.push("Gmail: VIRHE — " + error);
+  }
+
+  const yhteenveto = tulokset.join("\n");
+  console.log(yhteenveto);
+  return yhteenveto;
+}
