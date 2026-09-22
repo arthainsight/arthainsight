@@ -371,6 +371,12 @@ function isValidEmail(value) {
  * Apps Script -web-sovellus ei tue esitarkistuspyyntöjä (preflight), joten
  * runko lähetetään text/plain-tyyppisenä. Silloin selain tekee yksinkertaisen
  * pyynnön ilman OPTIONS-kierrosta.
+ *
+ * Vastauksesta tarkistetaan sisältö, ei pelkkää tilakoodia. Jos web-sovellus
+ * on julkaistu väärillä oikeuksilla, Google vastaa kirjautumissivulla tilalla
+ * 200 — pelkkä tilakoodin katsominen näyttäisi silloin onnistumista, vaikka
+ * mitään ei tallennu. Se on pahin mahdollinen vikatila, koska liidi katoaisi
+ * huomaamatta.
  */
 async function postToEndpoint(payload) {
   if (!ENDPOINT) return false;
@@ -380,6 +386,17 @@ async function postToEndpoint(payload) {
     body: JSON.stringify(payload),
   });
   if (!response.ok) throw new Error(`Palvelin vastasi: ${response.status}`);
+
+  const teksti = await response.text();
+  let tulos;
+  try {
+    tulos = JSON.parse(teksti);
+  } catch (error) {
+    throw new Error("Palvelin ei vastannut odotetusti. Tarkista käyttöönoton oikeudet.");
+  }
+  if (!tulos || tulos.ok !== true) {
+    throw new Error(tulos && tulos.virhe ? tulos.virhe : "Palvelin hylkäsi pyynnön.");
+  }
   return true;
 }
 
