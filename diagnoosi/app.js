@@ -224,6 +224,12 @@ let currentQuestion = 0;
 let answers = [];
 let currentResult = null;
 
+/* Ilman päätepistettä mitään ei tallenneta eikä lähetetä, joten lupauksetkin pois. */
+if (!ENDPOINT) {
+  document.querySelector("#fact-raportti")?.remove();
+  document.querySelector("#fact-data")?.remove();
+}
+
 function showOnly(panel) {
   [introPanel, quizPanel, resultPanel].forEach((item) => {
     item.hidden = item !== panel;
@@ -340,26 +346,28 @@ function prepareLeadGate(primary) {
     leadPoints.append(item);
   });
 
+  /*
+   * Ilman päätepistettä koko lohko jää pois: tilausta ei voi ottaa vastaan,
+   * eikä puolinaista lomaketta kannata näyttää. Silloin myös korjausliike
+   * avataan heti — sen lukitseminen oli vastine sähköpostista, eikä sitä
+   * enää kysytä.
+   */
+  if (!ENDPOINT) {
+    leadGate.hidden = true;
+    unlockNextMove();
+    return;
+  }
+
+  leadGate.hidden = false;
   leadGate.classList.remove("is-sent");
+  leadForm.hidden = false;
+  leadFallback.hidden = true;
   leadDone.hidden = true;
   leadStatus.textContent = "";
   leadStatus.className = "lead-status";
   nextMove.hidden = true;
   nextMoveLocked.hidden = false;
   leadSubmit.disabled = false;
-
-  if (ENDPOINT) {
-    leadForm.hidden = false;
-    leadFallback.hidden = true;
-  } else {
-    leadForm.hidden = true;
-    leadFallback.hidden = false;
-    leadFallback.querySelector("a").href = `mailto:info@arthainsight.com?subject=${encodeURIComponent(
-      `Raportti: ${primary.label}`,
-    )}&body=${encodeURIComponent(
-      `Tein testin "${FRAMEWORK_NAME}" ja sain tulokseksi: ${primary.label}. Lähetätkö minulle laajemman raportin?`,
-    )}`;
-  }
 }
 
 function unlockNextMove() {
