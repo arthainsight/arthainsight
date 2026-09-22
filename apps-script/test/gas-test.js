@@ -22,6 +22,9 @@ function boot(mlAsetettu = true) {
   return { ctx, env };
 }
 const post = (ctx, obj) => JSON.parse(ctx.doPost({ postData: { contents: JSON.stringify(obj) } }).getContent());
+// JSONP-reitti: sama käsittely, mutta data tulee kyselyparametrina.
+const jsonp = (ctx, obj, cb) =>
+  ctx.doGet({ parameter: { data: JSON.stringify(obj), callback: cb } }).getContent();
 
 console.log('\n1. Nimetön vastaus');
 {
@@ -123,7 +126,30 @@ console.log('\n7. Tuntematon jarru');
   check('roskasyöte ei kaada', e2.sent.length === 1, e2.sent[0]?.subject);
 }
 
-console.log('\n8. Rikkinäinen pyyntö');
+console.log('\n8. JSONP-reitti');
+{
+  const { ctx, env } = boot();
+  const ulos = jsonp(ctx, { tyyppi: 'liidi', sahkoposti: 'a@b.fi', ensisijainen: 'offer', suostumus: true }, 'arthaCb_1');
+  check('kääritty callbackiin', ulos.startsWith('arthaCb_1(') && ulos.endsWith(');'), ulos.slice(0, 40));
+  const sisalto = JSON.parse(ulos.slice('arthaCb_1('.length, -2));
+  check('ok:true', sisalto.ok === true, sisalto);
+  check('rivi tallentui', env.sheets['Liidit'].rows.length === 2);
+  check('raportti lähti', env.sent.length === 1);
+  check('MailerLite-kutsu tehtiin', env.kutsut.length === 1);
+
+  // Vieras callback-nimi ei saa päätyä vastaukseen sellaisenaan.
+  const paha = ctx.doGet({ parameter: { data: '{"tyyppi":"vastaus"}', callback: 'alert(1)//' } }).getContent();
+  check('kelvoton callback hylätään', !paha.includes('alert('), paha.slice(0, 40));
+
+  // Terveystarkistus ilman dataa.
+  const terve = JSON.parse(ctx.doGet({ parameter: {} }).getContent());
+  check('terveystarkistus toimii', terve.ok === true && terve.palvelu === 'Myynnin kuusi jarrua', terve);
+
+  const terveCb = ctx.doGet({ parameter: { callback: 'cb2' } }).getContent();
+  check('terveystarkistus myös JSONP:nä', terveCb.startsWith('cb2('), terveCb.slice(0, 20));
+}
+
+console.log('\n9. Rikkinäinen pyyntö');
 {
   const { ctx } = boot();
   check('tyhjä pyyntö', ctx.doPost(null).getContent().includes('false'));
