@@ -42,6 +42,13 @@ export const site = {
     paragraphs: [] as string[],
   },
 
+  /** Somekanavat. Vaihda tai poista rivejä tarpeen mukaan. */
+  social: [
+    { key: "instagram", label: "Instagram", handle: "@arthainsight", url: "https://www.instagram.com/arthainsight/" },
+    { key: "tiktok", label: "TikTok", handle: "@arthainsight", url: "https://www.tiktok.com/@arthainsight" },
+    { key: "youtube", label: "YouTube", handle: "@artha.insight", url: "https://www.youtube.com/@artha.insight" },
+  ],
+
   legal: {
     business: "Tmi Riku Forsell",
     businessId: "3015497-5",

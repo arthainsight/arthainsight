@@ -1,12 +1,13 @@
 import { footer, nav } from "../content/copy";
 import { site } from "../config/site";
 import { Container } from "./ui/Container";
+import { SocialIcon, type SocialKey } from "./ui/SocialIcon";
 
 export function Footer() {
   return (
     <footer className="on-dark bg-forest-deep py-16 text-paper/75">
       <Container>
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-12 md:grid-cols-[1.3fr_0.8fr_1.1fr_1.1fr]">
           <div>
             <img
               src="./logo.png"
@@ -32,6 +33,26 @@ export function Footer() {
               ))}
             </ul>
           </nav>
+
+          <div>
+            <p className="mb-4 text-[0.75rem] font-medium uppercase tracking-[0.26em] text-gold-soft">Seuraa</p>
+            <ul className="space-y-2.5 text-[0.95rem]">
+              {site.social.map((item) => (
+                <li key={item.key}>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${item.label} ${item.handle} (avautuu uuteen välilehteen)`}
+                    className="inline-flex items-center gap-3 text-paper/75 transition-colors hover:text-paper"
+                  >
+                    <SocialIcon name={item.key as SocialKey} />
+                    <span>{item.handle}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <div>
             <p className="mb-4 text-[0.75rem] font-medium uppercase tracking-[0.26em] text-gold-soft">Yhteys</p>

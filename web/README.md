@@ -18,7 +18,7 @@ npm run preview    # esikatselee tuotantoversiota
 | Mitä | Tiedosto |
 | --- | --- |
 | Kaikki sivun tekstit | `src/content/copy.ts` |
-| Hinta, ajanvarauslinkki, sähköposti, Minusta-tekstit ja -kuva | `src/config/site.ts` |
+| Hinta, ajanvarauslinkki, sähköposti, somelinkit, Minusta-tekstit ja -kuva | `src/config/site.ts` |
 | Värit ja fontit | `src/index.css` (`@theme`-lohko) |
 | Logo | `public/logo.png` (koko logo) ja `public/logo-mark.png` (pelkkä lootus) |
 | Maisemakuvitus | `src/components/art/Horizon.tsx` |

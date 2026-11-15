@@ -5,6 +5,7 @@ import { buttonClass } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { Eyebrow } from "../components/ui/SectionHeading";
+import { SocialIcon, type SocialKey } from "../components/ui/SocialIcon";
 
 const fieldClass =
   "mt-2 block w-full rounded-[2px] border border-forest/25 bg-white/60 px-4 py-3 text-[1rem] text-ink placeholder:text-ink-soft/60 transition-colors focus:border-forest focus:bg-white";
@@ -53,6 +54,23 @@ export function Contact() {
                 {site.email}
               </a>
             </p>
+
+            <ul className="mt-8 flex flex-wrap gap-x-7 gap-y-3 text-[0.95rem]">
+              {site.social.map((item) => (
+                <li key={item.key}>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${item.label} ${item.handle} (avautuu uuteen välilehteen)`}
+                    className="inline-flex items-center gap-2.5 text-forest transition-colors hover:text-gold-deep"
+                  >
+                    <SocialIcon name={item.key as SocialKey} />
+                    <span>{item.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
 
             {site.bookingUrl && (
               <p className="mt-8 text-sm text-ink-soft">
