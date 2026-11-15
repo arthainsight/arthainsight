@@ -47,6 +47,8 @@ export const site = {
     { key: "instagram", label: "Instagram", handle: "@arthainsight", url: "https://www.instagram.com/arthainsight/" },
     { key: "tiktok", label: "TikTok", handle: "@arthainsight", url: "https://www.tiktok.com/@arthainsight" },
     { key: "youtube", label: "YouTube", handle: "@artha.insight", url: "https://www.youtube.com/@artha.insight" },
+    { key: "facebook", label: "Facebook", handle: "Artha Insight", url: "https://www.facebook.com/profile.php?id=61593970195695" },
+    { key: "linkedin", label: "LinkedIn", handle: "Artha Insight", url: "https://www.linkedin.com/company/arthainsight" },
   ],
 
   legal: {
