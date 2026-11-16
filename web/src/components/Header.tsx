@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { nav } from "../content/copy";
+import { useContent } from "../i18n";
 import { useActiveSection } from "../hooks/useActiveSection";
 import { useScrolled } from "../hooks/useScrolled";
 import { Wordmark } from "./Wordmark";
 
-const sectionIds = nav.map((item) => item.id);
-
 export function Header() {
+  const c = useContent();
+  const nav = c.nav.map((item) => ({ ...item, id: c.ids[item.key as keyof typeof c.ids], href: `#${c.ids[item.key as keyof typeof c.ids]}` }));
+  const sectionIds = nav.map((item) => item.id);
   const [open, setOpen] = useState(false);
   const scrolled = useScrolled(24);
   const active = useActiveSection(sectionIds);
@@ -75,18 +76,18 @@ export function Header() {
     >
       <div className="mx-auto flex h-[4.75rem] w-full max-w-6xl md:h-[5.5rem] items-center justify-between px-6 md:px-10">
         <a
-          href="#etusivu"
-          aria-label="Artha Insight, etusivun alkuun"
+          href={`#${c.ids.home}`}
+          aria-label={c.a11y.homeLink}
           className="on-dark relative z-[60] text-paper"
         >
           <Wordmark className="h-[3.75rem] md:h-[4.5rem]" />
         </a>
 
         {/* Työpöytävalikko */}
-        <nav aria-label="Päävalikko" className="hidden md:block">
+        <nav aria-label={c.a11y.mainNav} className="hidden md:block">
           <ul className="flex items-center gap-9">
             {nav.map((item) => {
-              const isContact = item.id === "ota-yhteytta";
+              const isContact = item.key === "contact";
               const isActive = active === item.id;
               const tone = "text-paper/80 hover:text-paper";
               if (isContact) {
@@ -122,6 +123,18 @@ export function Header() {
                 </li>
               );
             })}
+            <li>
+              <a
+                href={c.switchLang.href}
+                hrefLang={c.switchLang.hreflang}
+                lang={c.switchLang.hreflang}
+                title={c.switchLang.title}
+                aria-label={c.switchLang.title}
+                className="on-dark inline-block rounded-[2px] px-2 py-1 text-[0.8rem] font-medium tracking-[0.18em] text-gold-soft transition-colors hover:text-paper"
+              >
+                {c.switchLang.label}
+              </a>
+            </li>
           </ul>
         </nav>
 
@@ -132,7 +145,7 @@ export function Header() {
           className="on-dark relative z-[60] -mr-2 flex h-11 w-11 items-center justify-center text-paper md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label={open ? "Sulje valikko" : "Avaa valikko"}
+          aria-label={open ? c.a11y.closeMenu : c.a11y.openMenu}
           onClick={() => setOpen((v) => !v)}
         >
           <span aria-hidden="true" className="relative block h-3.5 w-6">
@@ -158,7 +171,7 @@ export function Header() {
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
-        <nav aria-label="Mobiilivalikko">
+        <nav aria-label={c.a11y.mobileNav}>
           <ul className="space-y-1">
             {nav.map((item, i) => (
               <li key={item.id}>
@@ -176,6 +189,16 @@ export function Header() {
               </li>
             ))}
           </ul>
+          <a
+            href={c.switchLang.href}
+            hrefLang={c.switchLang.hreflang}
+            lang={c.switchLang.hreflang}
+            onClick={() => close(false)}
+            className="mt-8 inline-flex items-center gap-3 text-[0.9rem] tracking-[0.18em] text-gold-soft"
+          >
+            <span className="font-medium">{c.switchLang.label}</span>
+            <span className="text-paper/70 tracking-normal">{c.switchLang.title}</span>
+          </a>
         </nav>
       </div>
     </header>

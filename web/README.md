@@ -1,7 +1,8 @@
 # Artha Insight – verkkosivusto
 
-Yhden sivun sivusto: React, TypeScript ja Tailwind CSS (Vite). Etusivu esirenderöidään buildissa
-staattiseksi HTML:ksi, joten se latautuu nopeasti ja hakukoneet näkevät sisällön heti.
+Yhden sivun sivusto kahdella kielellä: suomi (`/`) ja englanti (`/en/`). React, TypeScript ja Tailwind CSS (Vite).
+Molemmat kieliversiot esirenderöidään buildissa staattiseksi HTML:ksi, joten sivut latautuvat nopeasti ja
+hakukoneet näkevät sisällön heti. Kielten välillä on kielenvaihtolinkki ja hreflang-merkinnät.
 
 ## Käyttö
 
@@ -17,20 +18,21 @@ npm run preview    # esikatselee tuotantoversiota
 
 | Mitä | Tiedosto |
 | --- | --- |
-| Kaikki sivun tekstit | `src/content/copy.ts` |
-| Hinta, ajanvarauslinkki, sähköposti, somelinkit, Minusta-tekstit ja -kuva | `src/config/site.ts` |
+| Suomenkieliset tekstit | `src/content/fi.ts` |
+| Englanninkieliset tekstit | `src/content/en.ts` (sama rakenne kuin fi.ts) |
+| Hinta, kesto, ajanvarauslinkki, sähköposti, somelinkit, Minusta-tekstit ja -kuva | `src/config/site.ts` |
 | Värit ja fontit | `src/index.css` (`@theme`-lohko) |
 | Logo | `public/logo.png` (koko logo) ja `public/logo-mark.png` (pelkkä lootus) |
 | Maisemakuvitus | `src/components/art/Horizon.tsx` |
-| Sivun otsikko, kuvaus ja Open Graph | `index.html` |
+| Sivun otsikko, kuvaus ja Open Graph | `index.html` (suomi) ja `en/index.html` (englanti) |
 
 ### Paikkamerkit, jotka pitää täyttää
 
 Kun arvo on tyhjä, sivu näyttää selvästi merkityn katkoviivaisen paikkamerkin eikä keksi tietoa.
 
-- **Hinta**: `site.consultation.price` (esim. `"290 € (sis. alv)"`).
+- **Hinta**: `site.consultation.price` kielittäin (esim. fi `"290 € (sis. alv)"`, en `"€290 (incl. VAT)"`).
 - **Ajanvarauslinkki**: `site.bookingUrl`. Kun se on tyhjä, kaikki "Varaa"-painikkeet vievät yhteydenottolomakkeelle.
-- **Minusta-teksti**: `site.founder.paragraphs` (yksi merkkijono = yksi kappale).
+- **Minusta-teksti**: `site.founder.paragraphs` kielittäin (yksi merkkijono = yksi kappale).
 - **Kuva perustajasta**: lisää tiedosto kansioon `public/` ja kirjoita nimi kohtaan `site.founder.image`.
 
 ## Yhteydenottolomake
@@ -42,13 +44,14 @@ viestillä (`mailto:`), eikä sivu väitä lähettävänsä mitään. Jos haluat
 ## Ennen julkaisua
 
 1. Täytä yllä olevat paikkamerkit.
-2. Poista `<meta name="robots" content="noindex" />` tiedostosta `index.html`. Se estää nyt hakukoneita indeksoimasta keskeneräistä sivua.
+2. Poista `<meta name="robots" content="noindex" />` tiedostoista `index.html` ja `en/index.html`. Se estää nyt hakukoneita indeksoimasta keskeneräistä sivua.
 3. Lisää `sitemap.xml` ja `robots.txt` tarvittaessa.
-4. `public/tietosuoja.html` ja `public/privacy.html` ovat kopiot juuren tietosuojasivuista. Pidä ne ajan tasalla.
+4. `public/tietosuoja.html` (suomi) ja `public/privacy.html` (englanti) ovat kopiot juuren tietosuojasivuista. Pidä ne ajan tasalla.
+5. Englannin Open Graph -kuva on `public/og-en.png` ja suomen `public/og.png`. Päivitä ne, jos otsikko muuttuu.
 
 ## Julkaisu
 
-`npm run build` tuottaa valmiin sivuston kansioon `dist/`. Koska `base` on `./`, sen voi viedä
+`npm run build` tuottaa valmiin sivuston kansioon `dist/` (`index.html` ja `en/index.html`). Koska `base` on `./`, sen voi viedä
 mihin tahansa: domainin juureen tai alikansioon. Nykyisessä GitHub Pages -asetuksessa (julkaisu
 juuresta) kopioi `dist/`-kansion sisältö repon juureen, tai ota käyttöön GitHub Actions
 -julkaisu, joka ajaa buildin ja julkaisee `web/dist`.
@@ -58,13 +61,20 @@ juuresta) kopioi `dist/`-kansion sisältö repon juureen, tai ota käyttöön Gi
 ```
 src/
   App.tsx              sivun kokoaminen
-  content/copy.ts      tekstit
+  content/fi.ts, en.ts tekstit kielittäin, content/index.ts valitsee kielen
+  i18n.tsx             kielikonteksti (useContent)
   config/site.ts       vaihdettavat asetukset
   sections/            Hero, Crossroads, Consultation, Philosophy, Obstacles, About, ClosingCta, Contact
   components/          Header, Footer, Wordmark, ui/ (Button, Reveal, ...), art/ (Horizon, PurusharthaIcon)
   hooks/               useActiveSection, useScrolled
 scripts/prerender.mjs  esirenderöinti buildin jälkeen
 ```
+
+## Uuden kielen lisääminen
+
+1. Kopioi `src/content/en.ts` uudeksi tiedostoksi ja käännä tekstit.
+2. Lisää kieli tiedostoon `src/content/index.ts` ja `Lang`-tyyppiin.
+3. Kopioi `en/index.html` uuteen kansioon ja lisää se `vite.config.ts`:n `input`-listaan ja `scripts/prerender.mjs`:n `pages`-listaan.
 
 ## Saavutettavuus
 

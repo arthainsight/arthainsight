@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
-import { contact } from "../content/copy";
-import { bookingHref, bookingIsExternal, site } from "../config/site";
+import { useContent } from "../i18n";
+import { getBooking, site } from "../config/site";
 import { buttonClass } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
@@ -19,6 +19,9 @@ const fieldClass =
  * (Formspree, Netlify Forms tms.) kutsulla.
  */
 export function Contact() {
+  const c = useContent();
+  const contact = c.contact;
+  const booking = getBooking(c.ids.contact);
   const [status, setStatus] = useState<"idle" | "opened">("idle");
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -28,14 +31,14 @@ export function Contact() {
     const email = String(data.get("email") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
-    const subject = `Yhteydenotto: Artha Insight${name ? ` / ${name}` : ""}`;
-    const body = `Nimi: ${name}\nSähköposti: ${email}\n\n${message}`;
+    const subject = `${contact.mailSubject}${name ? ` / ${name}` : ""}`;
+    const body = `${contact.mailName}: ${name}\n${contact.mailEmail}: ${email}\n\n${message}`;
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setStatus("opened");
   }
 
   return (
-    <section id="ota-yhteytta" aria-labelledby="contact-title" className="bg-paper py-24 md:py-36">
+    <section id={c.ids.contact} aria-labelledby="contact-title" className="bg-paper py-24 md:py-36">
       <Container>
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
           <Reveal className="lg:col-span-5">
@@ -62,7 +65,7 @@ export function Contact() {
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${item.label} ${item.handle} (avautuu uuteen välilehteen)`}
+                    aria-label={`${item.label} ${item.handle} ${c.a11y.newTab}`}
                     className="inline-flex items-center gap-2.5 text-forest transition-colors hover:text-gold-deep"
                   >
                     <SocialIcon name={item.key as SocialKey} />
@@ -76,11 +79,11 @@ export function Contact() {
               <p className="mt-8 text-sm text-ink-soft">
                 {contact.bookingLead}{" "}
                 <a
-                  href={bookingHref}
-                  {...(bookingIsExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  href={booking.href}
+                  {...(booking.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="text-forest underline decoration-gold underline-offset-4"
                 >
-                  {site.consultation.name}
+                  {c.consultation.name}
                 </a>
               </p>
             )}
@@ -118,14 +121,14 @@ export function Contact() {
 
               <p className="text-[0.85rem] leading-relaxed text-ink-soft">
                 {contact.notice}{" "}
-                <a href={site.legal.privacyUrl} className="underline decoration-gold underline-offset-4">
+                <a href={c.footer.privacyUrl} className="underline decoration-gold underline-offset-4">
                   {contact.privacy}
                 </a>
               </p>
 
               <p role="status" aria-live="polite" className="min-h-[1.5rem] text-[0.92rem] text-forest">
                 {status === "opened" &&
-                  `Sähköpostiohjelmasi pitäisi avautua. Jos näin ei käy, kirjoita osoitteeseen ${site.email}.`}
+                  contact.opened.replace("{email}", site.email)}
               </p>
             </form>
           </Reveal>

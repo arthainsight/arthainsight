@@ -1,11 +1,13 @@
-import { crossroads } from "../content/copy";
+import { useContent } from "../i18n";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { Eyebrow } from "../components/ui/SectionHeading";
 
 export function Crossroads() {
+  const c = useContent();
+  const crossroads = c.crossroads;
   return (
-    <section id="risteyskohta" aria-labelledby="crossroads-title" className="bg-paper py-24 md:py-36">
+    <section id={c.ids.crossroads} aria-labelledby="crossroads-title" className="bg-paper py-24 md:py-36">
       <Container>
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">

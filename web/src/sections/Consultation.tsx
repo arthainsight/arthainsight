@@ -1,5 +1,5 @@
-import { consultation } from "../content/copy";
-import { bookingHref, bookingIsExternal, site } from "../config/site";
+import { useContent } from "../i18n";
+import { getBooking, site } from "../config/site";
 import { Button } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
@@ -16,11 +16,15 @@ function DetailValue({ value, placeholder }: { value: string; placeholder: strin
 }
 
 export function Consultation() {
-  const { duration, price } = site.consultation;
+  const c = useContent();
+  const consultation = c.consultation;
+  const booking = getBooking(c.ids.contact);
+  const duration = site.consultation.duration[c.lang as "fi" | "en"];
+  const price = site.consultation.price[c.lang as "fi" | "en"];
 
   return (
     <section
-      id="konsultaatio"
+      id={c.ids.consultation}
       aria-labelledby="consultation-title"
       className="on-dark relative overflow-hidden bg-forest py-24 text-paper md:py-36"
     >
@@ -43,7 +47,7 @@ export function Consultation() {
             <Reveal>
               <Eyebrow tone="dark">{consultation.eyebrow}</Eyebrow>
               <h2 id="consultation-title" className="mt-7 text-[2.6rem] text-paper sm:text-5xl lg:text-[3.6rem]">
-                {site.consultation.name}
+                {consultation.name}
               </h2>
               <p className="mt-4 font-serif text-[1.45rem] italic text-gold-soft">{consultation.subtitle}</p>
               <p className="mt-9 text-lg leading-relaxed text-paper">{consultation.intro}</p>
@@ -78,7 +82,7 @@ export function Consultation() {
                       {consultation.detailLabels.duration}
                     </dt>
                     <dd>
-                      <DetailValue value={duration} placeholder="[Kesto]" />
+                      <DetailValue value={duration} placeholder={consultation.placeholderDuration} />
                     </dd>
                   </div>
                   <div>
@@ -86,7 +90,7 @@ export function Consultation() {
                       {consultation.detailLabels.price}
                     </dt>
                     <dd>
-                      <DetailValue value={price} placeholder="[Lisää hinta]" />
+                      <DetailValue value={price} placeholder={consultation.placeholderPrice} />
                     </dd>
                   </div>
                   <div>
@@ -98,7 +102,7 @@ export function Consultation() {
                 </dl>
 
                 <div className="mt-10">
-                  <Button href={bookingHref} variant="primary" external={bookingIsExternal}>
+                  <Button href={booking.href} variant="primary" external={booking.external}>
                     {consultation.cta}
                   </Button>
                 </div>

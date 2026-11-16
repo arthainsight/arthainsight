@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useContent } from "../../i18n";
 
 export type ButtonVariant = "primary" | "light" | "outline-dark" | "outline-light";
 
@@ -41,6 +42,7 @@ interface ButtonProps {
 
 /** Linkki, joka näyttää painikkeelta. Sisäiset ankkurit vierittävät sujuvasti kohteeseen. */
 export function Button({ href, variant = "primary", external = false, className = "", children }: ButtonProps) {
+  const c = useContent();
   return (
     <a
       href={href}
@@ -49,7 +51,7 @@ export function Button({ href, variant = "primary", external = false, className 
     >
       <span className="text-center">{children}</span>
       <Arrow />
-      {external && <span className="sr-only"> (avautuu uuteen välilehteen)</span>}
+      {external && <span className="sr-only"> {c.a11y.newTab}</span>}
     </a>
   );
 }

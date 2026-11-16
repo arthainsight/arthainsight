@@ -1,4 +1,4 @@
-import { philosophy } from "../content/copy";
+import { useContent } from "../i18n";
 import { PurusharthaIcon, type PurusharthaKey } from "../components/art/PurusharthaIcon";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
@@ -13,8 +13,10 @@ const panelStyles: Record<PurusharthaKey, { bg: string; text: string; sub: strin
 };
 
 export function Philosophy() {
+  const c = useContent();
+  const philosophy = c.philosophy;
   return (
-    <section id="filosofia" aria-labelledby="philosophy-title" className="bg-paper">
+    <section id={c.ids.philosophy} aria-labelledby="philosophy-title" className="bg-paper">
       <Container className="pb-20 pt-24 md:pb-28 md:pt-36">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
@@ -70,7 +72,7 @@ export function Philosophy() {
             <figure>
               <blockquote>
                 <p className="font-serif text-[1.9rem] italic leading-[1.3] text-forest md:text-[2.4rem]">
-                  ”{philosophy.quote}”
+                  {philosophy.quote}
                 </p>
               </blockquote>
               <figcaption className="mt-5 text-[0.8rem] uppercase tracking-[0.24em] text-gold-deep">

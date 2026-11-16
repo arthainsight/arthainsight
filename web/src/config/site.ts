@@ -18,11 +18,13 @@ export const site = {
   bookingUrl: "",
 
   consultation: {
-    name: "Oman dharman äärelle",
-    /** Kesto. */
-    duration: "90 minuuttia",
-    /** Hinta, esim. "290 € (sis. alv)". Tyhjänä näytetään paikkamerkki. */
-    price: "",
+    /** Kesto kielittäin. Palvelun nimi on kielitiedostoissa (src/content). */
+    duration: { fi: "90 minuuttia", en: "90 minutes" },
+    /**
+     * Hinta kielittäin, esim. fi: "290 € (sis. alv)" ja en: "€290 (incl. VAT)".
+     * Tyhjänä näytetään paikkamerkki.
+     */
+    price: { fi: "", en: "" },
   },
 
   founder: {
@@ -36,10 +38,10 @@ export const site = {
     /** Kuvan vaihtoehtoinen teksti, kun kuva on lisätty. */
     imageAlt: "Riku Forsell",
     /**
-     * Minusta-osion tekstikappaleet. Yksi merkkijono = yksi kappale.
+     * Minusta-osion tekstikappaleet kielittäin. Yksi merkkijono = yksi kappale.
      * Tyhjänä näytetään muokattava tekstipaikka.
      */
-    paragraphs: [] as string[],
+    paragraphs: { fi: [] as string[], en: [] as string[] },
   },
 
   /** Somekanavat. Vaihda tai poista rivejä tarpeen mukaan. */
@@ -54,10 +56,10 @@ export const site = {
   legal: {
     business: "Tmi Riku Forsell",
     businessId: "3015497-5",
-    privacyUrl: "./tietosuoja.html",
   },
 } as const;
 
 /** Varauspainikkeiden kohde: oma varauslinkki tai, jos sitä ei ole, yhteydenottolomake. */
-export const bookingHref: string = site.bookingUrl || "#ota-yhteytta";
-export const bookingIsExternal: boolean = Boolean(site.bookingUrl);
+export function getBooking(contactId: string): { href: string; external: boolean } {
+  return site.bookingUrl ? { href: site.bookingUrl, external: true } : { href: `#${contactId}`, external: false };
+}

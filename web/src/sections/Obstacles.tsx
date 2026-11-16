@@ -1,11 +1,13 @@
-import { obstacles } from "../content/copy";
+import { useContent } from "../i18n";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { Eyebrow } from "../components/ui/SectionHeading";
 
 export function Obstacles() {
+  const c = useContent();
+  const obstacles = c.obstacles;
   return (
-    <section id="esteet" aria-labelledby="obstacles-title" className="bg-paper-deep py-24 md:py-36">
+    <section id={c.ids.obstacles} aria-labelledby="obstacles-title" className="bg-paper-deep py-24 md:py-36">
       <Container>
         <Reveal className="max-w-3xl">
           <Eyebrow>{obstacles.eyebrow}</Eyebrow>

@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { hero } from "../content/copy";
+import { useContent } from "../i18n";
 import { Horizon } from "../components/art/Horizon";
 import { Button } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
@@ -7,9 +7,11 @@ import { Container } from "../components/ui/Container";
 const delay = (ms: number) => ({ "--hero-delay": `${ms}ms` }) as CSSProperties;
 
 export function Hero() {
+  const c = useContent();
+  const hero = c.hero;
   return (
     <section
-      id="etusivu"
+      id={c.ids.home}
       aria-labelledby="hero-title"
       className="on-dark relative isolate flex min-h-[max(100svh,44rem)] items-start overflow-hidden bg-[#14291f] text-paper"
     >
@@ -45,10 +47,10 @@ export function Hero() {
           className="hero-in mt-10 flex flex-col gap-4 sm:flex-row"
           style={delay(520)}
         >
-          <Button href="#konsultaatio" variant="light">
+          <Button href={`#${c.ids.consultation}`} variant="light">
             {hero.primaryCta}
           </Button>
-          <Button href="#filosofia" variant="outline-light">
+          <Button href={`#${c.ids.philosophy}`} variant="outline-light">
             {hero.secondaryCta}
           </Button>
         </div>

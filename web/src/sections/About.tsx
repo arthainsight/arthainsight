@@ -1,14 +1,17 @@
-import { about } from "../content/copy";
+import { useContent } from "../i18n";
 import { site } from "../config/site";
 import { Container } from "../components/ui/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { Eyebrow } from "../components/ui/SectionHeading";
 
 export function About() {
-  const { name, image, imageAlt, paragraphs } = site.founder;
+  const c = useContent();
+  const about = c.about;
+  const { name, image, imageAlt } = site.founder;
+  const paragraphs = site.founder.paragraphs[c.lang as "fi" | "en"];
 
   return (
-    <section id="minusta" aria-labelledby="about-title" className="bg-paper py-24 md:py-36">
+    <section id={c.ids.about} aria-labelledby="about-title" className="bg-paper py-24 md:py-36">
       <Container>
         <div className="grid items-start gap-14 lg:grid-cols-12 lg:gap-20">
           {/* Kuva tai kuvan paikkamerkki */}
