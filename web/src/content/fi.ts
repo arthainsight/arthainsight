@@ -59,7 +59,7 @@ export const fi = {
     lead:
       "Tutki ehdollistunutta identiteettiäsi, kyseenalaista rajoittavia uskomuksia ja löydä syvempi ymmärrys siitä, kuka olet.",
     support: "Löydä todellinen luontosi. Vapauta potentiaalisi. Elä vapaasti.",
-    meta: "Dharma Coaching · 90 minuuttia · pilottihinta 125 €",
+    meta: "Dharma Coaching · 90 minuuttia · pilottihinta 125 € (sis. alv)",
     primaryCta: "Varaa 90 minuutin tapaaminen",
     secondaryCta: "Tutustu Dharma Coachingiin",
   },
@@ -150,14 +150,14 @@ export const fi = {
     ],
     bookingNote: "Maksua ei oteta varauksen yhteydessä. Maksulinkki lähetetään erikseen, kun varaus on vastaanotettu ja vahvistettu.",
     /** {price} ja {duration} korvataan arvoilla. */
-    priceLine: "Hinta: {price} · {duration}",
+    priceLine: "Hinta: {price} (sis. alv 25,5 %) · {duration}",
     detailLabels: {
       duration: "Kesto",
       price: "Hinta",
       format: "Muoto",
     },
     formatValue: "Yksilötapaaminen verkossa (Google Meet)",
-    priceNote: "Pilottihinta",
+    priceNote: "Pilottihinta, sis. alv 25,5 %",
     placeholderDuration: "[Kesto]",
     placeholderPrice: "[Lisää hinta]",
   },

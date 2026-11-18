@@ -28,7 +28,7 @@ export const site = {
     duration: { fi: "90 minuuttia", en: "90 minutes" },
     /** Lyhyt kesto hintariville. */
     durationShort: { fi: "90 min", en: "90 min" },
-    /** Pilottihinta kielittäin. Tyhjänä näytetään paikkamerkki. */
+    /** Pilottihinta kielittäin (hinta sisältää alv 25,5 %, ks. content-tiedostojen priceNote ja priceLine). */
     price: { fi: "125 €", en: "€125" },
   },
 

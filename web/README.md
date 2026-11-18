@@ -28,7 +28,7 @@ npm run preview    # esikatselee tuotantoversiota
 
 ### Asetukset, jotka kannattaa tarkistaa (`src/config/site.ts`)
 
-- **Hinta**: `coaching.price` kielittäin. Nyt pilottihinta 125 € (fi) ja €125 (en). Alv-merkintää ei ole lisätty, koska sitä ei ole määritelty.
+- **Hinta**: `coaching.price` kielittäin. Nyt pilottihinta 125 € (fi) ja €125 (en). Hinta sisältää alv 25,5 %, ja se on kirjoitettu näkyviin tiedostoihin `fi.ts`/`en.ts` (`priceNote`, `priceLine`).
 - **Ajanvarauslinkki**: `bookingUrl` on olemassa oleva Google Kalenterin ajanvarauspage (`calendar.app.google/...`). Sitä on aiemmin käytetty 30 minuutin keskusteluun, joten varmista Google Kalenterissa, että sillä tarjotaan 90 minuutin aikoja ja Google Meet -linkki. Kun kenttä on tyhjä, "Varaa"-painikkeet vievät yhteydenottolomakkeelle. Maksulinkki lähetetään erikseen varauksen vahvistamisen jälkeen, eikä sivustolla ole maksuintegraatiota.
 - **Kuva ja nimi (Minusta)**: `founder.image` (`public/riku.jpg`, alkuperäiseltä sivulta) ja `founder.name`.
 - **Minusta-teksti**: `about.paragraphs` tiedostoissa `src/content/fi.ts` ja `en.ts`. Ensimmäinen kappale on sinun oma tarinasi. Lisää tarvittaessa omaa taustaasi, mutta vain todellista.
