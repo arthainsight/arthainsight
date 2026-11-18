@@ -3,4 +3,4 @@ Updated: 2026-11-18
 Offering: Dharma Coaching – 90 minuutin henkilökohtainen tapaaminen (pilottihinta 125 €)
 Concept: Ehdollistumisesta vapauteen. Vedanta, joogafilosofia ja Bhagavan Shanmukhan tulkinta neljästä Puruṣārthasta
 Site: web/ (React + Tailwind, suomi ja englanti, esirenderöity). Julkaisu: kopioi web/dist juureen.
-Booking: Calendly (calendly.com/riku-forsell) + sähköposti riku.forsell@gmail.com
+Booking: Google Kalenterin ajanvaraus + Google Meet; maksulinkki lähetetään erikseen varauksen vahvistamisen jälkeen. Yhteys: riku.forsell@gmail.com

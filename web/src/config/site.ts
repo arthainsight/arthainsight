@@ -11,15 +11,23 @@ export const site = {
   email: "riku.forsell@gmail.com",
 
   /**
-   * Ajanvarauslinkki. Tämä on alkuperäiseltä verkkosivulta peräisin oleva Calendly-profiili.
-   * Varmista, että Calendlyssä on 90 minuutin Dharma Coaching -tapahtuma (tai vaihda tähän suoraan
-   * sen tapahtuman linkki). Kun tämä on tyhjä, kaikki "Varaa"-painikkeet vievät yhteydenottolomakkeelle.
+   * Ajanvaraus: olemassa oleva Google Kalenterin ajanvarauspage (Google Calendar appointment schedule).
+   * Linkki on projektin aiemmasta ajanvarauksesta (ks. sisalto/mailerlite-sarja.md). Se on julkinen
+   * varauslinkki, joten se ei sisällä tunnuksia tai avaimia.
+   *
+   * TÄRKEÄÄ: tätä aikataulua on viimeksi käytetty 30 minuutin maksuttomaan keskusteluun. Varmista
+   * Google Kalenterissa, että sillä tarjotaan 90 minuutin aikoja ja että varaukseen liittyy Google Meet
+   * -linkki. Jos teet uuden 90 minuutin aikataulun, vaihda sen linkki tähän.
+   *
+   * Kun kenttä on tyhjä, kaikki "Varaa"-painikkeet vievät yhteydenottolomakkeelle.
    */
-  bookingUrl: "https://calendly.com/riku-forsell",
+  bookingUrl: "https://calendar.app.google/YF82nyAij819wJJT6",
 
   coaching: {
     /** Kesto kielittäin. Palvelun nimi ja kuvaus ovat kielitiedostoissa (src/content). */
     duration: { fi: "90 minuuttia", en: "90 minutes" },
+    /** Lyhyt kesto hintariville. */
+    durationShort: { fi: "90 min", en: "90 min" },
     /** Pilottihinta kielittäin. Tyhjänä näytetään paikkamerkki. */
     price: { fi: "125 €", en: "€125" },
   },

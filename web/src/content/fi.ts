@@ -141,12 +141,22 @@ export const fi = {
       "Yksi tapaaminen on itsenäinen ja merkityksellinen kokonaisuus. Se ei poista pelkoja, paranna traumoja eikä tuota pysyvää vapautta, mutta se antaa kysymyksiä ja näkökulmia, joiden tutkimista voit jatkaa itse.",
     note: "Dharma Coaching on ohjausta ja itsetutkiskelua. Se ei ole psykoterapiaa, hoitoa tai lääketieteellistä apua.",
     cta: "Varaa 90 minuutin tapaaminen",
+    bookingTitle: "Näin varaat tapaamisen",
+    bookingSteps: [
+      "Valitse sinulle sopiva vapaa aika Google Kalenterin ajanvarauksesta.",
+      "Saat vahvistuksen varauksestasi.",
+      "Saat maksulinkin varauksen vahvistamisen jälkeen.",
+      "Saat Google Meet -linkin, jonka kautta tapaamme sovittuna ajankohtana.",
+    ],
+    bookingNote: "Maksua ei oteta varauksen yhteydessä. Maksulinkki lähetetään erikseen, kun varaus on vastaanotettu ja vahvistettu.",
+    /** {price} ja {duration} korvataan arvoilla. */
+    priceLine: "Hinta: {price} · {duration}",
     detailLabels: {
       duration: "Kesto",
       price: "Hinta",
       format: "Muoto",
     },
-    formatValue: "Yksilötapaaminen",
+    formatValue: "Yksilötapaaminen verkossa (Google Meet)",
     priceNote: "Pilottihinta",
     placeholderDuration: "[Kesto]",
     placeholderPrice: "[Lisää hinta]",
@@ -294,7 +304,7 @@ export const fi = {
       "Lomake ei lähetä viestiä palvelimelle. Painike avaa sähköpostiohjelmasi valmiiksi täytetyllä viestillä, jonka lähetät itse.",
     privacy: "Tietosuoja",
     alt: "Voit myös kirjoittaa suoraan osoitteeseen",
-    bookingLead: "Tai varaa aika suoraan:",
+    bookingLead: "Tai varaa aika suoraan Google Kalenterista:",
     /** {email} korvataan sähköpostiosoitteella. */
     opened: "Sähköpostiohjelmasi pitäisi avautua. Jos näin ei käy, kirjoita osoitteeseen {email}.",
     mailSubject: "Yhteydenotto: Dharma Coaching",

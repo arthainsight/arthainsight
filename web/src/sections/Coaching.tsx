@@ -38,6 +38,8 @@ export function Coaching() {
   const lang = c.lang as "fi" | "en";
   const duration = site.coaching.duration[lang];
   const price = site.coaching.price[lang];
+  const durationShort = site.coaching.durationShort[lang];
+  const priceLine = coaching.priceLine.replace("{price}", price).replace("{duration}", durationShort);
 
   return (
     <section
@@ -114,6 +116,30 @@ export function Coaching() {
                 </ol>
 
                 <p className="mt-8 text-ink">{coaching.standalone}</p>
+
+                {/* Varauksen kulku */}
+                <div className="mt-10 border-t border-forest/12 pt-8">
+                  <h3 className="text-[0.78rem] font-medium uppercase tracking-[0.28em] text-gold-deep">
+                    {coaching.bookingTitle}
+                  </h3>
+                  <ol className="mt-5 space-y-4">
+                    {coaching.bookingSteps.map((step, i) => (
+                      <li key={step} className="flex gap-4">
+                        <span
+                          aria-hidden="true"
+                          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-forest font-sans text-[0.8rem] font-medium text-paper"
+                        >
+                          {i + 1}
+                        </span>
+                        <span className="pt-0.5 text-ink">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  {price && (
+                    <p className="mt-6 font-serif text-[1.35rem] text-forest">{priceLine}</p>
+                  )}
+                  <p className="mt-3 text-[0.9rem] leading-relaxed text-ink-soft">{coaching.bookingNote}</p>
+                </div>
 
                 <dl className="mt-9 grid gap-6 border-t border-forest/12 pt-8 sm:grid-cols-3">
                   <div>
