@@ -57,7 +57,7 @@ export const fi = {
     eyebrow: "Ehdollistumisesta vapauteen",
     title: "Kuka sinä olet kaiken sen alla, minkä uskot itsestäsi olevasi?",
     lead:
-      "Tutki ehdollistunutta identiteettiäsi, kyseenalaista rajoittavia uskomuksia ja löydä syvempi ymmärrys siitä, kuka olet.",
+      "Tutki ehdollistunutta identiteettiäsi, pura rajoittavia uskomuksia ja löydä oma yksilöllinen luontosi, potentiaalisi ja suuntasi elämässä.",
     support: "Löydä todellinen luontosi. Vapauta potentiaalisi. Elä vapaasti.",
     meta: "Dharma Coaching · 90 minuuttia · pilottihinta 125 € (sis. alv)",
     primaryCta: "Varaa 90 minuutin tapaaminen",
@@ -114,9 +114,9 @@ export const fi = {
         text: "Perehdymme yhteen keskeiseen rajoittavaan uskomukseen. Kyseenalaistamme sen paikkansapitävyyden, alkuperän ja seuraukset sekä siihen liittyvän samaistumisen.",
       },
       {
-        name: "Todellisen luonnon ja suunnan tutkiminen",
+        name: "Oman luonnon, dharman ja potentiaalin tutkiminen",
         minutes: 20,
-        text: "Tutkimme arvojasi, taipumuksiasi ja potentiaaliasi sekä sitä, mikä tuntuu elämässäsi merkitykselliseltä ja aidolta.",
+        text: "Tutkimme, mitkä ovat luontaisia ominaisuuksiasi, taipumuksiasi, kiinnostuksen kohteitasi ja vahvuuksiasi. Millainen toiminta tuntuu omalta? Mitä potentiaalia haluaisit ilmaista? Millainen voisi olla sinun tapasi osallistua maailmaan ja toteuttaa omaa tarkoitustasi?",
       },
       {
         name: "Yhteenveto ja integrointi",
@@ -138,7 +138,7 @@ export const fi = {
       "Haluat kohentaa minäkuvaasi myönteisemmäksi tai opetella positiivista ajattelua.",
     ],
     standalone:
-      "Yksi tapaaminen on itsenäinen ja merkityksellinen kokonaisuus. Se ei poista pelkoja, paranna traumoja eikä tuota pysyvää vapautta, mutta se antaa kysymyksiä ja näkökulmia, joiden tutkimista voit jatkaa itse.",
+      "Yksi tapaaminen on itsenäinen ja merkityksellinen kokonaisuus. Se ei paljasta koko Dharmaasi, poista rajoittavia uskomuksia pysyvästi, paranna traumoja eikä tuota pysyvää vapautta, mutta se antaa kysymyksiä ja näkökulmia, joiden tutkimista voit jatkaa itse.",
     note: "Dharma Coaching on ohjausta ja itsetutkiskelua. Se ei ole psykoterapiaa, hoitoa tai lääketieteellistä apua.",
     cta: "Varaa 90 minuutin tapaaminen",
     bookingTitle: "Näin varaat tapaamisen",
@@ -166,34 +166,70 @@ export const fi = {
     eyebrow: "Filosofinen perusta",
     title: "Mihin Dharma Coaching perustuu?",
     intro:
-      "Dharma Coaching on henkilökohtaisen ohjauksen ja itsetutkiskelun lähestymistapa. Sen pohjana on kolme lähdettä, joita ei tarvitse tuntea etukäteen.",
+      "Dharma Coaching on henkilökohtaisen ohjauksen ja itsetutkiskelun lähestymistapa. Se alkaa ehdollistuneen identiteetin purkamisesta ja etenee kohti oman luonnon, tarkoituksen ja potentiaalin ilmaisemista sekä vapautta. Pohjana on kolme lähdettä, joita ei tarvitse tuntea etukäteen.",
     sources: [
       {
         key: "vedanta",
         title: "Vedanta ja Advaita",
-        text: "Vedantassa ihmisen todellinen olemus, Atman, erotetaan siitä, mihin hän tavallisesti samaistuu: kehoon, ajatuksiin, rooleihin ja minäkuvaan. Itsetutkiskelussa ei kysytä, millainen minun pitäisi olla, vaan mikä on se ”minä”, jota pidän itsenäni.",
+        text: "Advaita Vedanta tutkii todellisen Itsen, Atmanin, luonnetta. Siinä Atman erotetaan siitä, mihin ihminen tavallisesti samaistuu: kehoon, ajatuksiin, rooleihin ja minäkuvaan. Itsetutkiskelussa ei kysytä, millainen minun pitäisi olla, vaan mikä on se ”minä”, jota pidän itsenäni.",
       },
       {
         key: "yoga",
         title: "Joogafilosofia",
-        text: "Patañjalin Joogasūtrat kuvaavat, miten kärsimystä ylläpitävät rakenteet syntyvät. Avidyā on tietämättömyys omasta todellisesta luonnosta ja asmitā samaistuminen minuuteen: ”minä olen tämä”. Yhdessä kiintymyksen, vastenmielisyyden ja menetyksen pelon kanssa ne ovat joogafilosofian kleśat.",
+        text: "Joogafilosofia tutkii ehdollistumista, samaistumista ja rakenteita, jotka ylläpitävät kärsimystä. Patañjalin Joogasūtrat kuvaavat, että avidyā on tietämättömyys omasta todellisesta luonnosta ja asmitā samaistuminen minuuteen: ”minä olen tämä”. Yhdessä kiintymyksen, vastenmielisyyden ja menetyksen pelon kanssa ne ovat joogafilosofian kleśat.",
       },
       {
         key: "purusharthas",
         title: "Neljä Puruṣārthaa",
-        text: "Bhagavan Shanmukhan tulkinnassa elämän neljä päämäärää ovat Dharma, Artha, Kāma ja Mokṣa. Ne kysyvät, mikä on todellinen luontosi, miten se voi ilmetä, mistä täyttymys syntyy ja mikä rajoittaa vapauttasi.",
+        text: "Bhagavan Shanmukhan tulkinta neljästä Puruṣārthasta antaa jäsennyksen yksilölliselle luonnolle, potentiaalille, autuudelle ja vapaudelle: Dharma, Artha, Kāma ja Mokṣa.",
       },
     ],
+    progression: {
+      title: "Dharma Coachingin eteneminen",
+      intro:
+        "Työskentely alkaa ehdollistuneen identiteetin purkamisesta. Sen jälkeen siirrytään kohti oman luonnon ymmärtämistä ja ilmaisemista sekä vapautta.",
+      steps: [
+        {
+          title: "Pura ehdollistunut identiteetti",
+          text: "Tunnista ja kyseenalaista rajoittavia uskomuksia, pelkoja, samaistumisia ja opittuja oletuksia.",
+        },
+        {
+          title: "Löydä yksilöllinen luontosi",
+          text: "Ymmärrä omat ominaisuutesi, taipumuksesi ja luontaiset piirteesi.",
+        },
+        {
+          title: "Ymmärrä Dharmasi",
+          text: "Tunnista oma luontosi, tarkoituksesi ja vastuusi osana laajempaa kokonaisuutta.",
+        },
+        {
+          title: "Löydä Arthasi",
+          text: "Tunnista ja ilmaise luontoosi sisältyvä potentiaali.",
+        },
+        {
+          title: "Ilmaise Kāmaa",
+          text: "Koe ja ilmaise luontaista autuutta, iloa ja täyttymystä.",
+        },
+        {
+          title: "Ymmärrä Mokṣa",
+          text: "Vapaus rajalliseen ja ehdollistuneeseen käsitykseen itsestä ja olemassaolosta.",
+        },
+      ],
+      note:
+        "Svabhāva tarkoittaa yksilön omaa luontoa ja svadharma omaa Dharmaa, eli tehtävää ja tarkoitusta, joka seuraa tämän luonnon ilmaisemisesta. Ne ovat tässä selittäviä käsitteitä, eivät Bhagavan Shanmukhan sanatarkkoja lainauksia.",
+    },
     distinction: {
-      title: "Identiteetti ja todellinen Itse",
+      title: "Identiteetti, Atman ja Dharma",
       leftTitle: "Psykologinen identiteetti",
       leftText:
         "Minäkuva, roolit, uskomukset, historia ja tarinat siitä, kuka olen. Se rakentuu elämän aikana, ja sitä voi tutkia, kyseenalaistaa ja muuttaa.",
-      rightTitle: "Atman, todellinen Itse",
+      rightTitle: "Atman, todellinen Itse (Advaita Vedantan näkökulma)",
       rightText:
-        "Vedantan mukaan Atman ei ole persoonallisuus, tunne tai minäkuva, eikä sitä voi parantaa tai rakentaa. Se on se, mikä tietää kaikki kokemukset ja pysyy samana, vaikka käsitykset itsestä vaihtuvat.",
+        "Advaita Vedantan mukaan Atman ei ole persoonallisuus, tunne tai minäkuva, eikä sitä voi parantaa tai rakentaa. Se on se, mikä tietää kaikki kokemukset ja pysyy samana, vaikka käsitykset itsestä vaihtuvat.",
+      relationTitle: "Atman ja Dharma eivät ole sama asia",
+      relationText:
+        "Atman liittyy syvempään filosofiseen kysymykseen todellisesta Itsestä, jota Advaita Vedanta tutkii. Dharma koskee sitä, miten yksilön oma luonto, tarkoitus ja potentiaali ilmenevät elämässä osana laajempaa kokonaisuutta. Käsitteet liittyvät toisiinsa, mutta Dharma Coaching ei samasta niitä keskenään.",
       closing:
-        "Siksi Dharma Coaching ei rakenna parempaa persoonallisuutta eikä myönteisempää minäkuvaa. Se tutkii, mitä identiteetti on ja miten sen alla oleva luontosi voi ilmetä arjessa.",
+        "Siksi Dharma Coaching ei rakenna parempaa persoonallisuutta eikä myönteisempää minäkuvaa. Se alkaa identiteetin tutkimisesta ja etenee kohti oman luonnon ilmaisemista arjessa.",
     },
     purusharthasTitle: "Neljä Puruṣārthaa",
     purusharthasIntro: "Bhagavan Shanmukhan tulkinnassa elämän neljä päämäärää ovat:",
@@ -202,31 +238,47 @@ export const fi = {
         key: "dharma",
         numeral: "I",
         name: "Dharma",
-        line: "Todellinen luontosi.",
-        text: "Se, mikä olet pohjimmiltasi, ennen kuin opitut käsitykset ja ehdollistuneet identiteetit peittävät sen.",
+        title: "Todellinen luontosi, tarkoituksesi ja tehtäväsi",
+        line: "Ihmisen yksilöllinen todellinen luonto ja sen mukainen tehtävä ja tarkoitus.",
+        paragraphs: [
+          "Dharma tarkoittaa oman luonnon tunnistamista ja sen täysipainoista ilmaisemista. Se liittyy siihen, millaisia ominaisuuksia, taipumuksia ja mahdollisuuksia ihmisessä on sekä siihen, mikä on hänen ainutlaatuinen tarkoituksensa osana laajempaa kokonaisuutta.",
+          "Kyse ei ole vain ulkoisesta velvollisuudesta, vaan oman luonnon mukaisesta tavasta elää ja toimia.",
+        ],
       },
       {
         key: "artha",
         numeral: "II",
         name: "Artha",
-        line: "Potentiaalisi ja resurssit sen ilmaisemiseen.",
-        text: "Kyvyt, taidot, työ ja arjen edellytykset, joiden kautta luontosi voi ilmetä.",
+        title: "Potentiaalisi ja resurssisi",
+        line: "Oman luonnon sisältämä potentiaali ja sen ilmaisemiseen tarvittavat resurssit.",
+        paragraphs: [
+          "Artha käsittää ihmisen kyvyt, taidot, mahdollisuudet ja käytännön edellytykset, joiden avulla hän voi toteuttaa omaa luontoaan elämässään.",
+        ],
       },
       {
         key: "kama",
         numeral: "III",
         name: "Kāma",
-        line: "Luontainen autuutesi, ilosi ja täyttymyksesi.",
-        text: "Sisäsyntyinen ilo ja täyttymys, ei pelkkä suoritusten tai olosuhteiden tuottama mielihyvä.",
+        title: "Luontainen autuutesi",
+        line: "Luontainen ilo, autuus ja täyttymys.",
+        paragraphs: [
+          "Bhagavan Shanmukhan tulkinnassa Kāma ei tarkoita pelkästään aistinautintoja tai halujen tyydyttämistä, vaan ihmisen luontaista oikeutta autuuteen. Se liittyy oman luonnon ja potentiaalin täysipainoiseen ilmaisemiseen.",
+        ],
       },
       {
         key: "moksha",
         numeral: "IV",
         name: "Mokṣa",
-        line: "Vapaus.",
-        text: "Vapaus ehdollistumisesta ja siitä, mikä rajoittaa olemistasi.",
+        title: "Vapaus",
+        line: "Vapaus rajalliseen ja ehdollistuneeseen käsitykseen itsestä ja olemassaolosta.",
+        paragraphs: [
+          "Dharma, Artha ja Kāma liittyvät Bhagavan Shanmukhan näkemyksessä olennaisesti Mokṣan toteutumiseen.",
+        ],
       },
     ],
+    natureTitle: "Oman luonnon löytäminen ei tarkoita kaikkien halujen seuraamista.",
+    natureText:
+      "Oman luonnon tunnistaminen ei tarkoita jokaisen halun seuraamista tai epämukavuuden välttämistä. Se tarkoittaa oman yksilöllisen luonnon, kykyjen, taipumusten ja tarkoituksen ymmärtämistä sekä niiden mukaista vastuullista elämistä osana laajempaa kokonaisuutta.",
     freedom:
       "Vapaus ei vaadi elämästä pakenemista. Tavoite ei ole paeta arkea vaan elää sitä vapaammin ja ilmaista omaa potentiaaliasi täydemmin.",
     stance:
@@ -261,6 +313,10 @@ export const fi = {
         title: "Samaistuminen ajatuksiin ja tarinoihin itsestä",
         text: "Ajatus ”minä olen tällainen” tuntuu faktalta, vaikka se on tarina, jota voi tutkia.",
       },
+      {
+        title: "Oman luonnon ja potentiaalin jääminen ilmaisematta",
+        text: "Ehdollistunut minäkuva ei vaikuta ainoastaan siihen, miten näet itsesi. Se voi myös estää sinua tunnistamasta omia kykyjäsi, taipumuksiasi, kiinnostuksen kohteitasi ja mahdollisuuksiasi. Saatat jättää toteuttamatta asioita, jotka ovat sinulle luontaisia, koska olet oppinut uskomaan, etteivät ne ole mahdollisia tai hyväksyttäviä.",
+      },
     ],
     closing:
       "Kun alat tutkia omia käsityksiäsi, voi avautua uusi näkökulma omaan elämääsi. Se, minkä luulit olevan rajasi, voi osoittautua opituksi tavaksi katsoa.",
@@ -271,8 +327,8 @@ export const fi = {
     title: "Dharma Coachingin taustalla",
     paragraphs: [
       "Olen ollut itse hukassa ja jumissa. Yritin käynnistää yritystä, joka ei tuntunut lainkaan omalta jutulta. Onneksi se ei lähtenyt käyntiin.",
-      "Dharma Coaching nojaa Vedantaan, joogafilosofiaan ja Bhagavan Shanmukhan tulkintaan neljästä Puruṣārthasta. Työskentelyssä yhdistyvät itsetutkiskelu, filosofinen syvyys ja käytännön soveltaminen arkeen.",
-      "Työtapa on kysyvä. En anna valmiita vastauksia siihen, kuka olet tai mikä on sinun suuntasi. Tutkimme kysymyksiä yhdessä, ja vastaukset löydät itse.",
+      "Minua kiinnostavat itsetutkiskelu ja kysymys siitä, mitä identiteetti oikeastaan on. Dharma Coaching nojaa Advaita Vedantaan, joogafilosofiaan ja Bhagavan Shanmukhan tulkintaan neljästä Puruṣārthasta. Vedanta ja joogafilosofia auttavat tutkimaan identiteettiä ja ehdollistumista, ja Puruṣārthat jäsentävät sitä, miten oma luonto, potentiaali, ilo ja vapaus voivat ilmetä elämässä.",
+      "Dharma Coachingin käytännön tarkoitus on auttaa sinua purkamaan rajoittavia käsityksiä ja löytämään oma luontosi, potentiaalisi ja tapasi ilmaista niitä arjessa. Työtapa on kysyvä: en anna valmiita vastauksia siihen, kuka olet tai mikä on sinun suuntasi. Tutkimme kysymyksiä yhdessä, ja vastaukset löydät itse.",
     ],
     notTitle: "Mitä Dharma Coaching ei ole",
     not: [

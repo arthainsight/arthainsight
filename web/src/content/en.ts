@@ -56,7 +56,7 @@ export const en: Content = {
     eyebrow: "From conditioning to freedom",
     title: "Who are you beneath everything you believe yourself to be?",
     lead:
-      "Explore your conditioned identity, question limiting beliefs and discover a deeper understanding of who you are.",
+      "Explore your conditioned identity, dismantle limiting beliefs and discover your own individual nature, potential and direction in life.",
     support: "Discover your true nature. Unlock your potential. Live freely.",
     meta: "Dharma Coaching · 90 minutes · pilot price €125 (incl. VAT)",
     primaryCta: "Book a 90-minute session",
@@ -113,9 +113,9 @@ export const en: Content = {
         text: "We investigate one central limiting belief. We question its validity, its origins and its implications, and the identification attached to it.",
       },
       {
-        name: "Exploring true nature and direction",
+        name: "Exploring your nature, Dharma and potential",
         minutes: 20,
-        text: "We explore your values, tendencies and potential, and what feels meaningful and authentic in your life.",
+        text: "We explore your inherent qualities, tendencies, interests and strengths. What kind of activity feels like your own? What potential would you like to express? What could be your way of taking part in the world and fulfilling your own purpose?",
       },
       {
         name: "Integration",
@@ -137,7 +137,7 @@ export const en: Content = {
       "You want to polish your self-image or learn positive thinking.",
     ],
     standalone:
-      "A single session is a complete and meaningful experience in itself. It does not remove fears, heal trauma or produce lasting freedom, but it gives you questions and perspectives that you can keep exploring on your own.",
+      "A single session is a complete and meaningful experience in itself. It does not reveal your whole Dharma, permanently remove limiting beliefs, heal trauma or produce lasting freedom, but it gives you questions and perspectives that you can keep exploring on your own.",
     note: "Dharma Coaching is guidance and self-inquiry. It is not psychotherapy, treatment or medical help.",
     cta: "Book a 90-minute session",
     bookingTitle: "How to book",
@@ -164,34 +164,70 @@ export const en: Content = {
     eyebrow: "Philosophical foundation",
     title: "What is Dharma Coaching based on?",
     intro:
-      "Dharma Coaching is an approach to personal coaching and self-inquiry. It rests on three sources, none of which you need to know beforehand.",
+      "Dharma Coaching is an approach to personal coaching and self-inquiry. It begins by dismantling conditioned identity and moves toward expressing your nature, purpose and potential, and toward freedom. It rests on three sources, none of which you need to know beforehand.",
     sources: [
       {
         key: "vedanta",
         title: "Vedanta and Advaita",
-        text: "In Vedanta, a person’s true nature, Atman, is distinguished from what they usually identify with: the body, thoughts, roles and self-image. Self-inquiry does not ask what kind of person I should be, but what this “I” is that I take myself to be.",
+        text: "Advaita Vedanta explores the nature of the true Self, Atman. It distinguishes Atman from what a person usually identifies with: the body, thoughts, roles and self-image. Self-inquiry does not ask what kind of person I should be, but what this “I” is that I take myself to be.",
       },
       {
         key: "yoga",
         title: "Yoga philosophy",
-        text: "Patañjali’s Yoga Sūtras describe how the structures that sustain suffering arise. Avidyā is ignorance of one’s true nature, and asmitā is identification with the sense of “I”: “I am this.” Together with attachment, aversion and fear of loss, they are the kleśas of Yoga philosophy.",
+        text: "Yoga philosophy explores conditioning, identification and the structures that sustain suffering. Patañjali’s Yoga Sūtras describe avidyā as ignorance of one’s true nature and asmitā as identification with the sense of “I”: “I am this.” Together with attachment, aversion and fear of loss, they are the kleśas of Yoga philosophy.",
       },
       {
         key: "purusharthas",
         title: "The four Puruṣārthas",
-        text: "In Bhagavan Shanmukha’s interpretation, the four aims of life are Dharma, Artha, Kāma and Mokṣa. They ask what your true nature is, how it can be expressed, where fulfilment comes from and what limits your freedom.",
+        text: "Bhagavan Shanmukha’s interpretation of the four Puruṣārthas gives a framework for individual nature, potential, bliss and freedom: Dharma, Artha, Kāma and Mokṣa.",
       },
     ],
+    progression: {
+      title: "How Dharma Coaching unfolds",
+      intro:
+        "The work begins by dismantling conditioned identity. From there it moves toward understanding and expressing your own nature, and toward freedom.",
+      steps: [
+        {
+          title: "Deconstruct conditioned identity",
+          text: "Identify and question limiting beliefs, fears, identifications and learned assumptions.",
+        },
+        {
+          title: "Discover your individual true nature",
+          text: "Understand your own qualities, tendencies and natural characteristics.",
+        },
+        {
+          title: "Understand your Dharma",
+          text: "Recognise your own nature, purpose and responsibility as part of the larger whole.",
+        },
+        {
+          title: "Discover your Artha",
+          text: "Recognise and express the potential inherent in your nature.",
+        },
+        {
+          title: "Express Kāma",
+          text: "Experience and express innate bliss, joy and fulfilment.",
+        },
+        {
+          title: "Understand Mokṣa",
+          text: "Freedom from a limited and conditioned idea of yourself and of existence.",
+        },
+      ],
+      note:
+        "Svabhāva means an individual’s own nature, and svadharma one’s own Dharma: the task and purpose that follow from expressing that nature. They are used here as explanatory concepts, not as direct quotations from Bhagavan Shanmukha.",
+    },
     distinction: {
-      title: "Identity and the true Self",
+      title: "Identity, Atman and Dharma",
       leftTitle: "Psychological identity",
       leftText:
         "Self-image, roles, beliefs, history and the stories of who I am. It is built over a lifetime, and it can be examined, questioned and changed.",
-      rightTitle: "Atman, the true Self",
+      rightTitle: "Atman, the true Self (the perspective of Advaita Vedanta)",
       rightText:
-        "According to Vedanta, Atman is not a personality, a feeling or a self-image, and it cannot be improved or built. It is that which knows every experience and remains the same while ideas about oneself change.",
+        "According to Advaita Vedanta, Atman is not a personality, a feeling or a self-image, and it cannot be improved or built. It is that which knows every experience and remains the same while ideas about oneself change.",
+      relationTitle: "Atman and Dharma are not the same thing",
+      relationText:
+        "Atman belongs to the deeper philosophical question of the true Self, which Advaita Vedanta explores. Dharma concerns how an individual’s own nature, purpose and potential are expressed in life as part of a larger whole. The concepts are related, but Dharma Coaching does not equate them.",
       closing:
-        "That is why Dharma Coaching does not build a better personality or a more positive self-image. It investigates what identity is and how the nature beneath it can be expressed in everyday life.",
+        "That is why Dharma Coaching does not build a better personality or a more positive self-image. It begins by examining identity and moves toward expressing your own nature in everyday life.",
     },
     purusharthasTitle: "The four Puruṣārthas",
     purusharthasIntro: "In Bhagavan Shanmukha’s interpretation, the four aims of life are:",
@@ -200,31 +236,47 @@ export const en: Content = {
         key: "dharma",
         numeral: "I",
         name: "Dharma",
-        line: "Your true nature.",
-        text: "What you are at your core, before learned ideas and conditioned identities cover it.",
+        title: "Your True Nature, Purpose & Duty",
+        line: "An individual’s true nature and the task and purpose that follow from it.",
+        paragraphs: [
+          "Dharma means recognising your own nature and expressing it fully. It relates to the qualities, tendencies and possibilities a person has, and to their unique purpose as part of a larger whole.",
+          "It is not only an external duty, but a way of living and acting that follows one’s own nature.",
+        ],
       },
       {
         key: "artha",
         numeral: "II",
         name: "Artha",
-        line: "Your potential and the resources to express it.",
-        text: "The abilities, skills, work and everyday conditions through which your nature can be expressed.",
+        title: "Your Potential & Resources",
+        line: "The potential within one’s nature and the resources needed to express it.",
+        paragraphs: [
+          "Artha covers a person’s abilities, skills, opportunities and practical conditions, through which they can live out their own nature in their life.",
+        ],
       },
       {
         key: "kama",
         numeral: "III",
         name: "Kāma",
-        line: "Your innate bliss, joy and fulfilment.",
-        text: "Inborn joy and fulfilment, not only the pleasure produced by achievements or circumstances.",
+        title: "Your Innate Bliss",
+        line: "Innate joy, bliss and fulfilment.",
+        paragraphs: [
+          "In Bhagavan Shanmukha’s interpretation, Kāma does not mean only sensual pleasure or the satisfaction of desires, but a person’s innate right to bliss. It is connected to the full expression of one’s nature and potential.",
+        ],
       },
       {
         key: "moksha",
         numeral: "IV",
         name: "Mokṣa",
-        line: "Freedom.",
-        text: "Freedom from conditioning and from whatever limits your being.",
+        title: "Freedom",
+        line: "Freedom from a limited and conditioned idea of oneself and of existence.",
+        paragraphs: [
+          "In Bhagavan Shanmukha’s view, Dharma, Artha and Kāma are essentially connected to the realisation of Mokṣa.",
+        ],
       },
     ],
+    natureTitle: "Discovering your nature does not mean following every desire.",
+    natureText:
+      "Recognising your nature does not mean following every desire or avoiding discomfort. It means understanding your own individual nature, abilities, tendencies and purpose, and living responsibly in accordance with them as part of a larger whole.",
     freedom:
       "Freedom does not require escaping life. The aim is not to run from everyday life but to live it more freely and to express your own potential more fully.",
     stance:
@@ -259,6 +311,10 @@ export const en: Content = {
         title: "Identifying with thoughts and stories about yourself",
         text: "The thought “I am like this” feels like a fact, even though it is a story you can examine.",
       },
+      {
+        title: "Your nature and potential going unexpressed",
+        text: "A conditioned self-image does not only affect how you see yourself. It can also stop you from recognising your own abilities, tendencies, interests and possibilities. You may leave undone things that are natural to you, because you have learned to believe they are not possible or acceptable.",
+      },
     ],
     closing:
       "When you begin to examine your own ideas, a new perspective on your life can open up. What you took to be your limit may turn out to be a learned way of looking.",
@@ -269,8 +325,8 @@ export const en: Content = {
     title: "Behind Dharma Coaching",
     paragraphs: [
       "I have been lost and stuck myself. I tried to start a business that did not feel like mine at all. Luckily it never took off.",
-      "Dharma Coaching draws on Vedanta, Yoga philosophy and Bhagavan Shanmukha’s interpretation of the four Puruṣārthas. The work combines self-inquiry, philosophical depth and practical application in everyday life.",
-      "The approach is one of questioning. I do not offer ready answers about who you are or what your direction is. We explore the questions together, and you find the answers yourself.",
+      "I am interested in self-inquiry and in the question of what identity actually is. Dharma Coaching draws on Advaita Vedanta, Yoga philosophy and Bhagavan Shanmukha’s interpretation of the four Puruṣārthas. Vedanta and Yoga philosophy help explore identity and conditioning, and the Puruṣārthas give a structure for how one’s own nature, potential, joy and freedom can be expressed in life.",
+      "The practical purpose of Dharma Coaching is to help you dismantle limiting ideas and discover your own nature, your potential and your way of expressing them in everyday life. The approach is one of questioning: I do not offer ready answers about who you are or what your direction is. We explore the questions together, and you find the answers yourself.",
     ],
     notTitle: "What Dharma Coaching is not",
     not: [

@@ -18,13 +18,16 @@ export function Obstacles() {
 
         <ul className="mt-16 grid gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {obstacles.items.map((item, i) => (
-            <li key={item.title}>
+            <li
+              key={item.title}
+              className={i === obstacles.items.length - 1 && obstacles.items.length % 3 === 1 ? "sm:col-span-2 lg:col-span-3" : ""}
+            >
               <Reveal delay={(i % 3) * 100} className="h-full border-t border-forest/25 pt-6">
                 <span aria-hidden="true" className="font-serif text-lg tracking-[0.18em] text-gold-deep">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-3 text-[1.55rem] leading-tight text-forest">{item.title}</h3>
-                <p className="mt-4 text-ink-soft">{item.text}</p>
+                <p className="mt-4 max-w-3xl text-ink-soft">{item.text}</p>
               </Reveal>
             </li>
           ))}
