@@ -11,10 +11,10 @@ export const fi = {
   /** Osioiden ankkuri-id:t. */
   ids: {
     home: "etusivu",
-    crossroads: "risteyskohta",
-    consultation: "konsultaatio",
+    questions: "kysymykset",
+    coaching: "dharma-coaching",
     philosophy: "filosofia",
-    obstacles: "esteet",
+    obstacles: "ehdollistuminen",
     about: "minusta",
     closing: "loppukutsu",
     contact: "ota-yhteytta",
@@ -23,8 +23,8 @@ export const fi = {
 
   nav: [
     { key: "home", label: "Etusivu" },
+    { key: "coaching", label: "Dharma Coaching" },
     { key: "philosophy", label: "Filosofia" },
-    { key: "consultation", label: "Konsultaatio" },
     { key: "about", label: "Minusta" },
     { key: "contact", label: "Ota yhteyttä" },
   ],
@@ -45,7 +45,7 @@ export const fi = {
   },
 
   footer: {
-    tagline: "Oma suunta, oma luonto, oma tie.",
+    tagline: "Ehdollistumisesta vapauteen.",
     siteHeading: "Sivusto",
     followHeading: "Seuraa",
     contactHeading: "Yhteys",
@@ -54,108 +54,177 @@ export const fi = {
   },
 
   hero: {
-    title: "Elätkö omaa elämääsi – vai elämää, jonka olet oppinut uskomaan omaksesi?",
+    eyebrow: "Ehdollistumisesta vapauteen",
+    title: "Kuka sinä olet kaiken sen alla, minkä uskot itsestäsi olevasi?",
     lead:
-      "Sinulla on oma luontosi, omat arvosi ja potentiaalisi. Mutta pelot, uskomukset ja muiden odotukset voivat ohjata sinua suuntaan, joka ei tunnu omalta.",
-    support: "Artha Insight auttaa sinua pysähtymään, näkemään syvemmin ja löytämään oman suuntasi.",
-    primaryCta: "Tutustu konsultaatioon",
-    secondaryCta: "Tutustu filosofiaan",
+      "Tutki ehdollistunutta identiteettiäsi, kyseenalaista rajoittavia uskomuksia ja löydä syvempi ymmärrys siitä, kuka olet.",
+    support: "Löydä todellinen luontosi. Vapauta potentiaalisi. Elä vapaasti.",
+    meta: "Dharma Coaching · 90 minuuttia · pilottihinta 125 €",
+    primaryCta: "Varaa 90 minuutin tapaaminen",
+    secondaryCta: "Tutustu Dharma Coachingiin",
   },
 
-  crossroads: {
-    eyebrow: "Kun elämä on risteyskohdassa",
-    title: "Joskus tiedät, ettei nykyinen suunta ole enää oikea. Mutta et vielä tiedä, mikä on sinun suuntasi.",
-    intro: "Ehkä tunnistat jotain näistä:",
-    points: [
-      "Nykyinen työ ei tunnu omalta.",
-      "Elämä näyttää ulkoisesti hyvältä, mutta sisältä puuttuu merkitys.",
-      "Haluat muutosta, mutta pelkäät sen seurauksia.",
-      "Et tiedä, mikä on oma halusi ja mikä muiden odotusta.",
-      "Kaipaat selkeyttä ennen seuraavaa suurta päätöstä.",
+  questions: {
+    eyebrow: "Kysymyksiä itsellesi",
+    title: "Mitä jos kysyisit ensin näitä?",
+    items: [
+      "Kuka sinä olet ilman uskomuksiasi?",
+      "Elätkö omaa elämääsi vai muiden odotuksia?",
+      "Entä jos identiteetti, jota puolustat, onkin jotain, minkä olet oppinut uskomaan?",
+      "Kertovatko ajatuksesi sinulle totuuden?",
+      "Mikä muuttuisi, jos lakkaisit samaistumasta kaikkeen, mitä ajattelet ja tunnet?",
+      "Oletko tulossa siksi, mikä todella olet, vai yritätkö tulla siksi, minkä uskot sinun pitäisi olla?",
     ],
     situations:
-      "Risteyskohta näyttää jokaiselle erilaiselta. Se voi olla pohdintaa ura- tai ammatinvaihdosta, arvojesi kanssa ristiriidassa oleva työ, suuri elämänmuutos tai kysymys parisuhteesta ja ihmissuhteista. Joskus tiedät vain, ettei nykyinen tilanne voi jatkua, vaikka et vielä tiedä, mitä pitäisi tehdä.",
+      "Moni hakeutuu itsetutkiskeluun elämän risteyskohdassa: työ ei tunnu omalta, elämä näyttää päältä hyvältä mutta sisältä puuttuu merkitys, tai haluat muutosta mutta pelkäät sen seurauksia. Taustalla on usein kysymys, jota ei ole vielä esitetty: kuka olen, kun en ole kaikki nämä käsitykset?",
     closing:
-      "Ehkä sinun ei tarvitse löytää uutta vastausta heti. Ehkä sinun täytyy ensin nähdä selkeämmin, mistä käsin olet tähän asti elänyt.",
+      "Tavoite ei ole rakentaa parempaa persoonallisuutta tai myönteisempää minäkuvaa. Tavoite on tutkia, mitä identiteetti oikeastaan on ja mikä sinussa on sen alla.",
   },
 
-  consultation: {
-    eyebrow: "Konsultaatio",
-    name: "Oman dharman äärelle",
-    subtitle: "90 minuutin henkilökohtainen konsultaatio",
-    intro:
-      "Kun olet elämäsi risteyskohdassa, voi olla vaikea erottaa, mitä todella haluat ja mitä olet oppinut haluamaan.",
-    body:
-      "Konsultaatiossa tutkimme yhdessä elämäntilannettasi, arvojasi, luontaista olemustasi, potentiaaliasi ja niitä sisäisiä tekijöitä, jotka vaikuttavat valintoihisi.",
-    topicsTitle: "Käsittelemme",
-    topics: [
-      "Nykyistä elämäntilannettasi ja risteyskohtaasi.",
-      "Omia arvojasi ja todellisia halujasi.",
-      "Identiteettiäsi, uskomuksiasi ja pelkojasi.",
-      "Luontaista potentiaaliasi ja omaa suuntaasi.",
-      "Seuraavaa konkreettista askelta.",
+  coaching: {
+    eyebrow: "Dharma Coaching",
+    name: "Dharma Coaching",
+    subtitle: "90 minuutin henkilökohtainen tapaaminen",
+    leadQuestion: "Kuka sinä olet ilman kaikkia uskomuksiasi?",
+    paragraphs: [
+      "Olemme elämämme aikana omaksuneet lukemattomia käsityksiä siitä, keitä olemme, millaisia meidän pitäisi olla ja mitä voimme elämässämme saavuttaa.",
+      "Osa näistä käsityksistä voi rajoittaa elämäämme huomaamattamme. Ne vaikuttavat siihen, miten näemme itsemme, miten käyttäydymme ja millaisia valintoja teemme.",
+      "Dharma Coaching on henkilökohtainen ohjaustapaaminen, jossa tutkimme näitä käsityksiä ja niiden vaikutusta elämääsi.",
+      "Tapaamisessa keskitymme yhteen sinulle merkitykselliseen kysymykseen tai haasteeseen. Tutkimme sen taustalla olevia uskomuksia, pelkoja ja samaistumisia sekä kyseenalaistamme niitä yhdessä.",
+      "Työskentelyn filosofisena perustana ovat Vedanta, joogafilosofia ja Bhagavan Shanmukhan näkemys neljästä Puruṣārthasta: Dharmasta, Arthasta, Kāmasta ja Mokṣasta.",
+      "Tavoitteena on syventää ymmärrystä itsestäsi, tunnistaa omaa elämääsi rajoittavia käsityksiä ja löytää uusia näkökulmia siihen, miten voisit elää enemmän oman luontosi mukaisesti.",
     ],
-    noAnswersNeeded: "Sinun ei tarvitse tulla tapaamiseen valmiiden vastausten kanssa.",
-    summary:
-      "Konsultaation jälkeen saat henkilökohtaisen kirjallisen yhteenvedon keskeisistä oivalluksista ja seuraavista askelista.",
-    cta: "Varaa oma konsultaatiosi",
-    note: "Konsultaatio ei ole terapiaa eikä korvaa lääketieteellistä hoitoa.",
+    philosophyLink: "Lue lisää filosofisesta perustasta",
+    stagesTitle: "Tapaamisen viisi vaihetta",
+    minutesUnit: "min",
+    stages: [
+      {
+        name: "Alkukartoitus",
+        minutes: 10,
+        text: "Selvitämme nykyisen tilanteesi, haasteesi ja kysymyksen, jota haluat tutkia.",
+      },
+      {
+        name: "Identiteetin tutkiminen",
+        minutes: 20,
+        text: "Tutkimme minäkuvaasi, oletuksiasi ja uskomuksiasi sekä sitä, miten ne vaikuttavat tunteisiisi, päätöksiisi ja käyttäytymiseesi.",
+      },
+      {
+        name: "Rajoittavien uskomusten purkaminen",
+        minutes: 30,
+        text: "Perehdymme yhteen keskeiseen rajoittavaan uskomukseen. Kyseenalaistamme sen paikkansapitävyyden, alkuperän ja seuraukset sekä siihen liittyvän samaistumisen.",
+      },
+      {
+        name: "Todellisen luonnon ja suunnan tutkiminen",
+        minutes: 20,
+        text: "Tutkimme arvojasi, taipumuksiasi ja potentiaaliasi sekä sitä, mikä tuntuu elämässäsi merkitykselliseltä ja aidolta.",
+      },
+      {
+        name: "Yhteenveto ja integrointi",
+        minutes: 10,
+        text: "Kokoamme oivallukset yhteen ja tunnistamme käytännön kysymyksiä tai askelia jatkotutkiskelua varten.",
+      },
+    ],
+    suitableTitle: "Kenelle tämä sopii",
+    suitable: [
+      "Haluat tutkia yhtä sinulle merkityksellistä kysymystä tai haastetta, joka liittyy esimerkiksi työhön, valintoihin tai omaan identiteettiisi.",
+      "Olet valmis kyseenalaistamaan omia oletuksiasi, vaikka se tuntuisi epämukavalta.",
+      "Kaipaat kysymyksiä ja uusia näkökulmia etkä valmista vastausta.",
+      "Et tarvitse aiempaa tietoa Vedantasta tai sanskritista.",
+    ],
+    notSuitableTitle: "Kenelle tämä ei sovi",
+    notSuitable: [
+      "Tarvitset psykoterapiaa, hoitoa tai kriisiapua. Dharma Coaching ei korvaa niitä.",
+      "Odotat yhdeltä tapaamiselta nopeaa ratkaisua, paranemista tai pysyvää muutosta.",
+      "Haluat kohentaa minäkuvaasi myönteisemmäksi tai opetella positiivista ajattelua.",
+    ],
+    standalone:
+      "Yksi tapaaminen on itsenäinen ja merkityksellinen kokonaisuus. Se ei poista pelkoja, paranna traumoja eikä tuota pysyvää vapautta, mutta se antaa kysymyksiä ja näkökulmia, joiden tutkimista voit jatkaa itse.",
+    note: "Dharma Coaching on ohjausta ja itsetutkiskelua. Se ei ole psykoterapiaa, hoitoa tai lääketieteellistä apua.",
+    cta: "Varaa 90 minuutin tapaaminen",
     detailLabels: {
       duration: "Kesto",
       price: "Hinta",
-      summary: "Mukana",
+      format: "Muoto",
     },
-    summaryDetail: "Henkilökohtainen kirjallinen yhteenveto",
+    formatValue: "Yksilötapaaminen",
+    priceNote: "Pilottihinta",
     placeholderDuration: "[Kesto]",
     placeholderPrice: "[Lisää hinta]",
   },
 
   philosophy: {
-    eyebrow: "Filosofia",
-    title: "Elämä ei ole vain selviytymistä. Se on oman luonnon ja potentiaalin toteuttamista.",
+    eyebrow: "Filosofinen perusta",
+    title: "Mihin Dharma Coaching perustuu?",
     intro:
-      "Artha Insightin filosofinen perusta on neljä puruṣārthaa, intialaisen ajattelun mukaiset elämän neljä päämäärää.",
-    quote: "”Oma dharma on parempi kuin toisen dharma.”",
-    quoteSource: "Bhagavadgītā 3.35",
-    dharmaNote: "Dharma ei tarkoita helpointa tietä. Se tarkoittaa omaa tietä.",
+      "Dharma Coaching on henkilökohtaisen ohjauksen ja itsetutkiskelun lähestymistapa. Sen pohjana on kolme lähdettä, joita ei tarvitse tuntea etukäteen.",
+    sources: [
+      {
+        key: "vedanta",
+        title: "Vedanta ja Advaita",
+        text: "Vedantassa ihmisen todellinen olemus, Atman, erotetaan siitä, mihin hän tavallisesti samaistuu: kehoon, ajatuksiin, rooleihin ja minäkuvaan. Itsetutkiskelussa ei kysytä, millainen minun pitäisi olla, vaan mikä on se ”minä”, jota pidän itsenäni.",
+      },
+      {
+        key: "yoga",
+        title: "Joogafilosofia",
+        text: "Patañjalin Joogasūtrat kuvaavat, miten kärsimystä ylläpitävät rakenteet syntyvät. Avidyā on tietämättömyys omasta todellisesta luonnosta ja asmitā samaistuminen minuuteen: ”minä olen tämä”. Yhdessä kiintymyksen, vastenmielisyyden ja menetyksen pelon kanssa ne ovat joogafilosofian kleśat.",
+      },
+      {
+        key: "purusharthas",
+        title: "Neljä Puruṣārthaa",
+        text: "Bhagavan Shanmukhan tulkinnassa elämän neljä päämäärää ovat Dharma, Artha, Kāma ja Mokṣa. Ne kysyvät, mikä on todellinen luontosi, miten se voi ilmetä, mistä täyttymys syntyy ja mikä rajoittaa vapauttasi.",
+      },
+    ],
+    distinction: {
+      title: "Identiteetti ja todellinen Itse",
+      leftTitle: "Psykologinen identiteetti",
+      leftText:
+        "Minäkuva, roolit, uskomukset, historia ja tarinat siitä, kuka olen. Se rakentuu elämän aikana, ja sitä voi tutkia, kyseenalaistaa ja muuttaa.",
+      rightTitle: "Atman, todellinen Itse",
+      rightText:
+        "Vedantan mukaan Atman ei ole persoonallisuus, tunne tai minäkuva, eikä sitä voi parantaa tai rakentaa. Se on se, mikä tietää kaikki kokemukset ja pysyy samana, vaikka käsitykset itsestä vaihtuvat.",
+      closing:
+        "Siksi Dharma Coaching ei rakenna parempaa persoonallisuutta eikä myönteisempää minäkuvaa. Se tutkii, mitä identiteetti on ja miten sen alla oleva luontosi voi ilmetä arjessa.",
+    },
+    purusharthasTitle: "Neljä Puruṣārthaa",
+    purusharthasIntro: "Bhagavan Shanmukhan tulkinnassa elämän neljä päämäärää ovat:",
     items: [
       {
         key: "dharma",
         numeral: "I",
         name: "Dharma",
-        line: "Tunnista oma luontosi.",
-        text: "Oman todellisen luonnon ja elämänsuunnan tunnistaminen. Ei sitä, mitä sinulta odotetaan, vaan sitä, mikä sinussa on jo.",
+        line: "Todellinen luontosi.",
+        text: "Se, mikä olet pohjimmiltasi, ennen kuin opitut käsitykset ja ehdollistuneet identiteetit peittävät sen.",
       },
       {
         key: "artha",
         numeral: "II",
         name: "Artha",
-        line: "Toteuta potentiaalisi.",
-        text: "Oman potentiaalin toteuttaminen ja sen edellytysten rakentaminen: työ, resurssit ja arki, jotka kantavat omaa suuntaasi.",
+        line: "Potentiaalisi ja resurssit sen ilmaisemiseen.",
+        text: "Kyvyt, taidot, työ ja arjen edellytykset, joiden kautta luontosi voi ilmetä.",
       },
       {
         key: "kama",
         numeral: "III",
         name: "Kāma",
-        line: "Elä elämän täyteyttä ja luontaista autuutta.",
-        text: "Luontainen ilo ja elämän täyteys. Se, mikä liikuttaa sinua sisäpuolelta, ei vain velvollisuudesta.",
+        line: "Luontainen autuutesi, ilosi ja täyttymyksesi.",
+        text: "Sisäsyntyinen ilo ja täyttymys, ei pelkkä suoritusten tai olosuhteiden tuottama mielihyvä.",
       },
       {
         key: "moksha",
         numeral: "IV",
         name: "Mokṣa",
-        line: "Vapaudu siitä, mikä rajoittaa olemistasi.",
-        text: "Vapautuminen sisäisistä rajoitteista ja karmallisista sidonnaisuuksista.",
+        line: "Vapaus.",
+        text: "Vapaus ehdollistumisesta ja siitä, mikä rajoittaa olemistasi.",
       },
     ],
     freedom:
-      "Ihmisen ei tarvitse paeta elämää löytääkseen vapautumisen. Hän voi toteuttaa omaa luontoaan, potentiaaliaan ja elämäänsä kokonaisvaltaisesti.",
+      "Vapaus ei vaadi elämästä pakenemista. Tavoite ei ole paeta arkea vaan elää sitä vapaammin ja ilmaista omaa potentiaaliasi täydemmin.",
     stance:
-      "Artha Insight ei kerro sinulle, mikä on sinun dharmasi. Se on sinun omasi. Artha Insight auttaa sinua löytämään omat vastauksesi ja tutkimaan, elätkö oman luontosi mukaisesti vai ohjaavatko elämääsi pelot, uskomukset, muiden odotukset ja omaksuttu identiteetti.",
+      "Dharma Coaching ei kerro sinulle, kuka olet. Tutkiminen tapahtuu sinun omassa kokemuksessasi: ohjaus antaa kysymykset ja näkökulmat, mutta vastaukset löydät itse.",
   },
 
   obstacles: {
-    eyebrow: "Mikä estää sinua elämästä omaa elämääsi?",
+    eyebrow: "Miten ehdollistuminen näkyy arjessa?",
     title: "Et välttämättä ole se, joksi olet oppinut itsesi määrittelemään.",
     items: [
       {
@@ -189,23 +258,32 @@ export const fi = {
 
   about: {
     eyebrow: "Minusta",
-    title: "Artha Insightin tausta",
-    placeholderTitle: "Tähän tulee oma tarinasi",
-    placeholderHint:
-      "Tämä on muokattava tekstipaikka. Kirjoita tähän omin sanoin, mikä on sinun filosofiasi, mitä olet elämässäsi kokenut ja miksi haluat auttaa ihmisiä löytämään oman suuntansa. Lisää tekstit tiedostoon src/config/site.ts (founder.paragraphs) ja kuva kansioon public/.",
-    imagePlaceholder: "Kuvan paikka",
+    title: "Dharma Coachingin taustalla",
+    paragraphs: [
+      "Olen ollut itse hukassa ja jumissa. Yritin käynnistää yritystä, joka ei tuntunut lainkaan omalta jutulta. Onneksi se ei lähtenyt käyntiin.",
+      "Dharma Coaching nojaa Vedantaan, joogafilosofiaan ja Bhagavan Shanmukhan tulkintaan neljästä Puruṣārthasta. Työskentelyssä yhdistyvät itsetutkiskelu, filosofinen syvyys ja käytännön soveltaminen arkeen.",
+      "Työtapa on kysyvä. En anna valmiita vastauksia siihen, kuka olet tai mikä on sinun suuntasi. Tutkimme kysymyksiä yhdessä, ja vastaukset löydät itse.",
+    ],
+    notTitle: "Mitä Dharma Coaching ei ole",
+    not: [
+      "Psykoterapiaa, hoitoa tai kriisiapua.",
+      "Valmiiden vastausten antamista siihen, kuka olet.",
+      "Persoonallisuuden tai minäkuvan kohentamista.",
+      "Lupausta pysyvästä muutoksesta tai vapaudesta yhdessä tapaamisessa.",
+    ],
+    philosophyLink: "Lue filosofisesta perustasta",
   },
 
   closing: {
-    title: "Oma dharmasi ei välttämättä ole helpoin tie. Mutta se on sinun tiesi.",
-    text: "Jos tunnet olevasi elämäsi risteyskohdassa, ehkä nyt on oikea hetki pysähtyä tutkimaan, mikä on sinulle todella omaa.",
-    cta: "Ota askel kohti omaa suuntaasi",
+    title: "Oletko tulossa siksi, mikä todella olet – vai yritätkö tulla siksi, minkä uskot sinun pitäisi olla?",
+    text: "Varaa 90 minuutin Dharma Coaching -tapaaminen ja tutki rauhassa yhtä sinulle merkityksellistä kysymystä.",
+    cta: "Varaa 90 minuutin tapaaminen",
   },
 
   contact: {
     eyebrow: "Ota yhteyttä",
-    title: "Kirjoita, mikä sinulle on nyt ajankohtaista.",
-    text: "Voit kysyä konsultaatiosta, kuvata lyhyesti tilannettasi tai sopia ajan. Valmiita vastauksia ei tarvita.",
+    title: "Kysy tai sovi tapaaminen.",
+    text: "Voit kysyä, sopiiko Dharma Coaching sinulle, kuvata lyhyesti kysymystä, jota haluaisit tutkia, tai sopia ajan. Valmista kysymystä ei tarvita.",
     labels: {
       name: "Nimi",
       email: "Sähköpostiosoitteesi",
@@ -219,7 +297,7 @@ export const fi = {
     bookingLead: "Tai varaa aika suoraan:",
     /** {email} korvataan sähköpostiosoitteella. */
     opened: "Sähköpostiohjelmasi pitäisi avautua. Jos näin ei käy, kirjoita osoitteeseen {email}.",
-    mailSubject: "Yhteydenotto: Artha Insight",
+    mailSubject: "Yhteydenotto: Dharma Coaching",
     mailName: "Nimi",
     mailEmail: "Sähköposti",
   },

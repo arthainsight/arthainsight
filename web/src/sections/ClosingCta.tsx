@@ -1,4 +1,5 @@
 import { useContent } from "../i18n";
+import { getBooking } from "../config/site";
 import { Horizon } from "../components/art/Horizon";
 import { Button } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
@@ -7,6 +8,7 @@ import { Reveal } from "../components/ui/Reveal";
 export function ClosingCta() {
   const c = useContent();
   const closing = c.closing;
+  const booking = getBooking(c.ids.contact);
   return (
     <section
       id={c.ids.closing}
@@ -26,7 +28,7 @@ export function ClosingCta() {
           </h2>
           <p className="mx-auto mt-8 max-w-2xl text-[1.08rem] leading-relaxed text-paper/88 md:text-lg">{closing.text}</p>
           <div className="mt-10 flex justify-center">
-            <Button href={`#${c.ids.contact}`} variant="light">
+            <Button href={booking.href} variant="light" external={booking.external}>
               {closing.cta}
             </Button>
           </div>

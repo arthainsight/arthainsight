@@ -4,12 +4,12 @@ import type { Lang } from "./content";
 import { ContentProvider, useContent } from "./i18n";
 import { About } from "./sections/About";
 import { ClosingCta } from "./sections/ClosingCta";
-import { Consultation } from "./sections/Consultation";
+import { Coaching } from "./sections/Coaching";
 import { Contact } from "./sections/Contact";
-import { Crossroads } from "./sections/Crossroads";
 import { Hero } from "./sections/Hero";
 import { Obstacles } from "./sections/Obstacles";
 import { Philosophy } from "./sections/Philosophy";
+import { Questions } from "./sections/Questions";
 
 function Page() {
   const c = useContent();
@@ -21,8 +21,8 @@ function Page() {
       <Header />
       <main id={c.ids.main} tabIndex={-1} className="outline-none">
         <Hero />
-        <Crossroads />
-        <Consultation />
+        <Questions />
+        <Coaching />
         <Philosophy />
         <Obstacles />
         <About />

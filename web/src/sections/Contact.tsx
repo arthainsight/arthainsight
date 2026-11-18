@@ -83,7 +83,7 @@ export function Contact() {
                   {...(booking.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="text-forest underline decoration-gold underline-offset-4"
                 >
-                  {c.consultation.name}
+                  {c.coaching.name}
                 </a>
               </p>
             )}

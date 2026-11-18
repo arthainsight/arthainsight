@@ -15,9 +15,11 @@ const panelStyles: Record<PurusharthaKey, { bg: string; text: string; sub: strin
 export function Philosophy() {
   const c = useContent();
   const philosophy = c.philosophy;
+  const d = philosophy.distinction;
   return (
     <section id={c.ids.philosophy} aria-labelledby="philosophy-title" className="bg-paper">
-      <Container className="pb-20 pt-24 md:pb-28 md:pt-36">
+      {/* Johdanto */}
+      <Container className="pb-16 pt-24 md:pb-20 md:pt-36">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <Reveal>
@@ -35,7 +37,50 @@ export function Philosophy() {
         </div>
       </Container>
 
-      {/* Neljä päämäärää */}
+      {/* Kolme lähdettä */}
+      <Container className="pb-20 md:pb-28">
+        <ul className="grid gap-x-12 gap-y-12 md:grid-cols-3">
+          {philosophy.sources.map((source, i) => (
+            <li key={source.key}>
+              <Reveal delay={i * 100} className="h-full border-t border-forest/25 pt-6">
+                <h3 className="text-[1.6rem] leading-tight text-forest">{source.title}</h3>
+                <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-soft">{source.text}</p>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+      </Container>
+
+      {/* Identiteetti ja todellinen Itse */}
+      <div className="bg-paper-deep">
+        <Container className="py-20 md:py-28">
+          <Reveal>
+            <h3 className="max-w-2xl text-[1.9rem] text-forest md:text-[2.4rem]">{d.title}</h3>
+          </Reveal>
+          <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-0">
+            <Reveal className="md:border-r md:border-forest/20 md:pr-12">
+              <h4 className="font-sans text-[0.78rem] font-medium uppercase tracking-[0.26em] text-ink-soft">{d.leftTitle}</h4>
+              <p className="mt-5 font-serif text-[1.45rem] leading-snug text-forest md:text-[1.6rem]">{d.leftText}</p>
+            </Reveal>
+            <Reveal delay={120} className="md:pl-12">
+              <h4 className="font-sans text-[0.78rem] font-medium uppercase tracking-[0.26em] text-gold-deep">{d.rightTitle}</h4>
+              <p className="mt-5 font-serif text-[1.45rem] leading-snug text-forest md:text-[1.6rem]">{d.rightText}</p>
+            </Reveal>
+          </div>
+          <Reveal className="mt-14 max-w-3xl">
+            <p className="border-l border-gold pl-6 leading-relaxed text-ink">{d.closing}</p>
+          </Reveal>
+        </Container>
+      </div>
+
+      {/* Neljä Puruṣārthaa */}
+      <Container className="pb-10 pt-20 md:pt-28">
+        <Reveal className="max-w-2xl">
+          <h3 className="text-[1.9rem] text-forest md:text-[2.4rem]">{philosophy.purusharthasTitle}</h3>
+          <p className="mt-4 text-ink-soft">{philosophy.purusharthasIntro}</p>
+        </Reveal>
+      </Container>
+
       <div className="grid sm:grid-cols-2 lg:grid-cols-4">
         {philosophy.items.map((item, i) => {
           const s = panelStyles[item.key as PurusharthaKey];
@@ -57,7 +102,7 @@ export function Philosophy() {
               </div>
 
               <div className="mt-16">
-                <h3 className="text-[2.1rem] uppercase tracking-[0.14em] md:text-[2.3rem]">{item.name}</h3>
+                <h4 className="text-[2.1rem] uppercase tracking-[0.14em] md:text-[2.3rem]">{item.name}</h4>
                 <p className={`mt-4 font-serif text-[1.45rem] italic leading-snug ${s.accent}`}>{item.line}</p>
                 <p className={`mt-6 text-[0.98rem] leading-relaxed ${s.sub}`}>{item.text}</p>
               </div>
@@ -67,24 +112,14 @@ export function Philosophy() {
       </div>
 
       <Container className="py-20 md:py-28">
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-6">
-            <figure>
-              <blockquote>
-                <p className="font-serif text-[1.9rem] italic leading-[1.3] text-forest md:text-[2.4rem]">
-                  {philosophy.quote}
-                </p>
-              </blockquote>
-              <figcaption className="mt-5 text-[0.8rem] uppercase tracking-[0.24em] text-gold-deep">
-                {philosophy.quoteSource}
-              </figcaption>
-            </figure>
-            <p className="mt-8 max-w-md text-lg text-ink">{philosophy.dharmaNote}</p>
+            <p className="font-serif text-[1.7rem] italic leading-[1.35] text-forest md:text-[2.1rem]">
+              {philosophy.freedom}
+            </p>
           </Reveal>
-
-          <Reveal delay={120} className="lg:col-span-6">
-            <p className="text-lg leading-relaxed text-ink">{philosophy.freedom}</p>
-            <p className="mt-6 border-l border-gold pl-6 leading-relaxed text-ink-soft">{philosophy.stance}</p>
+          <Reveal delay={120} className="lg:col-span-6 lg:pt-3">
+            <p className="border-l border-gold pl-6 leading-relaxed text-ink-soft">{philosophy.stance}</p>
           </Reveal>
         </div>
       </Container>

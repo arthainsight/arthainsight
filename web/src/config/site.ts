@@ -11,20 +11,17 @@ export const site = {
   email: "riku.forsell@gmail.com",
 
   /**
-   * Ajanvarauslinkki, esimerkiksi Calendlyn tai muun varauspalvelun osoite.
-   * Kun tämä on tyhjä, kaikki "Varaa"-painikkeet vievät yhteydenottolomakkeelle.
-   * Esim. "https://calendly.com/tahan-oma-linkki"
+   * Ajanvarauslinkki. Tämä on alkuperäiseltä verkkosivulta peräisin oleva Calendly-profiili.
+   * Varmista, että Calendlyssä on 90 minuutin Dharma Coaching -tapahtuma (tai vaihda tähän suoraan
+   * sen tapahtuman linkki). Kun tämä on tyhjä, kaikki "Varaa"-painikkeet vievät yhteydenottolomakkeelle.
    */
-  bookingUrl: "",
+  bookingUrl: "https://calendly.com/riku-forsell",
 
-  consultation: {
-    /** Kesto kielittäin. Palvelun nimi on kielitiedostoissa (src/content). */
+  coaching: {
+    /** Kesto kielittäin. Palvelun nimi ja kuvaus ovat kielitiedostoissa (src/content). */
     duration: { fi: "90 minuuttia", en: "90 minutes" },
-    /**
-     * Hinta kielittäin, esim. fi: "290 € (sis. alv)" ja en: "€290 (incl. VAT)".
-     * Tyhjänä näytetään paikkamerkki.
-     */
-    price: { fi: "", en: "" },
+    /** Pilottihinta kielittäin. Tyhjänä näytetään paikkamerkki. */
+    price: { fi: "125 €", en: "€125" },
   },
 
   founder: {
@@ -34,14 +31,9 @@ export const site = {
      * Kuva perustajasta. Lisää kuva kansioon public/ ja kirjoita tähän tiedostonimi,
      * esim. "riku.jpg". Tyhjänä näytetään kuvan paikkamerkki.
      */
-    image: "",
+    image: "riku.jpg",
     /** Kuvan vaihtoehtoinen teksti, kun kuva on lisätty. */
     imageAlt: "Riku Forsell",
-    /**
-     * Minusta-osion tekstikappaleet kielittäin. Yksi merkkijono = yksi kappale.
-     * Tyhjänä näytetään muokattava tekstipaikka.
-     */
-    paragraphs: { fi: [] as string[], en: [] as string[] },
   },
 
   /** Somekanavat. Vaihda tai poista rivejä tarpeen mukaan. */

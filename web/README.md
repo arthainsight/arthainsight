@@ -20,20 +20,18 @@ npm run preview    # esikatselee tuotantoversiota
 | --- | --- |
 | Suomenkieliset tekstit | `src/content/fi.ts` |
 | Englanninkieliset tekstit | `src/content/en.ts` (sama rakenne kuin fi.ts) |
-| Hinta, kesto, ajanvarauslinkki, sähköposti, somelinkit, Minusta-tekstit ja -kuva | `src/config/site.ts` |
+| Hinta, kesto, ajanvarauslinkki, sähköposti, somelinkit, Minusta-kuva ja -nimi | `src/config/site.ts` |
 | Värit ja fontit | `src/index.css` (`@theme`-lohko) |
 | Logo | `public/logo.png` (koko logo) ja `public/logo-mark.png` (pelkkä lootus) |
 | Maisemakuvitus | `src/components/art/Horizon.tsx` |
 | Sivun otsikko, kuvaus ja Open Graph | `index.html` (suomi) ja `en/index.html` (englanti) |
 
-### Paikkamerkit, jotka pitää täyttää
+### Asetukset, jotka kannattaa tarkistaa (`src/config/site.ts`)
 
-Kun arvo on tyhjä, sivu näyttää selvästi merkityn katkoviivaisen paikkamerkin eikä keksi tietoa.
-
-- **Hinta**: `site.consultation.price` kielittäin (esim. fi `"290 € (sis. alv)"`, en `"€290 (incl. VAT)"`).
-- **Ajanvarauslinkki**: `site.bookingUrl`. Kun se on tyhjä, kaikki "Varaa"-painikkeet vievät yhteydenottolomakkeelle.
-- **Minusta-teksti**: `site.founder.paragraphs` kielittäin (yksi merkkijono = yksi kappale).
-- **Kuva perustajasta**: lisää tiedosto kansioon `public/` ja kirjoita nimi kohtaan `site.founder.image`.
+- **Hinta**: `coaching.price` kielittäin. Nyt pilottihinta 125 € (fi) ja €125 (en). Alv-merkintää ei ole lisätty, koska sitä ei ole määritelty.
+- **Ajanvarauslinkki**: `bookingUrl`. Nyt alkuperäisen sivun Calendly-profiili. Vaihda tähän suoraan 90 minuutin tapahtuman linkki, kun se on olemassa. Kun kenttä on tyhjä, "Varaa"-painikkeet vievät yhteydenottolomakkeelle.
+- **Kuva ja nimi (Minusta)**: `founder.image` (`public/riku.jpg`, alkuperäiseltä sivulta) ja `founder.name`.
+- **Minusta-teksti**: `about.paragraphs` tiedostoissa `src/content/fi.ts` ja `en.ts`. Ensimmäinen kappale on sinun oma tarinasi. Lisää tarvittaessa omaa taustaasi, mutta vain todellista.
 
 ## Yhteydenottolomake
 
@@ -43,11 +41,11 @@ viestillä (`mailto:`), eikä sivu väitä lähettävänsä mitään. Jos haluat
 
 ## Ennen julkaisua
 
-1. Täytä yllä olevat paikkamerkit.
+1. Tarkista yllä olevat asetukset (hinta, ajanvarauslinkki, Minusta-teksti).
 2. Poista `<meta name="robots" content="noindex" />` tiedostoista `index.html` ja `en/index.html`. Se estää nyt hakukoneita indeksoimasta keskeneräistä sivua.
-3. Lisää `sitemap.xml` ja `robots.txt` tarvittaessa.
+3. `public/sitemap.xml` ja `public/robots.txt` kopioituvat buildin mukana ja korvaavat juuren vanhat tiedostot. Tarkista osoitteet ja päivämäärät.
 4. `public/tietosuoja.html` (suomi) ja `public/privacy.html` (englanti) ovat kopiot juuren tietosuojasivuista. Pidä ne ajan tasalla.
-5. Englannin Open Graph -kuva on `public/og-en.png` ja suomen `public/og.png`. Päivitä ne, jos otsikko muuttuu.
+5. Open Graph -kuvat ovat `public/og.png` (suomi) ja `public/og-en.png` (englanti). Päivitä ne, jos pääotsikko muuttuu.
 
 ## Julkaisu
 
@@ -64,7 +62,7 @@ src/
   content/fi.ts, en.ts tekstit kielittäin, content/index.ts valitsee kielen
   i18n.tsx             kielikonteksti (useContent)
   config/site.ts       vaihdettavat asetukset
-  sections/            Hero, Crossroads, Consultation, Philosophy, Obstacles, About, ClosingCta, Contact
+  sections/            Hero, Questions, Coaching, Philosophy, Obstacles, About, ClosingCta, Contact
   components/          Header, Footer, Wordmark, ui/ (Button, Reveal, ...), art/ (Horizon, PurusharthaIcon)
   hooks/               useActiveSection, useScrolled
 scripts/prerender.mjs  esirenderöinti buildin jälkeen
