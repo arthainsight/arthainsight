@@ -13,7 +13,7 @@ export function About() {
     <section id={c.ids.about} aria-labelledby="about-title" className="bg-paper py-24 md:py-36">
       <Container>
         <div className="grid items-start gap-14 lg:grid-cols-12 lg:gap-20">
-          <Reveal className="lg:col-span-5">
+          <Reveal className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
             {image ? (
               <img
                 src={`${c.root}${image}`}
@@ -34,10 +34,23 @@ export function About() {
             </h2>
             <p className="mt-4 text-[0.82rem] uppercase tracking-[0.26em] text-ink-soft">{name}</p>
 
-            <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink">
-              {about.paragraphs.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
+            <div className="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-ink md:text-lg">
+              {about.paragraphs.map((para, i) => {
+                const last = about.paragraphs.length - 1;
+                if (i === 0)
+                  return (
+                    <p key={para} className="font-serif text-[1.55rem] leading-snug text-forest md:text-[1.8rem]">
+                      {para}
+                    </p>
+                  );
+                if (i === last)
+                  return (
+                    <p key={para} className="pt-4 font-serif text-[1.45rem] italic leading-snug text-forest md:text-[1.65rem]">
+                      {para}
+                    </p>
+                  );
+                return <p key={para}>{para}</p>;
+              })}
             </div>
 
             <p className="mt-6">
