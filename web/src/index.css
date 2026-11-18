@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Artha Insight – teema
+   Värit ja fontit löytyvät kaikki täältä. Muuta arvoja tässä, niin
+   koko sivusto päivittyy.
+   ------------------------------------------------------------------ */
+@theme {
+  --font-serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Lämmin luonnonvalkoinen */
+  --color-paper: #f6f1e7;
+  --color-paper-deep: #eee6d6;
+  /* Hiekka ja kulta (logon keltaisesta johdettu, hillitty) */
+  --color-sand: #d8c9a8;
+  --color-gold: #d1a62f;
+  --color-gold-soft: #f1cf62;
+  --color-gold-deep: #7f6228;
+  /* Logon värit: lootuksen sininen ja auringon oranssi. Käytetään vain aksentteina. */
+  --color-lotus: #38b6ff;
+  --color-lotus-soft: #8bd3ff;
+  --color-lotus-deep: #0f5578;
+  --color-sun: #f77b19;
+  --color-sun-soft: #f6a45f;
+  /* Metsän- ja oliivinvihreä */
+  --color-forest: #1f3a2e;
+  --color-forest-deep: #14271f;
+  --color-olive: #3a4630;
+  --color-moss: #566a4e;
+  /* Hiilenharmaa teksteille */
+  --color-ink: #24272a;
+  --color-ink-soft: #4a4f52;
+
+  --ease-calm: cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    background: var(--color-forest-deep);
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Cormorantin oletusnumerot ovat vanhanmallisia; tasakorkeat numerot luetaan paremmin. */
+  .font-serif,
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-variant-numeric: lining-nums;
+  }
+
+  ::selection {
+    background: var(--color-gold-soft);
+    color: var(--color-forest-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-deep);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-gold-soft);
+  }
+}
+
+/* Pehmeä vieritys ottaa huomioon otsakkeen korkeuden */
+section[id] {
+  scroll-margin-top: 4.75rem;
+}
+@media (min-width: 768px) {
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Esiin ilmestyminen vierittäessä
+   Piilotetaan vain, kun JavaScript on käytössä (html.js), jotta sisältö
+   näkyy aina ilman JavaScriptiäkin.
+   ------------------------------------------------------------------ */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 1s var(--ease-calm),
+    transform 1s var(--ease-calm);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero ilmestyy CSS:llä, ei JavaScriptillä, jotta ensimmäinen sisältö latautuu nopeasti */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-in {
+  animation: rise-in 1.1s var(--ease-calm) both;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+/* Usva ajelehtii hitaasti maiseman päällä */
+@keyframes mist-drift {
+  from {
+    transform: translateX(-3%);
+  }
+  to {
+    transform: translateX(3%);
+  }
+}
+.mist-drift {
+  animation: mist-drift 38s ease-in-out infinite alternate;
+}
+.mist-drift-slow {
+  animation-duration: 56s;
+  animation-direction: alternate-reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-in,
+  .mist-drift {
+    animation: none;
+  }
+}
+
+/* Näkyvä, mutta ei kiinnittävä vain ruudunlukijoille -luokka (Tailwindin sr-only riittää),
+   ohituslinkki näkyviin kun se saa fokuksen: */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--color-paper);
+  color: var(--color-forest-deep);
+  padding: 0.75rem 1.25rem;
+  border-radius: 2px;
+  font-weight: 500;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 1rem;
+}

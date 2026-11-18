@@ -1,8 +1,6 @@
 Artha Insight deploy marker
-Updated: 2026-09-22
-Offering: Myynnin pullonkauladiagnoosi (maksullinen), hinta kerrotaan keskustelussa
-Entry: maksuton 30 min keskustelu tuloksesta ja sopivuudesta
-Lead magnet: /diagnoosi — testi "Myynnin kuusi jarrua", jarrukohtainen raportti sähköpostiin + 3 jatkoviestiä
-Data: testivastaukset tallennetaan nimettöminä markkinatietona (eri välilehti kuin sähköpostit)
-Backend: Google Apps Script + Sheets (apps-script/, ENDPOINT asetetaan diagnoosi/app.js)
-List: MailerLite hoitaa tilaajalistan, jatkosarjan ja peruutuksen; raportin lähettää Apps Script
+Updated: 2026-11-18
+Offering: Dharma Coaching – 90 minuutin henkilökohtainen tapaaminen (pilottihinta 125 €)
+Concept: Ehdollistumisesta vapauteen. Vedanta, joogafilosofia ja Bhagavan Shanmukhan tulkinta neljästä Puruṣārthasta
+Site: web/ (React + Tailwind, suomi ja englanti, esirenderöity). Julkaisu: kopioi web/dist juureen.
+Booking: Google Kalenterin ajanvaraus + Google Meet; maksulinkki lähetetään erikseen varauksen vahvistamisen jälkeen. Yhteys: riku.forsell@gmail.com
