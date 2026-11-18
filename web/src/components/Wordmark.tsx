@@ -9,7 +9,7 @@ export function Wordmark({ className = "", lazy = false }: { className?: string;
   const c = useContent();
   return (
     <img
-      src={`${c.root}logo.png`}
+      src={c.url("/logo.png")}
       alt={c.a11y.logoAlt}
       width={818}
       height={700}

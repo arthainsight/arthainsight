@@ -10,13 +10,13 @@ export function About() {
   const { name, image, imageAlt } = site.founder;
 
   return (
-    <section id={c.ids.about} aria-labelledby="about-title" className="bg-paper py-24 md:py-36">
+    <section id={c.ids.about} aria-labelledby="about-title" className="bg-paper-deep py-24 md:py-36">
       <Container>
         <div className="grid items-start gap-14 lg:grid-cols-12 lg:gap-20">
           <Reveal className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
             {image ? (
               <img
-                src={`${c.root}${image}`}
+                src={c.url(`/${image}`)}
                 alt={imageAlt}
                 width={800}
                 height={1000}
@@ -55,24 +55,13 @@ export function About() {
 
             <p className="mt-6">
               <a
-                href={`#${c.ids.philosophy}`}
+                href={c.url(c.paths.philosophy)}
                 className="text-[0.95rem] text-forest underline decoration-gold decoration-1 underline-offset-[6px] transition-colors hover:text-gold-deep"
               >
                 {about.philosophyLink} →
               </a>
             </p>
 
-            <div className="mt-12 border-t border-forest/15 pt-8">
-              <h3 className="text-[1.5rem] text-forest">{about.notTitle}</h3>
-              <ul className="mt-5 space-y-3">
-                {about.not.map((item) => (
-                  <li key={item} className="flex gap-4 text-ink-soft">
-                    <span aria-hidden="true" className="mt-[0.8em] h-px w-4 shrink-0 bg-gold" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </Reveal>
         </div>
       </Container>

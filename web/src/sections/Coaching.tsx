@@ -31,15 +31,16 @@ function StageBar({ minutes }: { minutes: number[] }) {
   );
 }
 
+const labelClass = "text-[0.78rem] font-medium uppercase tracking-[0.28em] text-gold-deep";
+const dtClass = "mb-2 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-ink-soft";
+
 export function Coaching() {
   const c = useContent();
   const coaching = c.coaching;
   const booking = getBooking(c.ids.contact);
-  const lang = c.lang as "fi" | "en";
+  const lang = c.lang;
   const duration = site.coaching.duration[lang];
   const price = site.coaching.price[lang];
-  const durationShort = site.coaching.durationShort[lang];
-  const priceLine = coaching.priceLine.replace("{price}", price).replace("{duration}", durationShort);
 
   return (
     <section
@@ -60,6 +61,7 @@ export function Coaching() {
       />
 
       <Container className="relative">
+        {/* 3. Esittely ja mitä tapaamisessa tehdään  |  4. Viisi vaihetta */}
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
             <Reveal>
@@ -74,9 +76,25 @@ export function Coaching() {
                   <p key={p}>{p}</p>
                 ))}
               </div>
+
+              <div className="mt-9 border-t border-paper/15 pt-7">
+                <h3 className="font-sans text-[0.78rem] font-medium uppercase tracking-[0.26em] text-gold-soft">
+                  {coaching.examplesTitle}
+                </h3>
+                <p className="mt-3 text-[0.95rem] text-paper/75">{coaching.examplesIntro}</p>
+                <ul className="mt-4 space-y-3">
+                  {coaching.examples.map((q) => (
+                    <li key={q} className="flex gap-4 font-serif text-[1.3rem] italic leading-snug text-paper">
+                      <span aria-hidden="true" className="mt-[0.75em] h-px w-4 shrink-0 bg-gold-soft" />
+                      <span>{q}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
               <p className="mt-8">
                 <a
-                  href={`#${c.ids.philosophy}`}
+                  href={c.url(c.paths.philosophy)}
                   className="text-[0.95rem] text-gold-soft underline decoration-gold-soft/50 underline-offset-[6px] transition-colors hover:text-paper"
                 >
                   {coaching.philosophyLink} →
@@ -88,9 +106,7 @@ export function Coaching() {
           <div className="lg:col-span-7">
             <Reveal delay={140}>
               <div className="rounded-[3px] bg-paper p-6 text-ink shadow-[0_30px_80px_-30px_rgba(0,0,0,0.55)] sm:p-8 md:p-12">
-                <h3 className="text-[0.78rem] font-medium uppercase tracking-[0.28em] text-gold-deep">
-                  {coaching.stagesTitle}
-                </h3>
+                <h3 className={labelClass}>{coaching.stagesTitle}</h3>
                 <StageBar minutes={coaching.stages.map((s) => s.minutes)} />
 
                 <ol className="mt-4">
@@ -114,71 +130,12 @@ export function Coaching() {
                     </li>
                   ))}
                 </ol>
-
-                <p className="mt-8 text-ink">{coaching.standalone}</p>
-
-                {/* Varauksen kulku */}
-                <div className="mt-10 border-t border-forest/12 pt-8">
-                  <h3 className="text-[0.78rem] font-medium uppercase tracking-[0.28em] text-gold-deep">
-                    {coaching.bookingTitle}
-                  </h3>
-                  <ol className="mt-5 space-y-4">
-                    {coaching.bookingSteps.map((step, i) => (
-                      <li key={step} className="flex gap-4">
-                        <span
-                          aria-hidden="true"
-                          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-forest font-sans text-[0.8rem] font-medium text-paper"
-                        >
-                          {i + 1}
-                        </span>
-                        <span className="pt-0.5 text-ink">{step}</span>
-                      </li>
-                    ))}
-                  </ol>
-                  {price && (
-                    <p className="mt-6 font-serif text-[1.35rem] text-forest">{priceLine}</p>
-                  )}
-                  <p className="mt-3 text-[0.9rem] leading-relaxed text-ink-soft">{coaching.bookingNote}</p>
-                </div>
-
-                <dl className="mt-9 grid gap-6 border-t border-forest/12 pt-8 sm:grid-cols-3">
-                  <div>
-                    <dt className="mb-2 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-ink-soft">
-                      {coaching.detailLabels.duration}
-                    </dt>
-                    <dd>
-                      <DetailValue value={duration} placeholder={coaching.placeholderDuration} />
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="mb-2 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-ink-soft">
-                      {coaching.detailLabels.price}
-                    </dt>
-                    <dd>
-                      <DetailValue value={price} placeholder={coaching.placeholderPrice} />
-                      {price && <span className="mt-1 block text-[0.82rem] text-ink-soft">{coaching.priceNote}</span>}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="mb-2 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-ink-soft">
-                      {coaching.detailLabels.format}
-                    </dt>
-                    <dd className="text-[0.98rem] leading-snug text-forest">{coaching.formatValue}</dd>
-                  </div>
-                </dl>
-
-                <div className="mt-10">
-                  <Button href={booking.href} variant="primary" external={booking.external}>
-                    {coaching.cta}
-                  </Button>
-                </div>
-                <p className="mt-6 text-[0.85rem] text-ink-soft">{coaching.note}</p>
               </div>
             </Reveal>
           </div>
         </div>
 
-        {/* Kenelle sopii ja kenelle ei */}
+        {/* 5. Kenelle sopii ja kenelle ei */}
         <div className="mt-20 grid gap-12 md:mt-28 md:grid-cols-2 md:gap-16">
           <Reveal>
             <h3 className="text-[1.7rem] text-paper">{coaching.suitableTitle}</h3>
@@ -203,6 +160,78 @@ export function Coaching() {
             </ul>
           </Reveal>
         </div>
+
+        {/* 6. Hinta ja ajanvaraus */}
+        <Reveal className="mt-20 scroll-mt-24 md:mt-28 md:scroll-mt-28">
+          <div
+            id={c.ids.pricing}
+            className="scroll-mt-24 rounded-[3px] bg-paper p-6 text-ink shadow-[0_30px_80px_-30px_rgba(0,0,0,0.55)] sm:p-8 md:scroll-mt-28 md:p-12"
+          >
+            <h3 className="text-[1.9rem] text-forest md:text-[2.3rem]">{coaching.pricingTitle}</h3>
+            <div className="mt-8 grid gap-10 md:grid-cols-12 md:gap-14">
+              <div className="md:col-span-5">
+                {price ? (
+                  <p className="font-serif text-[3.2rem] leading-none text-forest">{price}</p>
+                ) : (
+                  <DetailValue value="" placeholder={coaching.placeholderPrice} />
+                )}
+                {price && <p className="mt-2 text-[0.88rem] text-ink-soft">{coaching.priceNote}</p>}
+
+                <dl className="mt-7 grid grid-cols-2 gap-6 border-t border-forest/12 pt-6">
+                  <div>
+                    <dt className={dtClass}>{coaching.detailLabels.duration}</dt>
+                    <dd>
+                      <DetailValue value={duration} placeholder={coaching.placeholderDuration} />
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className={dtClass}>{coaching.detailLabels.format}</dt>
+                    <dd className="text-[0.98rem] leading-snug text-forest">{coaching.formatValue}</dd>
+                  </div>
+                </dl>
+
+                <h4 className={`${labelClass} mt-8`}>{coaching.includesTitle}</h4>
+                <ul className="mt-4 space-y-3">
+                  {coaching.includes.map((item) => (
+                    <li key={item} className="flex gap-3 text-[0.98rem] text-ink">
+                      <span aria-hidden="true" className="mt-[0.75em] h-px w-4 shrink-0 bg-gold" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="md:col-span-7">
+                <h4 className={labelClass}>{coaching.bookingTitle}</h4>
+                <ol className="mt-5 space-y-4">
+                  {coaching.bookingSteps.map((step, i) => (
+                    <li key={step} className="flex gap-4">
+                      <span
+                        aria-hidden="true"
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-forest font-sans text-[0.8rem] font-medium text-paper"
+                      >
+                        {i + 1}
+                      </span>
+                      <span className="pt-0.5 text-ink">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="mt-6 text-[0.9rem] text-ink-soft">{coaching.bookingNote}</p>
+
+                <div className="mt-8">
+                  <Button href={booking.href} variant="primary" external={booking.external}>
+                    {coaching.cta}
+                  </Button>
+                </div>
+
+                <p className="mt-8 border-l border-gold pl-5 text-[0.95rem] leading-relaxed text-ink-soft">
+                  {coaching.standalone}
+                </p>
+                <p className="mt-4 text-[0.85rem] text-ink-soft">{coaching.note}</p>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

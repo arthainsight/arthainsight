@@ -1,18 +1,19 @@
 import { useContent } from "../i18n";
 import { site } from "../config/site";
 import { Container } from "./ui/Container";
+import { useNavItems } from "./nav";
 import { SocialIcon, type SocialKey } from "./ui/SocialIcon";
 
 export function Footer() {
   const c = useContent();
-  const nav = c.nav.map((item) => ({ ...item, id: c.ids[item.key as keyof typeof c.ids] }));
+  const nav = useNavItems();
   return (
     <footer className="on-dark bg-forest-deep py-16 text-paper/75">
       <Container>
         <div className="grid gap-12 md:grid-cols-[1.3fr_0.8fr_1.1fr_1.1fr]">
           <div>
             <img
-              src={`${c.root}logo.png`}
+              src={c.url("/logo.png")}
               alt={c.a11y.logoAlt}
               width={818}
               height={700}
@@ -27,8 +28,8 @@ export function Footer() {
             <p className="mb-4 text-[0.75rem] font-medium uppercase tracking-[0.26em] text-gold-soft">{c.footer.siteHeading}</p>
             <ul className="space-y-2.5">
               {nav.map((item) => (
-                <li key={item.id}>
-                  <a href={`#${item.id}`} className="text-[0.95rem] text-paper/75 transition-colors hover:text-paper">
+                <li key={item.key}>
+                  <a href={item.href} className="text-[0.95rem] text-paper/75 transition-colors hover:text-paper">
                     {item.label}
                   </a>
                 </li>
@@ -65,7 +66,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={c.footer.privacyUrl} className="text-paper/75 transition-colors hover:text-paper">
+                <a href={c.url(c.paths.privacy)} className="text-paper/75 transition-colors hover:text-paper">
                   {c.footer.privacy}
                 </a>
               </li>

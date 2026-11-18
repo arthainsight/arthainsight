@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // base "./" tekee buildista siirrettävän: sivusto toimii niin domainin juuressa
 // kuin alikansiossakin ilman asetusten muuttamista.
-// Kaksi sivua: index.html (suomi) ja en/index.html (englanti).
+// Neljä sivua: etusivu ja Filosofia-sivu suomeksi ja englanniksi.
 const root = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
@@ -17,6 +17,8 @@ export default defineConfig({
       input: {
         fi: resolve(root, "index.html"),
         en: resolve(root, "en/index.html"),
+        fiFilosofia: resolve(root, "filosofia/index.html"),
+        enPhilosophy: resolve(root, "en/philosophy/index.html"),
       },
     },
   },

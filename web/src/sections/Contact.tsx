@@ -121,7 +121,7 @@ export function Contact() {
 
               <p className="text-[0.85rem] leading-relaxed text-ink-soft">
                 {contact.notice}{" "}
-                <a href={c.footer.privacyUrl} className="underline decoration-gold underline-offset-4">
+                <a href={c.url(c.paths.privacy)} className="underline decoration-gold underline-offset-4">
                   {contact.privacy}
                 </a>
               </p>

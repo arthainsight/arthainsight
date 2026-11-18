@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useContent } from "../i18n";
+import { sitePaths } from "../content";
+import { useNavItems } from "./nav";
 import { useActiveSection } from "../hooks/useActiveSection";
 import { useScrolled } from "../hooks/useScrolled";
 import { Wordmark } from "./Wordmark";
 
 export function Header() {
   const c = useContent();
-  const nav = c.nav.map((item) => ({ ...item, id: c.ids[item.key as keyof typeof c.ids], href: `#${c.ids[item.key as keyof typeof c.ids]}` }));
-  const sectionIds = nav.map((item) => item.id);
+  const nav = useNavItems();
+  const sectionIds = c.page === "home" ? nav.flatMap((item) => (item.sectionId ? [item.sectionId] : [])) : [];
+  const otherLang = c.lang === "fi" ? "en" : "fi";
+  const switchHref = c.url(sitePaths[otherLang][c.page]);
+  const homeHref = c.page === "home" ? `#${c.ids.home}` : c.url(c.paths.home);
   const [open, setOpen] = useState(false);
   const scrolled = useScrolled(24);
   const active = useActiveSection(sectionIds);
@@ -76,7 +81,7 @@ export function Header() {
     >
       <div className="mx-auto flex h-[4.75rem] w-full max-w-6xl md:h-[5.5rem] items-center justify-between px-6 md:px-10">
         <a
-          href={`#${c.ids.home}`}
+          href={homeHref}
           aria-label={c.a11y.homeLink}
           className="on-dark relative z-[60] text-paper"
         >
@@ -88,11 +93,11 @@ export function Header() {
           <ul className="flex items-center gap-9">
             {nav.map((item) => {
               const isContact = item.key === "contact";
-              const isActive = active === item.id;
+              const isActive = item.current || (c.page === "home" && active === item.sectionId);
               const tone = "text-paper/80 hover:text-paper";
               if (isContact) {
                 return (
-                  <li key={item.id}>
+                  <li key={item.key}>
                     <a
                       href={item.href}
                       aria-current={isActive ? "true" : undefined}
@@ -104,10 +109,10 @@ export function Header() {
                 );
               }
               return (
-                <li key={item.id}>
+                <li key={item.key}>
                   <a
                     href={item.href}
-                    aria-current={isActive ? "true" : undefined}
+                    aria-current={isActive ? "page" : undefined}
                     className={`on-dark relative py-1 text-[0.9rem] tracking-[0.03em] transition-colors duration-300 ${tone} ${
                       isActive ? "!text-paper" : ""
                     }`}
@@ -125,7 +130,7 @@ export function Header() {
             })}
             <li>
               <a
-                href={c.switchLang.href}
+                href={switchHref}
                 hrefLang={c.switchLang.hreflang}
                 lang={c.switchLang.hreflang}
                 title={c.switchLang.title}
@@ -174,7 +179,7 @@ export function Header() {
         <nav aria-label={c.a11y.mobileNav}>
           <ul className="space-y-1">
             {nav.map((item, i) => (
-              <li key={item.id}>
+              <li key={item.key}>
                 <a
                   href={item.href}
                   onClick={() => close(false)}
@@ -190,7 +195,7 @@ export function Header() {
             ))}
           </ul>
           <a
-            href={c.switchLang.href}
+            href={switchHref}
             hrefLang={c.switchLang.hreflang}
             lang={c.switchLang.hreflang}
             onClick={() => close(false)}
